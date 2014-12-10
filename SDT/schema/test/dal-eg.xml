@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<Domain xmlns:xi="http://www.w3.org/2001/XInclude"
+	xmlns="http://hgi.org/xml/dal/1.0" 
+	id="com.telekom">
+
+  <Imports>
+    <xi:include href="./dal-core.xml" parse="xml" />
+  </Imports>
+
+  <Modules>
+  </Modules>
+
+  <Devices>
+
+    <Device id="switch.power">
+      <DeviceInfo>
+	<Name>PowerSwitch</Name>
+	<!-- The Vendor field should probably be part of the domain -->
+	<Vendor>Telekom Innovation Laboratories</Vendor>
+      </DeviceInfo>
+      
+      <Doc>
+	This device is intended as a demonstration of how to use the
+	abstract modules defined in the <em>HGI Core</em> domain. The
+	vendor has provided a proprietry module with two operations
+	<tt>on</tt> and <tt>off</tt>. This is clearly a candidate for the 
+	module class <tt>BooleanState</tt>.
+      </Doc>
+
+      <Modules>
+	<Module name="proprietaryPower">
+	  <Doc>
+	    The proprietry interface for turning the switch on and off. 
+	    Actions for setting the state to <tt>on</tt> or <tt>off</tt> 
+	    and for querying the state.
+	  </Doc>
+
+	  <Actions>
+	    <Action name="on">
+	      <Doc>
+		Turn the switch on.
+	      </Doc>
+	    </Action>
+	    <Action name="off">
+	      <Doc>
+		Turn the switch off.
+	      </Doc>
+	    </Action>
+	    <Action name="state" type="string">
+	      <Doc>
+		Query the state of the switch. Returns the string "<tt>on</tt>"
+		or "<tt>off</tt>".
+	      </Doc>
+	    </Action>
+	  </Actions>
+	</Module>
+
+	<Module name="power">
+	  <extends domain="hgi.dal.core" class="BooleanState"/>
+	</Module>
+      </Modules>
+    </Device>
+  </Devices>
+</Domain>
