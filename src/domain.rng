@@ -141,6 +141,9 @@
       <ref name="Actions"/>
     </optional>
     <optional>
+      <ref name="Data"/>
+    </optional>
+    <optional>
       <ref name="Events"/>
     </optional>
   </define>
@@ -177,6 +180,29 @@
 	      <ref name="Doc"/>
 	    </element>
 	  </zeroOrMore>
+	</element>
+      </zeroOrMore>
+    </element>
+  </define>
+
+  <define name="Data">
+    <element name="Data">
+      <zeroOrMore>
+	<element name="DataPoint">
+	  <attribute name="name">
+	    <text/>
+	  </attribute>
+	  <optional>
+	    <attribute name="type">
+	      <ref name="DataType"/>
+	    </attribute>
+	  </optional>
+	  <optional>
+	    <attribute name="writable">
+	      <data type="boolean"/>
+	    </attribute>
+	  </optional>
+	  <ref name="Doc"/>
 	</element>
       </zeroOrMore>
     </element>

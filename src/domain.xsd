@@ -115,6 +115,7 @@
       <xs:element minOccurs="0" ref="extends"/>
       <xs:group ref="Doc"/>
       <xs:element minOccurs="0" ref="Actions"/>
+      <xs:element minOccurs="0" ref="Data"/>
       <xs:element minOccurs="0" ref="Events"/>
     </xs:sequence>
     <xs:attribute name="name" use="required"/>
@@ -155,6 +156,21 @@
       <xs:group ref="Doc"/>
       <xs:attribute name="name" use="required"/>
       <xs:attribute name="type" use="required" type="DataType"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Data">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="DataPoint"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DataPoint">
+    <xs:complexType>
+      <xs:group ref="Doc"/>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="type" type="DataType"/>
+      <xs:attribute name="writable" type="xs:boolean"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="Events">
