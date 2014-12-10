@@ -1,0 +1,15 @@
+
+namespace local = ""
+default namespace xsl = "http://hgi.org/xml/dal/1.0"
+namespace xi = "http://www.w3.org/2001/XInclude"
+
+version = "1.0"
+
+include "domain.rnc"
+
+xinclude = element xi:include {
+    attribute href { xsd:anyURI },
+    attribute parse { text }
+  }
+
+Imports = element Imports { xinclude* }?

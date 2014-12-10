@@ -1,0 +1,91 @@
+start = Domain
+
+Domain =
+  element Domain {
+    # still having some problems with included documents ... 
+    #      the included document is given the attribute xml:base ...
+    #      but my schema does not permit this ... 
+    # 
+    #      This almost generates the correct schema ... but it
+    #      doesn't have the correct schemaLocation
+    # 
+    # <attribute ns="http://www.w3.org/XML/1998/namespace" name="base">		  <data type="anyURI"/>
+    # </attribute>
+    attribute xml:base { xsd:anyURI }?,
+    attribute id { xsd:ID },
+    Imports,
+    element Modules {
+      element ModuleClass { ModuleDef }*
+    }?,
+    element Devices {
+      element Device {
+        attribute id { xsd:Name },
+        element DeviceInfo {
+          element Name { text }
+          & element Vendor { text }
+        },
+        Doc,
+        Modules?
+      }*
+    }?
+  }
+DataType = "integer" | "boolean" | "string"
+DocText =
+  (text
+   | element em { text }
+   | element b { text }
+   | element tt { text })*
+Doc =
+  element Doc {
+    DocText
+    | (element p { DocText }
+       | element img {
+           attribute src { text },
+           element caption { text }
+         })*
+  }?
+ModuleDef =
+  attribute name { text },
+  element extends {
+    attribute domain { xsd:IDREF },
+    attribute class { text }
+  }?,
+  Doc,
+  Actions?,
+  Data?,
+  Events?
+Modules =
+  element Modules {
+    element Module { ModuleDef }*
+  }
+Actions =
+  element Actions {
+    element Action {
+      attribute name { text },
+      attribute type { DataType }?,
+      Doc,
+      element Arg {
+        attribute name { text },
+        attribute type { DataType },
+        Doc
+      }*
+    }*
+  }
+Data =
+  element Data {
+    element DataPoint {
+      attribute name { text },
+      attribute type { DataType }?,
+      attribute writable { xsd:boolean }?,
+      Doc
+    }*
+  }
+Events =
+  element Events {
+    element Event {
+      attribute name { text }
+    }*
+  }
+#
+
+#
