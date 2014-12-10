@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="_prepare" default="build">
+
+<!--	TASK: _prepare
+		Set properties, generate the classpath etc
+-->
+<target name="_prepare">
+	<!-- initialize the build.time property -->
+	<tstamp />		
+	<tstamp>
+		<format property="build.time" pattern="dd.MM.yyyy HH:mm:ss" />
+	</tstamp>
+
+	<!-- Retrieve the subversion property -->
+	<trycatch>
+		<try>
+			<svn>
+				<status path="${basedir}" revisionProperty="svn.revision" />
+			</svn>
+		</try>
+		<catch>
+			<property name="svn.revision" value="svn.revision.undefined" />
+			<echo>Cannot determine SVN revision. SVN not found?</echo>
+		</catch>
+	</trycatch>
+
+	<mkdir dir="${path.genbase}" />
+	<mkdir dir="${path.gen}" />
+	<mkdir dir="${path.gen.classes}" />
+	<mkdir dir="${path.gen.documentation}" />
+	<mkdir dir="${path.gen.etc}" />
+	<mkdir dir="${path.gen.docbase}" />
+	<mkdir dir="${path.gen.documentation}" />
+	<mkdir dir="${path.gen.collection}" />
+	<mkdir dir="${path.gen.domain}" />
+
+	<!-- remove old help files -->
+	<delete file="${path.gen.classpathfile}"/>
+	<delete file="${path.gen.includecmdfile}"/>
+	<delete file="${path.gen.importmanifestcmdfile}"/>
+
+	<runtarget target="_handleProjectProperties" />
+
+	
+	<!-- make the directory for the domain -->
+	<if>
+		<isset property="omain" />
+		<then>
+			<mkdir dir="${path.gen.domain}/${omain}" />
+		</then>
+	</if>
+
+	
+</target>
+
+</project>

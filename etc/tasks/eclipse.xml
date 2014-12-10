@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="eclipse" default="build">
+
+<!--	TASK: eclipse
+		Set properties, generate the classpath etc
+-->
+<target name="eclipse" depends="build, _setClassPath">
+
+	<!-- Writing the .classpath file -->
+	<!-- using echoxml is not possible together with the "for" statement, so <echo> and escapes must be used -->
+	<echo file="${path.eclipse.classpathfile}">&lt;?xml version="1.0" encoding="UTF-8"?&gt;${line.separator}&lt;classpath&gt;${line.separator}&lt;classpathentry kind="src" path="src"/&gt;${line.separator}&lt;classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/&gt;${line.separator}</echo>
+	<for param="p">
+		<path refid="id.libraries" />
+		<sequential>
+			<echo file="${path.eclipse.classpathfile}" append="true">&lt;classpathentry kind="lib" path="@{p}"/&gt;${line.separator}</echo>
+		</sequential>
+	</for>
+	<echo file="${path.eclipse.classpathfile}" append="true">&lt;classpathentry kind="output" path="classes"/&gt;${line.separator}&lt;/classpath&gt;${line.separator}</echo>
+
+	<!-- Writing the .project file -->
+	<echoxml file="${path.eclipse.projectfile}">
+		<projectDescription>
+			<name>${projectname}</name>
+			<comment></comment>
+			<projects></projects>
+			<buildSpec>
+				<buildCommand>
+					<name>org.eclipse.jdt.core.javabuilder</name>
+					<arguments>
+					</arguments>
+				</buildCommand>
+			</buildSpec>
+			<natures>
+				<nature>org.eclipse.jdt.core.javanature</nature>
+			</natures>
+			<linkedResources>
+				<link>
+					<name>classes</name>
+					<type>2</type>
+					<location>${path.gen.classes}</location>
+				</link>
+			</linkedResources>
+		</projectDescription>
+	</echoxml> 
+
+	<!-- Writing the settings/org.eclipse.jdt.core.prefs file -->
+	<mkdir dir="${path.eclipse.settingsdir}" />
+	<echo file="${path.eclipse.settingsfile}">org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled${line.separator}</echo>
+	<echo file="${path.eclipse.settingsfile}" append="true">org.eclipse.jdt.core.compiler.codegen.targetPlatform=${java.target}${line.separator}</echo>
+	<echo file="${path.eclipse.settingsfile}" append="true">org.eclipse.jdt.core.compiler.codegen.unusedLocal=preserve${line.separator}</echo>
+	<echo file="${path.eclipse.settingsfile}" append="true">org.eclipse.jdt.core.compiler.compliance=${java.source}${line.separator}</echo>
+	<echo file="${path.eclipse.settingsfile}" append="true">org.eclipse.jdt.core.compiler.debug.lineNumber=generate${line.separator}</echo>
+	<echo file="${path.eclipse.settingsfile}" append="true">org.eclipse.jdt.core.compiler.debug.localVariable=generate${line.separator}</echo>
+	<echo file="${path.eclipse.settingsfile}" append="true">org.eclipse.jdt.core.compiler.debug.sourceFile=generate${line.separator}</echo>
+	<echo file="${path.eclipse.settingsfile}" append="true">org.eclipse.jdt.core.compiler.problem.assertIdentifier=warning${line.separator}</echo>
+	<echo file="${path.eclipse.settingsfile}" append="true">org.eclipse.jdt.core.compiler.problem.enumIdentifier=warning${line.separator}</echo>
+	<echo file="${path.eclipse.settingsfile}" append="true">org.eclipse.jdt.core.compiler.source=${java.source}${line.separator}</echo>
+
+
+</target>
+
+</project>
+
+

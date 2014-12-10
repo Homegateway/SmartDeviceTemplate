@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="_importManifest" default="build">
+
+<!-- BAUSTELLE -->
+
+
+
+
+
+
+<!--	INTERNAL: _importManifest
+		Import the Manifest from another jar (in lib or from another project).
+-->
+<target name="_importManifest">
+	<!-- Build an external build file to add the content to the jar file -->
+	<echo file="${path.gen.importmanifestcmdfile}" append="true">&lt;project name="runimportmanifest" default="_runimportmanifest">${line.separator}</echo>
+	<echo file="${path.gen.importmanifestcmdfile}" append="true">&lt;target name="_runimportmanifest">${line.separator}</echo>
+	<propertyselector property="manifestlib" 
+						override="yes"
+						delimiter="," 
+						match="^importmanifest\.lib\.(.*)" 
+						select="\1"
+						casesensitive="false" />
+	<if><isset property="manifestlib" />
+	<then>
+		<echo file="${path.gen.importmanifestcmdfile}" append="true">&lt;zip destfile="${file.jar}" update="true">${line.separator}</echo>
+		<propertycopy name="fs.src" from="default.lib.${manifestlib}" override="yes" />
+		<var name="fs.src" value="${path.libs}/${fs.src}" />
+		<echo file="${path.gen.importmanifestcmdfile}" append="true">&lt;zipfileset src="${fs.src}" includes="META-INF/MANIFEST.MF" />${line.separator}</echo>	
+		<echo file="${path.gen.importmanifestcmdfile}" append="true">&lt;/zip>${line.separator}</echo>
+	</then>
+	</if>
+
+
+	<echo file="${path.gen.importmanifestcmdfile}" append="true">&lt;/target>${line.separator}</echo>
+	<echo file="${path.gen.importmanifestcmdfile}" append="true">&lt;/project>${line.separator}</echo>
+
+
+	<!-- run the generates build file -->
+	<ant antfile="${path.gen.importmanifestcmdfile}" target="_runimportmanifest" inheritAll="true" />
+
+</target>
+
+</project>

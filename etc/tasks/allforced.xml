@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="allforced" default="build">
+
+<!--	TASK: allforced
+		Clean up, build and collect. 
+		Includes a forced update to all dependent projects
+-->
+<target name="allforced">
+	<var name="dependency.projects.forcebuild" value="" />
+	<runtarget target="all" />
+</target>
+
+</project>

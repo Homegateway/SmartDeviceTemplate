@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="_cleanDependentProjects" default="build">
+
+<!--	INTERNAL:	_cleanDependentProjects
+		Check whether there are dependencies to other projects and clean them.
+-->
+<target name="_cleanDependentProjects">
+	<if><and>
+			<isset property="dependency.projects" />
+			<length string="${dependency.projects}" trim="true" when="greater" length="0" />	
+		</and>
+		<then>
+			<!-- go through all dependent projects -->
+			<for list="${dependency.projects}" param="pname">
+			<sequential>
+				<available property="available.dir.@{pname}" file="../@{pname}" />
+
+				<!-- does the project exist at all? -->
+				<if><isset property="available.dir.@{pname}" />
+					<then>
+						<echo>Cleaning dependent project "@{pname}"</echo>
+						<var name="tmp" value="${toString:x}" />
+						<if><isset property="global.build" />	<!-- inheriting global.build property, if set -->
+							<then>
+								<ant dir="../@{pname}" inheritall="false" antfile="../@{pname}/build.xml" target="clean">
+									<property name="global.build" value="true" />
+								</ant>
+							</then>
+							<else>
+								<ant dir="../@{pname}" inheritall="false" antfile="../@{pname}/build.xml" target="clean" />
+							</else>
+						</if>
+					</then>
+				</if>
+			</sequential>
+			</for>
+		</then>
+	</if>
+</target>
+
+
+</project>
