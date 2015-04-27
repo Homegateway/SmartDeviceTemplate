@@ -8,7 +8,7 @@
 -->
 
 
-<property name="path.libs"					location="${basedir}/../../libs" />
+<property name="path.libs"					location="${basedir}/lib" />
 
 <!-- Load various tasks -->
 <import file="anttasks.xml" />

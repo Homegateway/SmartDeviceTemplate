@@ -9,7 +9,7 @@
 				select="\1" />
 				
 <!-- A couple of constants -->
-<property name="path.base"						location="${basedir}/../.." />
+<property name="path.base"						location="${basedir}" />
 <property name="path.libs"						location="${path.base}/libs" />
 <property name="path.etc"						location="${path.base}/etc" />
 <property name="path.genbase"					location="${path.base}/gen" />
@@ -48,7 +48,7 @@
 		<loadproperties srcFile="properties" />		
 
 		<!-- Load project specific properties from local properties file -->
-		<loadproperties srcFile="../../etc/default.properties" />		
+		<loadproperties srcFile="etc/default.properties" />		
 
 		<!-- Set the start loglevel -->
 		<setloglevel level="${loglevel}" /> 

@@ -8,7 +8,7 @@
 <!--    - generate HTML documentation from DAL documents 		     -->
 
 <project name="importing" basedir="." default="schemas">
-  <import file="../../etc/common.xml"/>
+  <import file="etc/common.xml"/>
 
   <!-- Read the namespace declarations from a file (to get linebreaks) - - - -->
 
@@ -30,9 +30,10 @@
   <!-- xml-apis.jar and xercesImpl.jar in the Ant lib directory.             -->
 
   <target name="html">
-    <xslt basedir="${basedir}/test" destdir="${basedir}/html"
+	<mkdir dir="${path.genbase}" />
+    <xslt basedir="${basedir}/test" destdir="${basedir}/gen/html"
 	  style="${basedir}/style/html.xsl">
-      <param name="destdir" expression="${basedir}/html"/>
+      <param name="destdir" expression="${basedir}/gen/html"/>
       <sysproperty
 	  key="org.apache.xerces.xni.parser.XMLParserConfiguration"
 	  value="org.apache.xerces.parsers.XIncludeParserConfiguration"/>
