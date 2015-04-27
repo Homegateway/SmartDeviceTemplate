@@ -182,6 +182,10 @@
   </xs:element>
   <xs:element name="Event">
     <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Data"/>
+        <xs:group ref="Doc"/>
+      </xs:sequence>
       <xs:attribute name="name" use="required"/>
     </xs:complexType>
   </xs:element>

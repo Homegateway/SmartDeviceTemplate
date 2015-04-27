@@ -215,6 +215,8 @@
 	  <attribute name="name">
 	    <text/>
 	  </attribute>
+	  <ref name="Data" />
+  	  <ref name="Doc"/>
 	</element>
       </zeroOrMore>
     </element>

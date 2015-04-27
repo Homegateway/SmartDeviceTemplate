@@ -83,7 +83,9 @@ Data =
 Events =
   element Events {
     element Event {
-      attribute name { text }
+      attribute name { text },
+      Data,
+      Doc
     }*
   }
 #

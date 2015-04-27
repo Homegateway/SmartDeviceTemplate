@@ -54,6 +54,17 @@
 	      </Doc>
 	    </Action>
 	  </Actions>
+
+	  <Events>
+	  	<Event name="switchEvent">
+		  <Data>
+		    <DataPoint name="state" type="boolean" writable="false">
+	 		</DataPoint>
+		  </Data>
+		  <Doc>An event that indicates the new state of the switch.
+		  </Doc>
+	  	</Event>
+	  </Events>
 	</Module>
 
 	<Module name="power">
