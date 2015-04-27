@@ -8,7 +8,7 @@ This document describes the SDT build system and how to build the SDT and valida
 	**Only edit this file when one wants to make changes to the SDT!**
 	- [domain.xsd](SDT/schema/src/domain.xsd) : The SDT schema defintion that is generated from *domain.rng*.
 	- [xml.xsd](SDT/schema/src/xml.xsd) : General schema definitions for the SDT
-- [SDT/test/](SDT/test/) : This directory contains all XML files with SDT definitions that should be validated whether they conform to the SDT schema. This could be example definitions or contributions.
+- [SDT/schema/test/](SDT/schema/test/) : This directory contains all XML files with SDT definitions that should be validated whether they conform to the SDT schema. This could be example definitions or contributions.
 - [SDT/schema/build.xml](SDT/schema/build.xml) : This is the definition file for the ant build system.
 - [SDT/schema/etc/](SDT/schema/etc/), [SDT/schema/lib/](SDT/schema/lib/), [SDT/schema/style/](SDT/schema/style/) : internal directories for the build system. Please, don't make unnecessary changes to these files.
 
