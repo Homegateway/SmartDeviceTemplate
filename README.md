@@ -10,6 +10,8 @@ Any contributions made to this project must comply with the forementioned licens
 
 You can find further Information here:
 
+- [SDT Components](SDT_Components.md)
+- [FAQ](FAQ.md)
 - [SDT Build System](SDT%20Build%20System.md)
 - [LICENSE](LICENSE)
 
