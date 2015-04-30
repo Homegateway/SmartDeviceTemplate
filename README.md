@@ -6,6 +6,11 @@ Note that this project runs under Apache 2.0 license. Read the [LICENSE](LICENSE
 
 Any contributions made to this project must comply with the forementioned license.
 
+## Quick Links
+- ['domain.xsd' Version 2.0](SDT/schema2.0/src/domain.xsd)
+- [UML Diagram of the SDT 2.0](images/SDT2.0_UML.png)
+
+
 ## Content
 
 You can find further Information here:

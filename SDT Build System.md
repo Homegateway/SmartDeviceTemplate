@@ -19,7 +19,7 @@ The files referenced in this document point to version **2.0** of the SDT.
 - Download and install Apache ant from [http://ant.apache.org](http://ant.apache.org)
 - Clone the SDT repository from GitHub:
 
-		git clone https://github.com/Homegateway/RWD050.git
+		$ git clone https://github.com/Homegateway/RWD050.git
 	
 ## How to Use the Build System
 After cloning the repository go to the directoy *SDT/schema* and run commands depending on what you want to achieve.
