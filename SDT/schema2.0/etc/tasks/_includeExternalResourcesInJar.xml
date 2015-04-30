@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="_includeExternalResourcesInJar" default="build">
+
+<!--	INTERNAL: _includeExternalResourcesInJar
+		Check, whether there should resources from other jar files be included.
+		Generate an external build file and execute it in order to add the files.
+-->
+<target name="_includeExternalResourcesInJar">
+	<!-- go through all properties that start with "include." -->
+	<propertyselector	property="include.list" 
+						override="yes"
+						delimiter="," 
+						match="^include\.(.*)" 
+						select="\1"
+						casesensitive="false" />
+	<if><isset property="include.list" />
+		<then>
+		
+			<!-- Build an external build file to add the content to the jar file -->
+			<echo file="${path.gen.includecmdfile}" append="true">&lt;project name="runzipinclude" default="_runzipinclude">${line.separator}</echo>
+			<echo file="${path.gen.includecmdfile}" append="true">&lt;target name="_runzipinclude">${line.separator}</echo>
+			<echo file="${path.gen.includecmdfile}" append="true">&lt;jar destfile="${file.jar}" update="true">${line.separator}</echo>
+			
+			<for list="${include.list}" param="include.id">
+			<sequential>
+				<propertycopy override="yes" name="include.value" from="include.@{include.id}" />
+				<var name="include.iszipfileset" value="true" />
+				
+
+				<!-- check whether the include is from a lib or generated project file -->
+				<if><matches string="include.@{include.id}" pattern="^include\.lib.\.*" />
+					<then>	<!-- lib -->
+						<propertyregex	property="include.libname" 
+										override="yes"
+										input="include.@{include.id}"
+										regexp="^include\.(.*)" 
+										select="\1"
+										casesensitive="false" />
+						<propertycopy name="fs.src" from="default.${include.libname}" override="yes" />
+						<var name="fs.src" value="${path.libs}/${fs.src}" />
+					</then>
+					<else>	
+
+						<!-- check whether the include is from a gen/resources directory -->
+						<if><matches string="include.@{include.id}" pattern="^include\.gen\.resources" />
+						<then>
+							<var name="fs.src" value="${path.gen}" />
+							<var name="include.iszipfileset" value="false" />
+						</then>
+						<else>
+						
+							<!-- include from a project -->
+							<propertyregex	property="include.libname" 
+											override="yes"
+											input="include.@{include.id}"
+											regexp="^include\.project\.(.*)" 
+											select="\1"
+											casesensitive="false" />
+
+							<path id="x">
+								<fileset dir="../../gen/projects/${include.libname}">
+									<include name="*.jar" />
+								</fileset>
+							</path>
+							<var name="fs.src" value="${toString:x}" />
+						</else>
+						</if>
+					</else>
+				</if>
+				
+				<if><length string="${include.value}" trim="true" when="equal" length="0" />	
+					<then>
+						<var name="fs.includes" value="**/*" />
+					</then>
+					<else>
+						<var name="fs.includes" value="${include.value}" />
+					</else>
+				</if>										
+
+
+				<if><equals arg1="${include.iszipfileset}" arg2="true"/>	
+				<then>
+					<echo file="${path.gen.includecmdfile}" append="true">&lt;zipfileset src="${fs.src}" includes="${fs.includes}" />${line.separator}</echo>	
+				</then>
+				<else>
+					<echo file="${path.gen.includecmdfile}" append="true">&lt;fileset dir="${fs.src}" includes="${fs.includes}" />${line.separator}</echo>	
+				</else>
+				</if>
+
+			</sequential>
+			</for>
+			
+			<echo file="${path.gen.includecmdfile}" append="true">&lt;/jar>${line.separator}</echo>
+			<echo file="${path.gen.includecmdfile}" append="true">&lt;/target>${line.separator}</echo>
+			<echo file="${path.gen.includecmdfile}" append="true">&lt;/project>${line.separator}</echo>
+
+	
+			<!-- run the generates build file -->
+			<ant antfile="${path.gen.includecmdfile}" target="_runzipinclude" inheritAll="true" />
+		</then>
+	</if>
+
+</target>
+
+</project>

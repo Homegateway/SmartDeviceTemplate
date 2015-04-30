@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--tabstop: 4 -->
+
+<!--
+
++................................................+
+:Domain:org.hgi                                  :
+:                                                :
+:  +..........................................+  :
+:  :Module:BooleanState                       :  :
+:  :                                          :  :
+:  :  +....................................+  :  :
+:  :  :Action:get                          :  :  :
+:  :  +....................................+  :  :
+:  :                                          :  :
+:  :  +....................................+  :  :
+:  :  :Action:setTarget                    :  :  :
+:  :  +....................................+  :  :
+:  +..........................................+  :
+:                                                :
+:  +..........................................+  :
+:  :RootDevice:MSEEB.root                     :  :
+:  :                                          :  :
+:  :  +....................................+  :  :
+:  :  :Module<REF>:BooleanState            :  :  :
+:  :  +....................................+  :  :
+:  :                                          :  :
+:  :  +....................................+  :  :
+:  :  :Module:extensionBlockDataPoints     :  :  :
+:  :  :                                    :  :  :
+:  :  :  +..............................+  :  :  :
+:  :  :  :DataPoint:firmwareVersion     :  :  :  :
+:  :  :  +..............................+  :  :  :
+:  :  :                                    :  :  :
+:  :  :  +..............................+  :  :  :
+:  :  :  :DataPoint:powerSwitchNames    :  :  :  :
+:  :  :  +..............................+  :  :  :
+:  :  +....................................+  :  :
+:  :                                          :  :
+:  :  +....................................+  :  :
+:  :  :Devices                             :  :  :
+:  :  :                                    :  :  :
+:  :  :  +..............................+  :  :  :
+:  :  :  :Device:switch.power.1         :  :  :  :
+:  :  :  :                              :  :  :  :
+:  :  :  :+...........................+ :  :  :  :
+:  :  :  ::Module<REF>:BooleanState   : :  :  :  :
+:  :  :  :+...........................+ :  :  :  :
+:  :  :  +..............................+  :  :  :
+:  :  :                                    :  :  :
+:  :  :  +..............................+  :  :  :
+:  :  :  :Device:switch.power.2         :  :  :  :
+:  :  :  :                              :  :  :  :
+:  :  :  :+...........................+ :  :  :  :
+:  :  :  ::Module<REF>:BooleanState   : :  :  :  :
+:  :  :  :+...........................+ :  :  :  :
+:  :  :  +..............................+  :  :  :
+:  :  +....................................+  :  :
+:  +..........................................+  :
++................................................+
+
+-->
+<Domain xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns="http://hgi.org/xml/dal/2.0" 
+    id="org.hgi">
+
+
+    <Modules>
+
+
+<!--    The following module should be imported from dal-core.xml.
+
+            <Imports>
+                <xi:include href="./dal-core.xml" parse="xml" />
+            </Imports>
+
+        It is included directly for tangibility.
+        It is still referenced in this XML via
+         "<extends domain="hgi.dal.core" class="BooleanState"/>"
+-->
+
+        <ModuleClass name="BooleanState">
+            <Doc>
+                <tt>BooleanState</tt> is the preferred module for modelling a functionality corresponding to an underlying binary state.This module should be used to abstract away from the actual datatype and values in question. Note that the module does not define whether the execution mode is blocking or non-blocking.
+            </Doc>
+            <Actions>
+                <Action name="get" type="boolean">
+                    <Doc>
+                        Obtain the current associated state.
+                    </Doc>
+                </Action>
+                <Action name="setTarget">
+                    <Doc>
+                        Set the associated state to the specified value.
+                    </Doc>
+                    <Arg name="value" type="boolean">
+                        <Doc>
+                        The desired value of the associated state.
+                        </Doc>
+                    </Arg>
+                </Action>
+          </Actions>
+        </ModuleClass>
+    </Modules>
+
+<!-- Definition of the Root Device starts here. -->
+
+    <RootDevices>
+
+<!-- The Root Device contains several sub-devices and offers one action on its own. -->
+
+        <RootDevice id="MSEEB.root">
+            <DeviceInfo>
+                <Name>Multi Socket Electrical-Extension-Block</Name>
+                <Vendor>HGI</Vendor>
+            </DeviceInfo>
+            <Doc>
+                This device is intended as a demonstration of how to define a Root Device with multiple sub-devices.
+            </Doc>
+
+<!-- These are the modules for the root device:
+    - Switch on/off all contained switches. It inherits from hgi.dal.core.BooleanState.
+    - A module with some data points for the firmware version of the whole device and a list of names of the containted power switches.
+-->
+
+            <Modules>
+                <Module name="rootPowerOnOff">
+                    <extends domain="hgi.dal.core" class="BooleanState"/>
+                    <Doc>
+                        The proprietry interface for turning all switches of the extension block on and off. 
+                        The action "BooleanState:get" returns "true" when any of the sub-devices is in the state "on", otherwise it returns "false".
+                    </Doc>
+                </Module>
+
+                <Module name="extensionBlockDataPoints">
+                    <Data>
+                        <DataPoint  name="firmwareVersion" 
+                                    type="String" 
+                                    writeable="false">
+                            <Doc>
+                                This datapoint represents the firmware version of the extension block.
+                            </Doc>
+                        </DataPoint>
+                        
+                        <DataPoint  name="powerSwitchNames"
+                                    type="StringArray"
+                                    writeable="false">
+                            <Doc>
+                                This datapoint is an array of strings with the names of the contained devices.
+                            </Doc>
+                        </DataPoint>
+                    </Data>
+                </Module>
+            </Modules>
+
+<!-- Definition of sub-devices starts here. -->
+
+            <Devices>
+
+<!-- This is the first power switch of the extension block. For sake of simplicity no new ModuleClasses are defined, but only referenced.
+-->
+
+                <Device id="switch.power.1">
+                    <DeviceInfo>
+                        <Name>PowerSwitch 1</Name>
+                        <Vendor>HGI</Vendor>
+                    </DeviceInfo>
+                    <Doc>
+                        This sub device is intended as a demonstration of how to use the abstract modules defined in the <em>HGI Core</em> domain.
+                    </Doc>
+                    <Modules>
+                        <Module name="power">
+                            <extends domain="hgi.dal.core" class="BooleanState"/>
+                        </Module>
+                    </Modules>
+                </Device>
+
+<!-- This is the seconcd power switch of the extension block. -->
+
+                <Device id="switch.power.2">
+                    <DeviceInfo>
+                        <Name>PowerSwitch 2</Name>
+                        <Vendor>HGI</Vendor>
+                    </DeviceInfo>
+                    <Doc>
+                        This sub device is intended as a demonstration of how to use the abstract modules defined in the <em>HGI Core</em> domain.
+                    </Doc>
+                    <Modules>
+                        <Module name="power">
+                            <extends domain="hgi.dal.core" class="BooleanState"/>
+                        </Module>
+                    </Modules>
+                </Device>
+
+            </Devices>
+
+        </RootDevice>
+    </RootDevices>
+</Domain>

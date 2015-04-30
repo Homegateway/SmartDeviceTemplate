@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="properties" default="build">
+
+<!-- Set the default project name to the name of the directory --> 
+<propertyregex	override="yes" 
+				property="projectname"
+				input="${basedir}"
+				regexp=".*[/\\]([^/\\]*)"
+				select="\1" />
+				
+<!-- A couple of constants -->
+<property name="path.base"						location="${basedir}" />
+<property name="path.libs"						location="${path.base}/libs" />
+<property name="path.etc"						location="${path.base}/etc" />
+<property name="path.genbase"					location="${path.base}/gen" />
+<property name="path.gen"						location="${path.genbase}/projects/${projectname}" />
+<property name="path.gen.classes"				location="${path.gen}/classes" />
+<property name="path.gen.etc"					location="${path.gen}/etc" />
+<property name="path.gen.docbase"				location="${path.genbase}/docs" />
+<property name="path.gen.documentation"			location="${path.gen.docbase}/${projectname}" />
+<property name="path.gen.collection"			location="${path.genbase}/collection" />
+<property name="path.gen.domain"				location="${path.genbase}/domains" />
+<property name="path.src"						location="${basedir}/src" />
+<property name="path.resources"					location="${basedir}/resources" />
+<property name="path.native"					location="${basedir}/native" />
+<property name="path.gen.native"				location="${path.gen}/native" />
+<property name="path.gen.classpathfile"			location="${path.gen.etc}/_classpath" />
+<property name="path.gen.includecmdfile"		location="${path.gen.etc}/_jarinclude.xml" />
+<property name="path.gen.importmanifestcmdfile"	location="${path.gen.etc}/_manifestimport.xml" />
+<property name="path.etc.localfile"				location="${path.base}/etc/local.xml" />
+<property name="path.eclipse.classpathfile"		location="${basedir}/.classpath" />
+<property name="path.eclipse.projectfile"		location="${basedir}/.project" />
+<property name="path.eclipse.settingsdir"		location="${basedir}/.settings" />
+<property name="path.eclipse.settingsfile"		location="${path.eclipse.settingsdir}/org.eclipse.jdt.core.prefs" />
+
+
+
+<!-- The following tasks only need to be executed when this file is not included from the main build file -->
+<if><not>
+		<isset property="_mainbuild" />
+	</not>
+	<then>
+		<!-- Unset the java.target and java.source properties -->
+		<var name="java.target" unset="true" />
+		<var name="java.source" unset="true" />
+
+		<!-- Load project specific properties from local properties file -->
+		<loadproperties srcFile="properties" />		
+
+		<!-- Load project specific properties from local properties file -->
+		<loadproperties srcFile="etc/default.properties" />		
+
+		<!-- Set the start loglevel -->
+		<setloglevel level="${loglevel}" /> 
+
+	</then>
+</if>
+
+<!-- Define the path to additional Java jar files for the scriptdef and similar tasks -->
+<path id="antscripting">
+	<fileset dir="${path.libs}/ant/scripting" includes="*.jar" />
+</path>
+
+
+<!-- set the default Java source and target formats to the local versions -->
+<if><not>
+		<isset property="java.source" />
+	</not>
+	<then>
+		<var name="java.source" value="${ant.java.version}" />
+	</then>
+</if>
+<if><not>
+		<isset property="java.target" />
+	</not>
+	<then>
+		<var name="java.target" value="${ant.java.version}" />
+	</then>
+</if>
+
+
+<!-- load local properties, if the file exists -->
+<available property="available.local" file="${path.etc.localfile}"/>
+<if><isset property="available.local" />
+	<then>
+		<import file="${path.etc.localfile}" />
+	</then>
+</if>
+
+
+</project>

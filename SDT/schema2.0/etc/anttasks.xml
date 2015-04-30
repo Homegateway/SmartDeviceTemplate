@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="anttasks" default="build">
+
+
+<!-- ant-contribs -->
+<taskdef resource="net/sf/antcontrib/antlib.xml">
+  <classpath>
+    <pathelement location="${path.libs}/ant/ant-contrib-1.0b3.jar"/>
+  </classpath>
+</taskdef>
+
+<!-- BND tool -->
+<taskdef resource="aQute/bnd/ant/taskdef.properties">
+  <classpath>
+    <pathelement location="${path.libs}/ant/bnd-0.0.378.jar"/>
+  </classpath>
+</taskdef>
+
+<!-- Set the log level -->
+<taskdef	name="setloglevel"		
+			classname="de.berkom.ehome.tools.ant.setloglevel.SetLogLevel" 
+			classpath="${path.libs}/ant/antSetLogLevel.jar"/>
+
+<!-- Ant Thinlet Dialog -->
+<taskdef	name="dialog"		
+			classname="de.berkom.ehome.tools.ant.dialog.Dialog" 
+			classpath="${path.libs}/ant/antDialog.jar"/>
+
+<!-- SVN Library -->
+<taskdef resource="org/tigris/subversion/svnant/svnantlib.xml">
+  <classpath>
+    <pathelement location="${path.libs}/ant/svnant.jar"/>
+    <pathelement location="${path.libs}/ant/svnClientAdapter.jar"/>
+    <pathelement location="${path.libs}/ant/svnjavahl.jar"/>
+  </classpath>
+</taskdef>
+
+</project>
+

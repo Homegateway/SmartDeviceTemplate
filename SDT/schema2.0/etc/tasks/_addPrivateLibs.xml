@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="_addPrivateLibs" default="build">
+
+
+<!--	INTERNAL: _addPrivateLibs
+		Check, whether there are privare jars that should be added to the classpath.
+		Those must be located under resouces/libs or libs in the project directory.
+		Note that jars under resources/libs will be included in the resulting jar.
+-->
+<target name="_addPrivateLibs">
+	<!-- look for jar files in the projects resources libs directory -->
+	<path id="idPrivatelibs">
+		<fileset dir="resources/libs">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<trycatch>
+		<try>
+			<!-- try to access the private jars. If those don't exist, the following code is *not* executed -->
+			<var name="tmp" value="${toString:idPrivatelibs}" />
+			<!-- add them to the classpath file -->
+			<for list="${tmp}" delimiter=":" param="jfile">
+			<sequential>
+				<propertyregex	override="yes" 
+								property="tmp"
+								input="@{jfile}"
+								regexp=".*[/\\]([^/\\]*)"
+								select="\1" />
+				<echo file="${path.gen.classpathfile}" append="true">projects/${projectname}/resources/libs/${tmp}${line.separator}</echo>
+			</sequential>
+			</for>
+		</try>
+		<catch>
+			<!-- if no lib available then do nothing -->
+		</catch>
+	</trycatch>
+
+
+	<path id="idPrivateExternallibs">
+		<fileset dir="libs">
+			<include name="*.jar" />
+		</fileset>
+
+	</path>
+
+	<trycatch>
+		<try>
+			<!-- try to access the private jars. If those don't exist, the following code is *not* executed -->
+			<var name="tmp" value="${toString:idPrivateExternallibs}" />
+			<!-- add them to the classpath file -->
+			<for list="${tmp}" delimiter=":" param="jfile">
+			<sequential>
+				<propertyregex	override="yes" 
+								property="tmp"
+								input="@{jfile}"
+								regexp=".*[/\\]([^/\\]*)"
+								select="\1" />
+				<echo file="${path.gen.classpathfile}" append="true">projects/${projectname}/libs/${tmp}${line.separator}</echo>
+			</sequential>
+			</for>
+		</try>
+		<catch>
+			<!-- if no lib available then do nothing -->
+		</catch>
+	</trycatch>
+
+</target>
+
+</project>

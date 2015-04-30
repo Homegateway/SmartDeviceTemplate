@@ -1,0 +1,292 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+	datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  
+
+	<start>
+		<ref name="Domain"/>
+	</start>
+
+	<define name="Imports">
+		<optional>
+			<element name="Imports">
+				<zeroOrMore>
+					<ref name="Domain"/>
+				</zeroOrMore>
+			</element>
+		</optional>
+	</define>
+
+	<define name="Domain">
+		<element name="Domain">
+			<optional>
+
+	<!-- still having some problems with included documents ... 
+	     the included document is given the attribute xml:base ...
+	     but my schema does not permit this ... 
+	     
+	     This almost generates the correct schema ... but it
+	     doesn't have the correct schemaLocation
+
+	<attribute ns="http://www.w3.org/XML/1998/namespace" name="base">		  <data type="anyURI"/>
+	</attribute>
+	-->
+
+				<attribute name="xml:base">
+					<data type="anyURI"/>
+				</attribute>
+			</optional>
+			<attribute name="id">
+				<data type="ID"/>
+			</attribute>
+			<ref name="Imports"/>
+			<optional>
+				<element name="Modules">
+					<zeroOrMore>
+						<element name="ModuleClass">
+							<ref name="ModuleDef"/>
+						</element>
+					</zeroOrMore>
+				</element>
+			</optional>
+			<optional>
+				<element name="RootDevices">
+					<zeroOrMore>
+						<element name="RootDevice">
+							<attribute name="id">
+								<data type="Name"/>
+							</attribute>
+							<ref name="DeviceInfo"/>
+							<ref name="Doc"/>
+							<optional>
+								<ref name="Modules"/>
+							</optional>
+						<optional>
+							<element name="Devices">
+								<zeroOrMore>
+									<element name="Device">
+										<ref name="DeviceDef"/>
+									</element>
+								</zeroOrMore>
+							</element>
+						</optional>
+						</element>
+					</zeroOrMore>
+				</element>
+			</optional>
+		</element>
+	</define>
+
+	<define name="DeviceDef">
+		<attribute name="id">
+			<data type="Name"/>
+		</attribute>
+		<ref name="DeviceInfo"/>
+		<ref name="Doc"/>
+		<optional>
+			<ref name="Modules"/>
+		</optional>
+	</define>
+
+
+	<define name="DeviceInfo">
+		<element name="DeviceInfo">
+			<interleave>
+				<element name="Name">
+					<text/>
+				</element>
+				<element name="Vendor">
+					<text/>
+				</element>
+				<optional>
+					<element name="FirmwareVersion">
+						<text/>
+					</element>
+				</optional>
+				<optional>
+					<element name="SerialNumber">
+						<text/>
+					</element>
+				</optional>
+				<optional>
+					<element name="VendorURL">
+						<data type="anyURI"/> 
+					</element>
+				</optional>
+			</interleave>
+		</element>
+	</define>
+
+
+	<define name="DataType">
+		<choice>
+			<value>integer</value>
+			<value>boolean</value>
+			<value>string</value>
+			<value>byte</value>
+			<value>float</value>
+			<value>array</value>
+			<value>enum</value>
+			<value>date</value>
+			<value>time</value>
+			<value>datetime</value>
+			<value>blob</value>
+		</choice>
+	</define>
+
+	<define name="DocText">
+		<zeroOrMore>
+			<choice>
+				<text/>
+				<element name="em">
+					<text/>
+				</element>
+				<element name="b">
+					<text/>
+				</element>
+				<element name="tt">
+					<text/>
+				</element>
+			</choice>
+		</zeroOrMore>
+	</define>
+
+
+	<define name="Doc">
+		<optional>
+			<element name="Doc">
+				<choice>
+					<ref name="DocText"/>
+					<zeroOrMore>
+						<choice>
+							<element name="p">
+								<ref name="DocText"/>
+							</element>
+							<element name="img">
+								<attribute name="src"/>
+								<element name="caption">
+									<text/>
+								</element>
+							</element>
+						</choice>
+					</zeroOrMore>
+				</choice>
+			</element>
+		</optional>
+	</define>
+
+
+	<define name="ModuleDef">
+		<attribute name="name">
+			<text/>
+		</attribute>
+		<optional>
+			<element name="extends">
+				<attribute name="domain">
+					<data type="IDREF"/>
+				</attribute>
+				<attribute name="class"/>
+			</element>
+		</optional>
+		<ref name="Doc"/>
+		<optional>
+			<ref name="Actions"/>
+		</optional>
+		<optional>
+			<ref name="Data"/>
+		</optional>
+		<optional>
+			<ref name="Events"/>
+		</optional>
+	</define>
+
+
+	<define name="Modules">
+		<element name="Modules">
+			<zeroOrMore>
+				<element name="Module">
+					<ref name="ModuleDef"/>
+				</element>
+			</zeroOrMore>
+		</element>
+	</define>
+
+
+	<define name="Actions">
+		<element name="Actions">
+			<zeroOrMore>
+				<element name="Action">
+					<attribute name="name">
+						<text/>
+					</attribute>
+					<optional>
+						<attribute name="type">
+							<ref name="DataType"/>
+						</attribute>
+					</optional>
+					<ref name="Doc"/>
+					<zeroOrMore>
+						<element name="Arg">
+							<attribute name="name"/>
+							<attribute name="type">
+								<ref name="DataType"/>
+							</attribute>
+							<ref name="Doc"/>
+						</element>
+					</zeroOrMore>
+				</element>
+			</zeroOrMore>
+		</element>
+	</define>
+
+
+	<define name="Data">
+		<element name="Data">
+			<zeroOrMore>
+				<element name="DataPoint">
+					<attribute name="name">
+						<text/>
+					</attribute>
+					<optional>
+						<attribute name="type">
+							<ref name="DataType"/>
+						</attribute>
+					</optional>
+					<optional>
+						<attribute name="writable">
+							<data type="boolean"/>
+						</attribute>
+					</optional>
+					<optional>
+						<attribute name="readable">
+							<data type="boolean"/>
+						</attribute>
+					</optional>
+					<optional>
+						<attribute name="eventable">
+							<data type="boolean"/>
+						</attribute>
+					</optional>
+					<ref name="Doc"/>
+				</element>
+			</zeroOrMore>
+		</element>
+	</define>
+
+
+	<define name="Events">
+		<element name="Events">
+			<zeroOrMore>
+				<element name="Event">
+					<attribute name="name">
+						<text/>
+					</attribute>
+					<ref name="Data" />
+					<ref name="Doc"/>
+				</element>
+			</zeroOrMore>
+		</element>
+	</define>
+
+
+</grammar>
+

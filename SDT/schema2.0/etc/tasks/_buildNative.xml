@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="_buildNative" default="build">
+
+<!--	INTERNAL: _buildNative
+		Build all native code
+-->
+
+<target name="_buildNative">
+	<!-- is there a directory for native code? -->
+	<available property="available.native" file="${path.native}" type="dir"/>
+	<if><isset property="available.native" />
+		<then>
+
+			<!-- check whether ${prog.make} is set -->
+			<if> <isset property="prog.make" />
+				<then>
+
+					<!-- it is set, so go all the directories unter "native" and execute the Makefile -->
+					<path id="idNativeDirs"> 
+						<dirset dir="${path.native}">
+							<include name="*" />
+						</dirset>
+					</path>
+
+					<!-- iterate over all directories and call the makefile -->
+					<var name="tmp" value="${toString:idNativeDirs}" />
+					<for list="${tmp}" delimiter=":" param="ndir">
+						<sequential>
+							<available property="available.native.makefile" file="@{ndir}/Makefile" />
+							<if><isset property="available.native.makefile" />
+								<then>
+									<echo>@{ndir}/Makefile</echo>
+
+		<!--							<exec	executable="/usr/bin/make"
+											failonerror="false"
+											failifexecutionfails="false"
+											resultproperty="myStatus"
+											errorproperty="/tmp/error.out"
+											outputproperty="/tmp/foo.out"
+											error="/tmp/error.txt"
+											output="/tmp/output.txt"/>
+											-->
+
+								</then>
+								<else>
+									<echo>No "Makefile" found. Please check the check (note the upper-case M).</echo>
+								</else>
+							</if>
+							<echo>@{ndir}</echo>
+						</sequential>
+					</for>
+				</then>
+				<else>
+					<echo>Property "prog.make" not set. Native Builds are ignored.</echo>
+				</else>
+			</if>
+
+
+
+		
+		</then>
+	</if>
+</target>
+
+</project>

@@ -6,12 +6,24 @@ Note that this project runs under Apache 2.0 license. Read the [LICENSE](LICENSE
 
 Any contributions made to this project must comply with the forementioned license.
 
----
+## Content
 
 You can find further Information here:
 
 - [SDT Components](SDT_Components.md)
-- [FAQ](FAQ.md)
 - [SDT Build System](SDT%20Build%20System.md)
+- [FAQ](FAQ.md)
+- [Links & References](Links.md)
 - [LICENSE](LICENSE)
+
+
+## Changes in 2.0
+- Introduced RootDevice to handle
+- Added new data types (byte, float, array, enum, date, time, datetime, blob)
+- Added attributes to data points (readable, eventable)
+- Added otional ``<SerialNumber>``, ``<VendorURL>`` and ``<FirmwareVersion>`` elements to DeviceInfo
+- Added optional ``<Doc>`` element to Event
+- Added [UML diagram](SDT_Components.md)
+
+
 

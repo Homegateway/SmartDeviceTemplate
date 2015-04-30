@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="build" default="build">
+
+<!--	TASK: build
+		Main target
+-->
+<target name="build">
+	<echo>----</echo>
+	<echo>Building project "${projectname}"</echo>
+	<!-- don't run the build if it is a global build and the project property "global.build.ignore" is set -->
+	<if><not>
+			<and>
+				<isset property="global.build" />
+				<isset property="global.build.ignore" />
+			</and>
+		</not>
+		<then>
+			<runtarget target="compile" />
+			<runtarget target="buildjar" />
+		</then>
+		<else>
+			<echo>+--------------------------------------------------------------------------------+</echo>
+			<echo>| PROJECT IS NOT BUILD. Global build, but "global.build.ignore" property is set. |</echo>
+			<echo>+--------------------------------------------------------------------------------+</echo>
+		</else>
+	</if>
+</target>
+
+</project>

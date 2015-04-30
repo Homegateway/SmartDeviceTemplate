@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<Domain xmlns="http://hgi.org/xml/dal/2.0" 
+	id="hgi.dal.core">
+
+  <Modules>
+    <ModuleClass name="BooleanState">
+      <Doc>
+	<tt>BooleanState</tt> is the preferred module for modelling a
+	functionality corresponding to an underlying binary state. This
+	module should be used to abstract away from the actual datatype
+	and values in question. Note that the module does not define whether
+	the execution mode is blocking or non-blocking.
+      </Doc>
+      <Actions>
+	<Action name="get" type="boolean">
+	  <Doc>
+	    Obtain the current associated state.
+	  </Doc>
+	</Action>
+	<Action name="setTarget">
+	  <Doc>
+	    Set the associated state to the specified value.
+	  </Doc>
+	  <Arg name="value" type="boolean">
+	    <Doc>
+	      The desired value of the associated state.
+	    </Doc>
+	  </Arg>
+	</Action>
+      </Actions>
+    </ModuleClass>
+  </Modules>
+
+</Domain>

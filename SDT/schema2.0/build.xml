@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- - HGI Device Abstraction Layer  - - - - - - - - - - - - - - - - - - - - -->
+<!--                                                                         -->
+<!--   Extends the standard build with targets for: 			     -->
+<!--    - generate XML schema the from Relax NG (xml) description	     -->
+<!--    - validate DAL documents against the XML Schema			     -->
+<!--    - generate HTML documentation from DAL documents 		     -->
+
+<project name="importing" basedir="." default="schemas">
+  <import file="etc/common.xml"/>
+
+  <!-- Read the namespace declarations from a file (to get linebreaks) - - - -->
+
+  <loadfile property="schema.xmlns" srcFile="${basedir}/etc/schema.xmlns"/>
+
+  <!-- The RNG file the XML and RNC schemas are generaed from  - - - - - - - -->
+
+  <property name="schema.name" value="domain"/>
+  <property name="schema.rng" value="${path.src}/${schema.name}.rng"/>
+
+  <!-- HTML  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                                                                       -->
+  <!-- Generate HTML documentation from domain definitions in the test       -->
+  <!-- directory. The module classes included via the extends tagged are     -->
+  <!-- included in the documentation - so an xinclude capable XSL engine is  -->
+  <!-- needed.                                                               -->
+  <!-- This needs Ant version 1.8+ and it must be augmented with an current  -->
+  <!-- version of Xerces. Download the binray distribution and place the put -->
+  <!-- xml-apis.jar and xercesImpl.jar in the Ant lib directory.             -->
+
+  <target name="html">
+	<mkdir dir="${path.genbase}" />
+    <xslt basedir="${basedir}/test" destdir="${basedir}/gen/html"
+	  style="${basedir}/style/html.xsl">
+      <param name="destdir" expression="${basedir}/gen/html"/>
+      <sysproperty
+	  key="org.apache.xerces.xni.parser.XMLParserConfiguration"
+	  value="org.apache.xerces.parsers.XIncludeParserConfiguration"/>
+    </xslt>
+  </target>
+
+  <!-- Schemas - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                                                                       -->
+  <!-- The schema is specified using Relax NG (xml) and trang is used to     -->
+  <!-- generate the XML schema. The schema is also generated in Relay NG     -->
+  <!-- compact syntax, which is used by some validating editors (e.g. emacs) -->
+  <!-- The resulting schemas need some additional patching before thy are    -->
+  <!-- usable                                                                -->
+
+  <target name="schemas">
+    <java jar="${basedir}/lib/trang.jar" fork="true">
+      <arg value="${schema.rng}"/>
+      <arg value="${basedir}/etc/${schema.name}.rnc"/>
+    </java>
+
+    <!-- So that the editor does not complain about include directives, the -->
+    <!-- resulting schema is included in another schema, which includes the -->
+    <!-- necessary element definitions. To be able to do this the           -->
+    <!-- definition for Imports must be deleted from this generated schema. -->
+
+    <replace file="${basedir}/etc/${schema.name}.rnc"
+	     token="Imports = element Imports { Domain* }?" value=""/>
+
+    <java jar="${basedir}/lib/trang.jar" fork="true">
+      <arg value="${schema.rng}"/>
+      <arg value="${path.src}/${schema.name}.xsd"/>
+    </java>
+
+    <!-- Can't validate against the generated schema unless we add the      -->
+    <!-- target and default namespaces ...                                  -->
+
+    <replace file='${path.src}/domain.xsd'
+	     token='xmlns:xs="http://www.w3.org/2001/XMLSchema"'
+	     value='${schema.xmlns}'/>
+
+    <!-- In addition the xml:base tag, which is added automatically when    -->
+    <!-- including a document, must also be permitted by out schema.        -->
+    <!-- The schema generated from RNG is almost correct schema ... but     -->
+    <!-- the schemaLocation is wrong.                                       -->
+
+    <replace file='${path.src}/domain.xsd'
+	     token="xml.xsd" value="http://www.w3.org/2001/03/xml.xsd"/>
+  </target>
+
+  <!-- Validate  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                                                                       -->
+  <!-- Check the Device Description conforms to the Device Abstraction       -->
+  <!-- Schema. Note that we need to activate support for XML includes        -->
+
+  <target name="validate" depends="">
+    <schemavalidate warn="true">
+      <fileset dir="${basedir}/test" includes="*.xml"/>
+      <attribute name="http://apache.org/xml/features/xinclude" value="true"/>
+      <schema namespace="http://hgi.org/xml/dal/2.0"
+	      file="${path.src}/domain.xsd" />
+      <schema namespace="http://www.w3.org/2001/XInclude"
+	      file="${basedir}/etc/XInclude.xsd" />
+      <schema namespace="http://www.w3.org/2001/XMLSchema"
+	      file="${basedir}/etc/XMLSchema.xsd" />
+    </schemavalidate>
+  </target>
+
+</project>
+

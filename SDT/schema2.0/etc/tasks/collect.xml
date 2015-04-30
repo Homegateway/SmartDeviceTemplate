@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="collect" default="build">
+
+<!--	TASK: collect
+		collect the results in a common directory. If $omain is set, the artifacts are also collected in
+		the specified Domain directory.
+-->
+<target name="collect" depends="_prepare">
+	<echo>Collecting artifacts from "${projectname}"</echo>
+	<if>
+		<isset property="omain" />
+		<then>
+			<copy todir="${path.gen.domain}/${omain}">
+				<fileset dir="${path.gen}" includes="*.jar"/>
+			</copy>
+		</then>
+	</if>
+	<copy todir="${path.gen.collection}">
+		<fileset dir="${path.gen}" includes="*.jar"/>
+	</copy>
+</target>
+
+</project>

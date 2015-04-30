@@ -1,0 +1,116 @@
+start = Domain
+
+Domain =
+  element Domain {
+    # still having some problems with included documents ... 
+    #      the included document is given the attribute xml:base ...
+    #      but my schema does not permit this ... 
+    # 
+    #      This almost generates the correct schema ... but it
+    #      doesn't have the correct schemaLocation
+    # 
+    # <attribute ns="http://www.w3.org/XML/1998/namespace" name="base">		  <data type="anyURI"/>
+    # </attribute>
+    attribute xml:base { xsd:anyURI }?,
+    attribute id { xsd:ID },
+    Imports,
+    element Modules {
+      element ModuleClass { ModuleDef }*
+    }?,
+    element RootDevices {
+      element RootDevice {
+        attribute id { xsd:Name },
+        DeviceInfo,
+        Doc,
+        Modules?,
+        element Devices {
+          element Device { DeviceDef }*
+        }?
+      }*
+    }?
+  }
+DeviceDef =
+  attribute id { xsd:Name },
+  DeviceInfo,
+  Doc,
+  Modules?
+DeviceInfo =
+  element DeviceInfo {
+    element Name { text }
+    & element Vendor { text }
+    & element FirmwareVersion { text }?
+    & element SerialNumber { text }?
+    & element VendorURL { xsd:anyURI }?
+  }
+DataType =
+  "integer"
+  | "boolean"
+  | "string"
+  | "byte"
+  | "float"
+  | "array"
+  | "enum"
+  | "date"
+  | "time"
+  | "datetime"
+  | "blob"
+DocText =
+  (text
+   | element em { text }
+   | element b { text }
+   | element tt { text })*
+Doc =
+  element Doc {
+    DocText
+    | (element p { DocText }
+       | element img {
+           attribute src { text },
+           element caption { text }
+         })*
+  }?
+ModuleDef =
+  attribute name { text },
+  element extends {
+    attribute domain { xsd:IDREF },
+    attribute class { text }
+  }?,
+  Doc,
+  Actions?,
+  Data?,
+  Events?
+Modules =
+  element Modules {
+    element Module { ModuleDef }*
+  }
+Actions =
+  element Actions {
+    element Action {
+      attribute name { text },
+      attribute type { DataType }?,
+      Doc,
+      element Arg {
+        attribute name { text },
+        attribute type { DataType },
+        Doc
+      }*
+    }*
+  }
+Data =
+  element Data {
+    element DataPoint {
+      attribute name { text },
+      attribute type { DataType }?,
+      attribute writable { xsd:boolean }?,
+      attribute readable { xsd:boolean }?,
+      attribute eventable { xsd:boolean }?,
+      Doc
+    }*
+  }
+Events =
+  element Events {
+    element Event {
+      attribute name { text },
+      Data,
+      Doc
+    }*
+  }
