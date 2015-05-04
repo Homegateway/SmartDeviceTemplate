@@ -335,23 +335,8 @@ m1=0..*
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>500</y>
-      <w>150</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>Events
---
-/- event : Event/
-
-fg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>740</x>
-      <y>500</y>
+      <x>530</x>
+      <y>490</y>
       <w>160</w>
       <h>80</h>
     </coordinates>
@@ -368,26 +353,13 @@ fg=blue</panel_attributes>
     <coordinates>
       <x>410</x>
       <y>170</y>
-      <w>130</w>
-      <h>370</h>
+      <w>140</w>
+      <h>360</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..*
 </panel_attributes>
-    <additional_attributes>110.0;340.0;30.0;340.0;30.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>660</x>
-      <y>490</y>
-      <w>100</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-m1=0..*
-</panel_attributes>
-    <additional_attributes>80.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>120.0;330.0;30.0;330.0;30.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -456,13 +428,13 @@ m1=0..*
     <coordinates>
       <x>590</x>
       <y>350</y>
-      <w>350</w>
-      <h>220</h>
+      <w>130</w>
+      <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..*
 </panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;130.0;330.0;130.0;330.0;200.0;310.0;200.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0;110.0;120.0;110.0;190.0;100.0;190.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
