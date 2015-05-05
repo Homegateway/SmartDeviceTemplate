@@ -201,7 +201,7 @@
     <xs:complexType>
       <xs:group ref="Doc"/>
       <xs:attribute name="name" use="required"/>
-      <xs:attribute name="type" type="DataType"/>
+      <xs:attribute name="type" use="required" type="DataType"/>
       <xs:attribute name="writable" type="xs:boolean"/>
       <xs:attribute name="readable" type="xs:boolean"/>
       <xs:attribute name="eventable" type="xs:boolean"/>

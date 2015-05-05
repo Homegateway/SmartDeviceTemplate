@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="13.1">
-  <zoom_level>10</zoom_level>
+  <zoom_level>9</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>330</x>
-      <y>120</y>
-      <w>150</w>
-      <h>130</h>
+      <x>261</x>
+      <y>99</y>
+      <w>135</w>
+      <h>117</h>
     </coordinates>
     <panel_attributes>ModuleClass
 --
@@ -24,27 +24,27 @@ fg=blue
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>580</x>
-      <y>190</y>
-      <w>140</w>
-      <h>100</h>
+      <x>486</x>
+      <y>162</y>
+      <w>126</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>Action
 --
 *@ name : text*
 /@ type : DataType/
 /- Doc : Doc/
-/- Arg : Arg/
+/* Arg : Arg/
 fg=blue</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>470</x>
-      <y>100</y>
-      <w>130</w>
-      <h>90</h>
+      <x>387</x>
+      <y>81</y>
+      <w>117</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0,1
@@ -54,10 +54,10 @@ m1=0,1
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>800</x>
-      <y>260</y>
-      <w>160</w>
-      <h>80</h>
+      <x>684</x>
+      <y>225</y>
+      <w>144</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>Arg
 --
@@ -70,10 +70,10 @@ fg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>710</x>
-      <y>260</y>
-      <w>110</w>
-      <h>40</h>
+      <x>603</x>
+      <y>225</y>
+      <w>99</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..*</panel_attributes>
@@ -82,10 +82,10 @@ m1=0..*</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>60</x>
-      <y>230</y>
-      <w>200</w>
-      <h>100</h>
+      <x>18</x>
+      <y>198</y>
+      <w>180</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>Domain
 --
@@ -99,10 +99,10 @@ fg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>250</x>
-      <y>120</y>
-      <w>100</w>
-      <h>200</h>
+      <x>189</x>
+      <y>99</y>
+      <w>90</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1= 0..*</panel_attributes>
@@ -111,10 +111,10 @@ m1= 0..*</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>330</x>
-      <y>600</y>
-      <w>190</w>
-      <h>100</h>
+      <x>261</x>
+      <y>486</y>
+      <w>171</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>Device
 --
@@ -128,23 +128,23 @@ fg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>240</x>
-      <y>300</y>
-      <w>50</w>
-      <h>250</h>
+      <x>180</x>
+      <y>261</y>
+      <w>45</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..*
 </panel_attributes>
-    <additional_attributes>10.0;230.0;10.0;180.0;30.0;180.0;30.0;10.0;20.0;10.0</additional_attributes>
+    <additional_attributes>10.0;180.0;10.0;140.0;30.0;140.0;30.0;10.0;20.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>590</x>
-      <y>610</y>
-      <w>180</w>
-      <h>130</h>
+      <x>495</x>
+      <y>495</y>
+      <w>162</w>
+      <h>117</h>
     </coordinates>
     <panel_attributes>DeviceInfo
 --
@@ -160,10 +160,10 @@ fg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>510</x>
-      <y>610</y>
-      <w>100</w>
-      <h>90</h>
+      <x>423</x>
+      <y>495</y>
+      <w>90</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1= 0,1</panel_attributes>
@@ -172,10 +172,10 @@ m1= 0,1</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>800</x>
-      <y>30</y>
-      <w>160</w>
-      <h>210</h>
+      <x>684</x>
+      <y>18</y>
+      <w>144</w>
+      <h>189</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
 DataType
@@ -195,10 +195,10 @@ blob</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>850</x>
-      <y>650</y>
-      <w>110</w>
-      <h>50</h>
+      <x>729</x>
+      <y>531</y>
+      <w>99</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>Doc
 --
@@ -209,10 +209,10 @@ fg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>580</x>
-      <y>90</y>
-      <w>130</w>
-      <h>80</h>
+      <x>486</x>
+      <y>72</y>
+      <w>117</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Attributes&gt;&gt;
 Extends
@@ -225,10 +225,10 @@ Extends
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>470</x>
-      <y>180</y>
-      <w>130</w>
-      <h>50</h>
+      <x>387</x>
+      <y>153</y>
+      <w>117</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..*
@@ -238,10 +238,10 @@ m1=0..*
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>710</x>
-      <y>40</y>
-      <w>110</w>
-      <h>220</h>
+      <x>603</x>
+      <y>27</y>
+      <w>99</w>
+      <h>198</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0,1
@@ -251,10 +251,10 @@ m1=0,1
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>780</x>
-      <y>640</y>
-      <w>90</w>
-      <h>50</h>
+      <x>666</x>
+      <y>522</y>
+      <w>81</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;..
 m1=0..*
@@ -264,10 +264,10 @@ m1=0..*
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>950</x>
-      <y>110</y>
-      <w>50</w>
-      <h>220</h>
+      <x>819</x>
+      <y>90</y>
+      <w>45</w>
+      <h>198</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1= 1
@@ -277,10 +277,10 @@ m1= 1
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>580</x>
-      <y>340</y>
-      <w>170</w>
-      <h>50</h>
+      <x>486</x>
+      <y>297</y>
+      <w>153</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>Data
 --
@@ -291,10 +291,10 @@ fg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>470</x>
-      <y>210</y>
-      <w>130</w>
-      <h>170</h>
+      <x>387</x>
+      <y>180</y>
+      <w>117</w>
+      <h>153</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..*
@@ -304,10 +304,10 @@ m1=0..*
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>740</x>
-      <y>350</y>
-      <w>80</w>
-      <h>50</h>
+      <x>630</x>
+      <y>306</y>
+      <w>72</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..*
@@ -317,15 +317,15 @@ m1=0..*
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>800</x>
-      <y>360</y>
-      <w>160</w>
-      <h>130</h>
+      <x>684</x>
+      <y>315</y>
+      <w>144</w>
+      <h>117</h>
     </coordinates>
     <panel_attributes>DataPoint
 --
 *@ name : text*
-/@ type : DataType/
+@ type : DataType
 /@ writable : boolean/
 /@ readable : boolean/
 /@ eventable : boolean/
@@ -337,10 +337,10 @@ fg=blue
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>590</x>
-      <y>520</y>
-      <w>160</w>
-      <h>80</h>
+      <x>495</x>
+      <y>414</y>
+      <w>144</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>Event
 --
@@ -353,23 +353,23 @@ fg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>470</x>
-      <y>220</y>
-      <w>140</w>
-      <h>340</h>
+      <x>387</x>
+      <y>189</y>
+      <w>126</w>
+      <h>261</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..*
 </panel_attributes>
-    <additional_attributes>120.0;310.0;30.0;310.0;30.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>120.0;260.0;30.0;260.0;30.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>330</x>
-      <y>550</y>
-      <w>120</w>
-      <h>30</h>
+      <x>261</x>
+      <y>441</y>
+      <w>135</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>Module
 fg=blue</panel_attributes>
@@ -378,48 +378,48 @@ fg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>440</x>
-      <y>550</y>
-      <w>110</w>
-      <h>130</h>
+      <x>387</x>
+      <y>441</y>
+      <w>72</w>
+      <h>117</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..*
 </panel_attributes>
-    <additional_attributes>10.0;10.0;90.0;10.0;90.0;110.0;80.0;110.0</additional_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0;60.0;110.0;50.0;110.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>380</x>
-      <y>240</y>
-      <w>100</w>
-      <h>330</h>
+      <x>306</x>
+      <y>207</y>
+      <w>90</w>
+      <h>252</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;.
 &lt;&lt;extends&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;310.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;260.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
-      <y>380</y>
-      <w>130</w>
-      <h>210</h>
+      <x>549</x>
+      <y>333</y>
+      <w>126</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..*
 </panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;120.0;110.0;120.0;110.0;190.0;100.0;190.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0;120.0;70.0;120.0;140.0;100.0;140.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>950</x>
-      <y>40</y>
-      <w>70</w>
-      <h>390</h>
+      <x>819</x>
+      <y>27</y>
+      <w>63</w>
+      <h>351</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=1
@@ -429,10 +429,10 @@ m1=1
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>530</y>
-      <w>190</w>
-      <h>110</h>
+      <x>27</x>
+      <y>423</y>
+      <w>171</w>
+      <h>99</h>
     </coordinates>
     <panel_attributes>RootDevice
 --
@@ -447,10 +447,10 @@ fg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>250</x>
-      <y>590</y>
-      <w>100</w>
-      <h>50</h>
+      <x>189</x>
+      <y>477</y>
+      <w>90</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..*
@@ -460,10 +460,10 @@ m1=0..*
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>60</x>
-      <y>30</y>
-      <w>200</w>
-      <h>130</h>
+      <x>18</x>
+      <y>18</y>
+      <w>180</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>bg=#FAF8C8
 fontsize=10
@@ -471,7 +471,8 @@ fontsize=10
 *@mandatoryElementAttribute*
 - element
 - element : Subclass
-/- optionalElement/
+/- optionalElement (0/1)/
+/* optionalElement (0/n)/
 
 "Contains" Relation
 
@@ -481,10 +482,10 @@ Subclassing</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>160</x>
-      <y>90</y>
-      <w>100</w>
-      <h>40</h>
+      <x>108</x>
+      <y>81</y>
+      <w>90</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 fontsize=10
@@ -495,10 +496,10 @@ m1=0..*
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>160</x>
-      <y>120</y>
-      <w>110</w>
-      <h>40</h>
+      <x>108</x>
+      <y>108</y>
+      <w>99</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;.
 &lt;&lt;extends&gt;&gt;
@@ -508,10 +509,10 @@ fontsize=10</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>250</x>
-      <y>550</y>
-      <w>100</w>
-      <h>60</h>
+      <x>189</x>
+      <y>441</y>
+      <w>90</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..*
@@ -521,10 +522,10 @@ m1=0..*
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>250</x>
-      <y>610</y>
-      <w>360</w>
-      <h>130</h>
+      <x>189</x>
+      <y>495</y>
+      <w>324</w>
+      <h>117</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 </panel_attributes>

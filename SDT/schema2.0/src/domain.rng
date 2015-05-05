@@ -246,11 +246,9 @@
 					<attribute name="name">
 						<text/>
 					</attribute>
-					<optional>
-						<attribute name="type">
-							<ref name="DataType"/>
-						</attribute>
-					</optional>
+					<attribute name="type">
+						<ref name="DataType"/>
+					</attribute>
 					<optional>
 						<attribute name="writable">
 							<data type="boolean"/>

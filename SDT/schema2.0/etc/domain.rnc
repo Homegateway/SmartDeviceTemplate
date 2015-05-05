@@ -99,7 +99,7 @@ Data =
   element Data {
     element DataPoint {
       attribute name { text },
-      attribute type { DataType }?,
+      attribute type { DataType },
       attribute writable { xsd:boolean }?,
       attribute readable { xsd:boolean }?,
       attribute eventable { xsd:boolean }?,
