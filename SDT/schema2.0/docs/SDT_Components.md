@@ -1,6 +1,6 @@
 # SDT Components
 
-In this document an overview about the SDT 2.0 ødefinitions and component hierarchy is given.
+In this document an overview about the SDT 2.0 definitions and component hierarchy is given.
 
 ## Contents
 
@@ -10,7 +10,6 @@ In this document an overview about the SDT 2.0 ødefinitions and component hiera
 [ModuleClass](#ModuleClass)  
 &nbsp;&nbsp;&nbsp;[Action](#Action)  
 &nbsp;&nbsp;&nbsp;[Data](#Data)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[DataPoint](#DataPoint)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[DataType](#DataType)  
 &nbsp;&nbsp;&nbsp;[Event](#Event) 
 
@@ -219,8 +218,6 @@ The *Arg* has the following attributes and elements:
 	- **type** : The type of the *Arg*. It must comply to one of the defined *DataTypes*. Attribute. Required.
 	- **Doc** : Documentation for the *Arg*. Element. Optional.
 
-
-
 #### Example
 The following are two examples for actions implementing a getter and a setter for boolean values.
 
@@ -237,61 +234,80 @@ The following are two examples for actions implementing a getter and a setter fo
 
 ---
 
+<a name="Data"/></a>
 ### Data
-The 'Data' component represents a list of 'DataPoints'
+The *Data* component represents a list of *DataPoints*.
 
 ![](images/Data.png)
+
+Though *DataPoints* only refer to single data points of a physical device it is possible to describe hierarchies by model the path to the data point in the hierarchy by a path-like structure like to the pathname of a UNIX file system. Here, the root node of the hierarchy is a slash (/ TODO hex value) and the nodes along the path are also separated by slashes. The actual datapoint is the last leaf at the path. 
+
+In BNF:
+
+	name := leaf | '/' path .
+	path : = node '/' path | leaf.
+	node := String . 
+	leaf := String .
+	String := [character string excluding the character '/'] .
+
 
 #### Attributes
 None.
 
 #### Elements
-- **DataPoint** : Zero or more occurances of **DataPoints**. Optional.  
+- **DataPoint** : Zero or more occurances of *DataPoints. Optional.  
+A *DataPoint* has the following attributes and elements:
+	- **name** : The name (and possible path in a hierarchical data model) of the *DataPoint*. Attribute. Required.
+	- **type** : The type of the *DataPoint*. It must comply to one of the defined *DataTypes*. Attribute. Required.
+	- **writable** : Boolean value that indicates whether this *DataPoint* is writable by an application. Attribute. Optional. Default: false.
+	- **readable** : Boolean value that indicates whether this *DataPoint* is readable by an application. Attribute. Optional. Default: false.
+	- **eventable** : Boolean value that indicates whether an internal or external change of this *DataPoint* raises an event. Attribute. Optional. Default: false.
+	- **Doc** : Documentation for the *DataPoint*. Element. Optional.
+
 
 #### Example
 	<Data>
-		<!-- List of DataPoints goes here -->
+		<DataPoint  name="attributeName" type="string" writable="false">
+			<Doc>Some documentation for the DataPoint</Doc>
+		</DataPoint>
 	</Data>
 
 ---
 
-#### DataPoint
-
-![](images/xx.png)
-
-#### Attributes
-#### Elements
-#### Example
-
----
 
 <a name="DataType"/></a>
 ### DataType
-The currently allowed *DataTypes* for SDT *Actions*, *Args* and *DataTypes* are:
+The following *DataTypes* can be used in the SDT's *Actions*, *Args* and *DataTypes* elements and attributes. If not stated otherwise datatypes should comply to the equivalent datatypes defined in [XML Schema Part 2: Datatypes Second Edition](http://www.w3.org/TR/xmlschema-2/#boolean):
 
-- **boolean** :
-- **byte** :
-- **integer** :
-- **float** :
-- **string** :
-- **enum** :
-- **date** :
-- **time** :
-- **datetime** :
-- **blob** :
+- **boolean** : A boolean value as defined by [http://www.w3.org/TR/xmlschema-2/#boolean](http://www.w3.org/TR/xmlschema-2/#boolean) .
+- **byte** : An integer datatype with the range of [0 - 255] as defined by [http://www.w3.org/TR/xmlschema-2/#unsignedByte](http://www.w3.org/TR/xmlschema-2/#unsignedByte) .
+- **integer** : An integer value as defined by [http://www.w3.org/TR/xmlschema-2/#integer](http://www.w3.org/TR/xmlschema-2/#integer) .
+- **float** : An IEEE single-precision 32-bit floating point type as defined by [http://www.w3.org/TR/xmlschema-2/#float](http://www.w3.org/TR/xmlschema-2/#float) .
+- **string** : The string datatype represents character strings as defined by [http://www.w3.org/TR/xmlschema-2/#string](http://www.w3.org/TR/xmlschema-2/#string) .
+- **enum** : A complete and orderd list of items in a collection. Items in an enumeration are separated by commas (, 0x2c) and must be of one of the datatypes defined here. Commas (, 0x2c) and backslashes (\ 0x5c) in enumaration items must be escaped by backslash.
+- **date** : A date value as defined by [http://www.w3.org/TR/xmlschema-2/#date](http://www.w3.org/TR/xmlschema-2/#date) .
+- **time** : A time value as defined by [http://www.w3.org/TR/xmlschema-2/#time](http://www.w3.org/TR/xmlschema-2/#time) .
+- **datetime** : A time value as defined by [http://www.w3.org/TR/xmlschema-2/#dateTime](http://www.w3.org/TR/xmlschema-2/#dateTime) .
+- **blob** : A blob value represents a binary object. The internal encoding is transparent and not defined here. The binary object must be encoded conforming to [http://www.w3.org/TR/xmlschema-2/#base64Binary](http://www.w3.org/TR/xmlschema-2/#base64Binary) .
+- **uri** : A URI that represents a Uniform Resource Identifier Reference (URI) as defined by as defined by [RFC 2396](http://www.ietf.org/rfc/rfc2396.txt) and amended by [RFC 2732](http://www.ietf.org/rfc/rfc2732.txt) .
 
 ---
 
-
+<a name="Event"/></a>
 ### Event
+An *Event* is a component that defines properties for events that are raised as reactions to changes in *DataPoints* of a *device's* data model. These state changes can happen either through a device-internal change or by external means, e.g. a user operates a switch or the temperature in a room rises beyond a certain threshold.
 
-![](images/xx.png)
+![](images/Event.png)
 
 #### Attributes
+- **name** : The name of the *Event*. Required.
+
 #### Elements
+- **Data** : A list of *Data* components. Optional.
+
 #### Example
 
-
+TODO continue
 
 
 
@@ -300,6 +316,50 @@ The currently allowed *DataTypes* for SDT *Actions*, *Args* and *DataTypes* are:
 
 # DOC TBD
 Explain. Describe content elements
+
+	DocText := [ text | emphasizedText | boldText | monotypeText ] * . 
+
+
+	<define name="DocText">
+		<zeroOrMore>
+			<choice>
+				<text/>
+				<element name="em">
+					<text/>
+				</element>
+				<element name="b">
+					<text/>
+				</element>
+				<element name="tt">
+					<text/>
+				</element>
+			</choice>
+		</zeroOrMore>
+	</define>
+
+
+	<define name="Doc">
+		<optional>
+			<element name="Doc">
+				<choice>
+					<ref name="DocText"/>
+					<zeroOrMore>
+						<choice>
+							<element name="p">
+								<ref name="DocText"/>
+							</element>
+							<element name="img">
+								<attribute name="src"/>
+								<element name="caption">
+									<text/>
+								</element>
+							</element>
+						</choice>
+					</zeroOrMore>
+				</choice>
+			</element>
+		</optional>
+	</define>
 
 
 

@@ -36,13 +36,13 @@ You can use the build system to validate new SDT definitions or changes made to 
 	$ cd SDT/schema
 	$ ant validate
 
-The last lines of the many screens full of output you receive should look something like this:
+The output after a successful validation should look like this:
 
 >[schemavalidate] 2 file(s) have been successfully validated.  
 >BUILD SUCCESSFUL  
 >Total time: 1 second
 
-Otherwise you most likely receive a stacktrace. Search the output for the line *BUILD FAILED*. Above this line you will find some helpful hints for the filename and line number on which the error occured (here: file *mseeb.xml* on line 66) and a reason:	
+Otherwise you most likely receive a stacktrace or some other error messages. Search the output for the line *BUILD FAILED*. Above this line you will find some helpful hints for the filename and line number on which the error occured (here: file *mseeb.xml* on line 66) and a reason:	
 
 >[schemavalidate] /Users/someone/Sources/git/RWD050/SDT/schema/test/mseeb.xml:66:18: cvc-elt.1: Cannot find the declaration of element 'Domain'.    
 >BUILD FAILED
