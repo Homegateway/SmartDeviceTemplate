@@ -25,7 +25,7 @@ You can find further Information here:
 ## Changes in 2.0
 - Introduced RootDevice to handle
 - Added new data types (byte, float, array, enum, date, time, datetime, blob)
-- Added attributes to data points (readable, eventable)
+- Added ``readable`` and ``eventable`` to data points.
 - Added otional ``<SerialNumber>``, ``<VendorURL>`` and ``<FirmwareVersion>`` elements to DeviceInfo
 - Added optional ``<Doc>`` element to Event
 - Changed the optionality of the ``<DataPoint>``'s ``type`` attribute to "required".
