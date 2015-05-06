@@ -175,7 +175,7 @@ m1= 0,1</panel_attributes>
       <x>684</x>
       <y>18</y>
       <w>144</w>
-      <h>189</h>
+      <h>198</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
 DataType
@@ -189,7 +189,8 @@ enum
 date
 time
 datetime
-blob</panel_attributes>
+blob
+uri</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
