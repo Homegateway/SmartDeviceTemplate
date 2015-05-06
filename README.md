@@ -28,6 +28,7 @@ You can find further Information here:
 - Added attributes to data points (readable, eventable)
 - Added otional ``<SerialNumber>``, ``<VendorURL>`` and ``<FirmwareVersion>`` elements to DeviceInfo
 - Added optional ``<Doc>`` element to Event
+- Changed the optionality of the ``<DataPoint>``'s ``type`` attribute to "required".
 - Added [UML diagram](SDT/schema2.0/docs/SDT_Components.md)
 
 
