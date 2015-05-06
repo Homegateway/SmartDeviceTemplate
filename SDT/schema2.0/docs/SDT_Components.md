@@ -64,7 +64,7 @@ A *Domain* can define *ModuleClasses* or *RootDevices* only, or may choose to pr
 
 <a name="RootDevice"/></a>
 ### RootDevice
-A *RootDevice* is the description of a (physical) device that may contain optional sub-devices. It represents the idea an appliance that is addressable on a Home Area Network where one or more sub-*Devices* provide certain functionalities. 
+A *RootDevice* is the description of a (physical) device that may contain optional embedded sub-devices. It represents the idea an appliance that is addressable on a Home Area Network where one or more sub-*Devices* provide certain functionalities. 
 
 An example is a connected power-strip where each of the sockets can be switched on and off individually. The power-strip itself can provide functions such as "all sockets off" and "overall power consumption".
 

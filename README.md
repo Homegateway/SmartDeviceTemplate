@@ -24,7 +24,7 @@ You can find further Information here:
 
 
 ## Changes in 2.0
-- Introduced RootDevice to handle
+- Introduced RootDevice to support hierarchical embedded devices.
 - Added new data types (byte, float, array, enum, date, time, datetime, blob, uri)
 - Added ``readable`` and ``eventable`` to data points.
 - Added otional ``<SerialNumber>``, ``<VendorURL>`` and ``<FirmwareVersion>`` elements to DeviceInfo
