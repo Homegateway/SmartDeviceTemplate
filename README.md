@@ -17,6 +17,7 @@ You can find further Information here:
 
 - [SDT Components](SDT/schema2.0/docs/SDT_Components.md)
 - [SDT Build System](SDT/schema2.0/docs/SDT%20Build%20System.md)
+- [Examples](SDT/schema2.0/docs/Exampls.md) // Page that collects examples
 - [FAQ](SDT/schema2.0/docs/FAQ.md)
 - [Links & References](SDT/schema2.0/docs/Links.md)
 - [LICENSE](LICENSE)
