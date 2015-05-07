@@ -93,6 +93,14 @@
                     </Arg>
                 </Action>
           </Actions>
+          <Events>
+                <Event name="stateChanged">
+                    <Data>
+                        <DataPoint name="state" type="boolean">
+                        </DataPoint>
+                    </Data>
+                </Event>      
+          </Events>
         </ModuleClass>
     </Modules>
 
