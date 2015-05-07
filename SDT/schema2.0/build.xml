@@ -92,7 +92,7 @@
     <schemavalidate warn="true">
       <fileset dir="${basedir}/test" includes="*.xml"/>
       <attribute name="http://apache.org/xml/features/xinclude" value="true"/>
-      <schema namespace="http://hgi.org/xml/dal/2.0"
+      <schema namespace="http://homegatewayinitiative.org/xml/dal/2.0"
 	      file="${path.src}/domain.xsd" />
       <schema namespace="http://www.w3.org/2001/XInclude"
 	      file="${basedir}/etc/XInclude.xsd" />

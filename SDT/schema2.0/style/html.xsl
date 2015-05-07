@@ -8,7 +8,7 @@
        document ... -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-		xmlns:dal="http://hgi.org/xml/dal/1.0"
+		xmlns:dal="http://homegatewayinitiative.org/xml/dal/2.0"
 		xmlns="http://www.w3.org/1999/xhtml"
 		
 		xmlns:redirect="http://xml.apache.org/xalan/redirect" 

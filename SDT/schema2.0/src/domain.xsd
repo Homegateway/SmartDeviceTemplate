@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema targetNamespace="http://hgi.org/xml/dal/2.0" 
-	   xmlns="http://hgi.org/xml/dal/2.0" 
+<xs:schema targetNamespace="http://homegatewayinitiative.org/xml/dal/2.0" 
+	   xmlns="http://homegatewayinitiative.org/xml/dal/2.0" 
 	   xmlns:xs="http://www.w3.org/2001/XMLSchema" 
 	  
  elementFormDefault="qualified">

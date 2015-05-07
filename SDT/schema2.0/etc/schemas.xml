@@ -1,6 +1,6 @@
 <locatingRules xmlns="http://thaiopensource.com/ns/locating-rules/1.0">
   
-  <namespace ns="http://hgi.org/xml/dal/2.0" typeId="DAL"/>
+  <namespace ns="http://homegatewayinitiative.org/xml/dal/2.0" typeId="DAL"/>
   <namespace ns="http://www.w3.org/2001/XInclude" typeId="XINC"/>
 
   <typeId id="DAL" uri="dal.rnc"/>

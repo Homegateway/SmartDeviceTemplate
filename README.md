@@ -31,6 +31,7 @@ You can find further Information here:
 - Added optional ``<Doc>`` element to Event
 - Changed the optionality of the ``<DataPoint>``'s ``type`` attribute to "required".
 - Added [UML diagram](SDT/schema2.0/docs/SDT_Components.md)
+- Changed the namespace for the XSD from "hgi.org" to "homegatewayinitiative.org".
 
 ---
 
@@ -71,7 +72,11 @@ The "numbers" could be just integer number, but may also contain letters, e.g. "
 
 
 ## Domain / namespace
-The SDL now uses the namespace "homegateway.org" as a namespace to identify the schema (also used for includes). The namespace is **not** a URL, but uniquely identifies the namespace and *should* be registered by HGI.
+The SDL now uses the namespace "homegatewayinitiative.org" as a namespace to identify the schema (also used for includes). The namespace is **not** a URL, but uniquely identifies the namespace and *should* be registered by HGI.
+
+That said, most validating parsers expect **that the namesapce IS a valid URL** or that at least there is a server on the other end rejecting the request. A timeout / no connection / no answer / ... leads to an error.
+
+Therefore, we cannot use the namespace "homegateway.org" because parsers don't get an answer from this address.
 
 
 
