@@ -7,7 +7,7 @@
 
 ## Tools
 - **UMLet**	: [http://www.umlet.com](http://www.umlet.com)  
-Free UML drawing tool
+The free UML drawing tool used to draw the UML file.
 - **Apache Ant** : [http://ant.apache.org](http://ant.apache.org)  
 Build tool
 

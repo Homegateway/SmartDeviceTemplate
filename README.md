@@ -8,7 +8,7 @@ Any contributions made to this project must comply with the forementioned licens
 
 ## Quick Links
 - ['domain.xsd' Version 2.0](SDT/schema2.0/src/domain.xsd)
-- [UML Diagram of the SDT 2.0](SDT/schema2.0/docs/images/SDT2.0_UML.png)
+- [UML Diagram of the SDT 2.0](SDT/schema2.0/docs/images/SDT2.0_UML.png) ([source](SDT/schema2.0/docs/SDT_UML.uxf))
 
 
 ## Content
@@ -17,7 +17,7 @@ You can find further Information here:
 
 - [SDT Components](SDT/schema2.0/docs/SDT_Components.md)
 - [SDT Build System](SDT/schema2.0/docs/SDT%20Build%20System.md)
-- [Examples](SDT/schema2.0/docs/Exampls.md) // Page that collects examples
+- [Examples](SDT/schema2.0/docs/Examples.md) 
 - [FAQ](SDT/schema2.0/docs/FAQ.md)
 - [Links & References](SDT/schema2.0/docs/Links.md)
 - [LICENSE](LICENSE)
