@@ -46,6 +46,7 @@ The "numbers" could be just integer number, but may also contain letters, e.g. "
 
 <a name="Namespace"></a>
 ## Domain / Namespace
+### Issue
 The SDL now uses the namespace "homegatewayinitiative.org" as a namespace to identify the schema (also used for includes). The namespace is **not** a URL, but uniquely identifies the namespace and *should* be registered by HGI.
 
 That said, most validating parsers expect **that the namesapce IS a valid URL** or that at least there is a server on the other end rejecting the request. A timeout / no connection / no answer / ... leads to an error.
@@ -56,15 +57,36 @@ Therefore, we cannot use the namespace "homegateway.org" because parsers don't g
 
 <a name="Roles"></a>
 ## Roles
+### Proposal
+The proposal is to add a  *role* to *RootDevice* / *Device*. DECT ULE defines roles such as client and server for direct communication of appliances without a local hub. Depending on the assigned role a device might support different functions.
 
+Example:
+	
+	<RootDevice name id=”xyz” role=”something”>’
+	...
+	</RootDevice>
 
 ---
 
 <a name="Optionals"></a>
 ## Optionals
+### Rational
+Introduce optional *Actions* in *ModuleClasses* to reduce the number of possible combinations. Some technologies offers flexibility in defining requireed and optional *Actions*, *DataPoints* and *Events*´. The alternative is to define similar *ModuleClasses* that offers the variants of required and optional elements.
 
--	Add role to device/root device like ‘<rootdevice name id=”xyz” role=”something”>’. DECT ULE defines roles such as client and server for direct communication of appliances without a local hub.
--	Make actions option: ‘<action name=”abc” optional=”yes”>’ (the default with the optional attribute is “no” = mandatory). DECT has optional actions.
- 
+DECT ULE, for example, has optional actions.
+
+### Proposal
+Add an attribute to *Actions* to mark them as optional in a ModuleClass. Perhaps *DataPoints* and *Events* as well.
+
+Example:
+
+	...
+	<Action name=”abc” optional=”true”>
+	...
+	</Action>
+
+The default without the optional attribute would be  ``optional="false"``, meaning required).
+
+
 
 
