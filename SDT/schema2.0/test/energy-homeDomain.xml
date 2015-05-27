@@ -1,0 +1,2319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Domain xmlns="http://homegatewayinitiative.org/xml/dal/2.0" id="energy-home.it">
+
+	<Modules>
+		<ModuleClass name="ActiveApplianceParameterSet">
+			<ModuleRef class="ApplianceParameterState" domain="energy-home.it" name="ApplianceParameterState" />
+		</ModuleClass>
+		<ModuleClass name="AffectedParametersList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="ApplianceParameter" domain="energy-home.it" name="ApplianceParameter" />
+		</ModuleClass>
+		<ModuleClass name="Appliance">
+			<extends class="SelfDevice" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetActiveApplianceControlList" rt="ApplianceControlList" type="safe" />
+				<Action name="HeadActiveApplianceControlList" type="safe" />
+				<Action name="GetApplianceControlList" rt="ApplianceControlList" type="safe" />
+				<Action name="HeadApplianceControlList" type="safe" />
+				<Action name="CreateApplianceControl" type="unsafe">
+					<ModArg class="ApplianceControl" domain="energy-home.it" name="newApplianceControl" />
+				</Action>
+				<Action name="GetApplianceLogEventList" rt="ApplianceLogEventList" type="safe" />
+				<Action name="HeadApplianceLogEventList" type="safe" />
+				<Action name="GetApplianceMonitorList" rt="ApplianceMonitorList" type="safe" />
+				<Action name="HeadApplianceMonitorList" type="safe" />
+				<Action name="GetApplianceParameterCompatibilityActionList" rt="ApplianceParameterCompatibilityActionList" type="safe" />
+				<Action name="HeadApplianceParameterCompatibilityActionList" type="safe" />
+				<Action name="GetApplianceParameterList" rt="ApplianceParameterList" type="safe" />
+				<Action name="HeadApplianceParameterList" type="safe" />
+				<Action name="GetApplianceWorkingModeList" rt="ApplianceWorkingModeList" type="safe" />
+				<Action name="HeadApplianceWorkingModeList" type="safe" />
+			</Actions>
+		</ModuleClass>
+		<ModuleClass name="ApplianceControl">
+			<extends class="Event" domain="energy-home.it" />
+			<ModuleRef class="ApplianceParameterState" domain="energy-home.it" name="ApplianceParameterState" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceControlList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="ApplianceControl" domain="energy-home.it" name="ApplianceControl" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceMonitor">
+			<extends class="SubscribableResource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="maxValue" type="integer" />
+				<DataPoint name="minValue" type="integer" />
+			</Data>
+			<ModuleRef class="ApplianceParameterState" domain="energy-home.it" name="ApplianceParameterState" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceMonitorList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="ApplianceMonitor" domain="energy-home.it" name="ApplianceMonitor" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceParameter">
+			<extends class="Resource" domain="energy-home.it" />
+			<Actions />
+			<Data>
+				<DataPoint name="description" type="string" />
+				<DataPoint name="id" type="integer" />
+			</Data>
+			<ModuleRef class="ApplianceParameterTable" domain="energy-home.it" name="ApplianceParameterTable" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceParameterCompatibilityAction">
+			<extends class="Resource" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetAffectedParametersList" rt="AffectedParametersList" type="safe" />
+				<Action name="HeadAffectedParametersList" type="safe" />
+			</Actions>
+			<Data>
+				<DataPoint name="action" type="integer" />
+				<DataPoint name="max" type="integer" />
+			</Data>
+			<ModuleRef class="Expression" domain="energy-home.it" name="Expression" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceParameterCompatibilityActionList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="ApplianceParameterCompatibilityAction" domain="energy-home.it" name="ApplianceParameterCompatibilityAction" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceParameterList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="ApplianceParameter" domain="energy-home.it" name="ApplianceParameter" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceParameterSet">
+			<ModuleRef class="ApplianceParameterSettings" domain="energy-home.it" name="ApplianceParameterSettings" />
+			<ModuleRef class="Expression" domain="energy-home.it" name="Expression" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceParameterSetList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="ApplianceParameterSet" domain="energy-home.it" name="ApplianceParameterSet" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceParameterSettings">
+			<extends class="Resource" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetApplianceParameter" rt="ApplianceParameter" type="safe" />
+				<Action name="HeadApplianceParameter" type="safe" />
+			</Actions>
+			<Data>
+				<DataPoint name="default" type="integer" />
+				<DataPoint name="max" type="integer" />
+				<DataPoint name="min" type="integer" />
+			</Data>
+			<ModuleRef class="AvoidedValue" domain="energy-home.it" name="AvoidedValue" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceParameterState">
+			<Actions>
+				<Action name="GetApplianceParameter" rt="ApplianceParameter" type="safe" />
+				<Action name="HeadApplianceParameter" type="safe" />
+			</Actions>
+			<Data>
+				<DataPoint name="now" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="ApplianceParameterTable">
+			<Actions />
+			<Data>
+				<DataPoint name="permissions" type="string" />
+				<DataPoint name="unit" type="string" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="ApplianceWorkingMode">
+			<extends class="Resource" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetApplianceParameterSetList" rt="ApplianceParameterSetList" type="safe" />
+				<Action name="HeadApplianceParameterSetList" type="safe" />
+			</Actions>
+			<Data>
+				<DataPoint name="name" type="string" />
+				<DataPoint name="id" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="ApplianceWorkingModeList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="ApplianceWorkingMode" domain="energy-home.it" name="ApplianceWorkingMode" />
+		</ModuleClass>
+		<ModuleClass name="AvoidedValue">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="BooleanParameterTable">
+			<extends class="ApplianceParameterTable" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DateParameterTable">
+			<extends class="ApplianceParameterTable" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="Expression">
+			<Actions>
+				<Action name="GetApplianceParameter" rt="ApplianceParameter" type="safe" />
+				<Action name="HeadApplianceParameter" type="safe" />
+			</Actions>
+			<Data>
+				<DataPoint name="logicalConnective" type="string" />
+				<DataPoint name="mathOperator" type="string" />
+				<DataPoint name="value" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="LocalName">
+			<extends class="Resource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="name" type="string" />
+				<DataPoint name="language" type="string" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="LocalNameList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="LocalName" domain="energy-home.it" name="LocalName" />
+		</ModuleClass>
+		<ModuleClass name="ParameterTablePoint">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="PointwiseParameterTable">
+			<extends class="ApplianceParameterTable" domain="energy-home.it" />
+			<ModuleRef class="ParameterTablePoint" domain="energy-home.it" name="ParameterTablePoint" />
+		</ModuleClass>
+		<ModuleClass name="StepParameterTable">
+			<extends class="ApplianceParameterTable" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="min" type="integer" />
+				<DataPoint name="numSetPoints" type="integer" />
+				<DataPoint name="step" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="ApplianceStatistic">
+			<extends class="Resource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="applianceStatisticID" type="integer" />
+				<DataPoint name="applianceStatisticPayload" type="string" />
+			</Data>
+			<ModuleRef class="TimeType" domain="energy-home.it" name="timeStamp" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceStatisticList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="applianceStatisticListMaxSize" type="integer" />
+				<DataPoint name="applianceStatisticMaxSize" type="integer" />
+			</Data>
+			<ModuleRef class="ApplianceStatistic" domain="energy-home.it" name="ApplianceStatistic" />
+		</ModuleClass>
+		<ModuleClass name="EnergyPhase">
+			<extends class="Resource" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetEnergyPhaseScheduleState" rt="EnergyPhaseScheduleState" type="safe" />
+				<Action name="HeadEnergyPhaseScheduleState" type="safe" />
+			</Actions>
+			<Data>
+				<DataPoint name="expectedDuration" type="integer" />
+				<DataPoint name="macroPhaseID" type="integer" />
+				<DataPoint name="maxActivationDelay" type="integer" />
+				<DataPoint name="maxAnticipation" type="integer" />
+				<DataPoint name="maxOverloadPause" type="integer" />
+			</Data>
+			<ModuleRef class="SignedRealEnergy" domain="energy-home.it" name="energy" />
+			<ModuleRef class="ActivePower" domain="energy-home.it" name="peakPower" />
+		</ModuleClass>
+		<ModuleClass name="EnergyPhaseSchedule">
+			<extends class="Resource" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetEnergyPhase" rt="EnergyPhase" type="safe" />
+				<Action name="HeadEnergyPhase" type="safe" />
+			</Actions>
+			<Data>
+				<DataPoint name="activationDelay" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="EnergyPhaseScheduleState">
+			<extends class="Resource" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetEnergyPhase" rt="EnergyPhase" type="safe" />
+				<Action name="HeadEnergyPhase" type="safe" />
+			</Actions>
+			<Data>
+				<DataPoint name="activationDelay" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="ExtendedPowerProfile">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="PowerProfile" domain="energy-home.it" name="PowerProfile" />
+		</ModuleClass>
+		<ModuleClass name="ExtendedPowerProfileList">
+			<extends class="List" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="energyRemote" type="boolean" />
+				<DataPoint name="multipleScheduling" type="boolean" />
+				<DataPoint name="totalProfileNum" type="integer" />
+			</Data>
+			<ModuleRef class="ExtendedPowerProfile" domain="energy-home.it" name="ExtendedPowerProfile" />
+		</ModuleClass>
+		<ModuleClass name="ExtendedPowerProfilePrice">
+			<extends class="Resource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="price" type="integer" />
+			</Data>
+			<ModuleRef class="CurrencyCode" domain="energy-home.it" name="currency" />
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="pricePowerOfTenMultiplier" />
+		</ModuleClass>
+		<ModuleClass name="Mode">
+			<extends class="List" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="repetitionNumber" type="integer" />
+			</Data>
+			<ModuleRef class="EnergyPhase" domain="energy-home.it" name="EnergyPhase" />
+		</ModuleClass>
+		<ModuleClass name="OverallSchedulePrice">
+			<extends class="Resource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="price" type="integer" />
+			</Data>
+			<ModuleRef class="CurrencyCode" domain="energy-home.it" name="currency" />
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="pricePowerOfTenMultiplier" />
+		</ModuleClass>
+		<ModuleClass name="PowerProfile">
+			<extends class="SubscribableResource" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetExtendedPowerProfilePrice" rt="ExtendedPowerProfilePrice" type="safe" />
+				<Action name="HeadExtendedPowerProfilePrice" type="safe" />
+				<Action name="GetPowerProfileScheduleState" rt="PowerProfileScheduleState" type="safe" />
+				<Action name="HeadPowerProfileScheduleState" type="safe" />
+				<Action name="GetPowerProfileState" rt="PowerProfileState" type="safe" />
+				<Action name="HeadPowerProfileState" type="safe" />
+			</Actions>
+			<Data>
+				<DataPoint name="alternativeModesNumber" type="integer" />
+				<DataPoint name="duration" type="integer" />
+				<DataPoint name="minPowerProfileDelay" type="integer" />
+				<DataPoint name="mixEnable" type="boolean" />
+			</Data>
+			<ModuleRef class="Mode" domain="energy-home.it" name="Mode" />
+		</ModuleClass>
+		<ModuleClass name="PowerProfileSchedule">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="PowerProfileScheduleList" domain="energy-home.it" name="PowerProfileScheduleList" />
+		</ModuleClass>
+		<ModuleClass name="PowerProfileScheduleContraints">
+			<extends class="SubscribableResource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="scheduleMode" type="array" />
+				<DataPoint name="startAfter" type="integer" />
+				<DataPoint name="stopBefore" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="PowerProfileScheduleList">
+			<extends class="List" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="minPowerProfileDelay" type="integer" />
+			</Data>
+			<ModuleRef class="PowerProfileScheduleMode" domain="energy-home.it" name="PowerProfileScheduleMode" />
+		</ModuleClass>
+		<ModuleClass name="PowerProfileScheduleMode">
+			<Actions>
+				<Action name="GetMode" rt="Mode" type="safe" />
+				<Action name="HeadMode" type="safe" />
+			</Actions>
+			<ModuleRef class="EnergyPhaseSchedule" domain="energy-home.it" name="EnergyPhaseSchedule" />
+		</ModuleClass>
+		<ModuleClass name="PowerProfileScheduleModeState">
+			<Actions>
+				<Action name="GetMode" rt="Mode" type="safe" />
+				<Action name="HeadMode" type="safe" />
+			</Actions>
+			<ModuleRef class="EnergyPhaseScheduleState" domain="energy-home.it" name="EnergyPhaseScheduleState" />
+		</ModuleClass>
+		<ModuleClass name="PowerProfileScheduleState">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="minPowerProfileDelay" type="integer" />
+			</Data>
+			<ModuleRef class="PowerProfileScheduleModeState" domain="energy-home.it" name="PowerProfileScheduleModeState" />
+		</ModuleClass>
+		<ModuleClass name="PowerProfileState">
+			<extends class="SubscribableResource" domain="energy-home.it" />
+			<Actions />
+			<Data>
+				<DataPoint name="remoteControl" type="boolean" />
+				<DataPoint name="state" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="DeviceCapability">
+			<extends class="FunctionSetAssignmentsBase" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetEndDeviceList" rt="EndDeviceList" type="safe" />
+				<Action name="HeadEndDeviceList" type="safe" />
+				<Action name="GetMirrorUsagePointList" rt="MirrorUsagePointList" type="safe" />
+				<Action name="HeadMirrorUsagePointList" type="safe" />
+				<Action name="CreateMirrorUsagePoint" type="unsafe">
+					<ModArg class="MirrorUsagePoint" domain="energy-home.it" name="newMirrorUsagePoint" />
+				</Action>
+				<Action name="GetSelfDevice" rt="SelfDevice" type="safe" />
+				<Action name="HeadSelfDevice" type="safe" />
+			</Actions>
+		</ModuleClass>
+		<ModuleClass name="AbstractDevice">
+			<extends class="SubscribableResource" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetApplianceStatisticList" rt="ApplianceStatisticList" type="safe" />
+				<Action name="HeadApplianceStatisticList" type="safe" />
+				<Action name="GetConfiguration" rt="Configuration" type="safe" />
+				<Action name="HeadConfiguration" type="safe" />
+				<Action name="ModifyConfiguration" type="idempotent">
+					<ModArg class="Configuration" domain="energy-home.it" name="newConfiguration" />
+				</Action>
+				<Action name="GetDERList" rt="DERList" type="safe" />
+				<Action name="HeadDERList" type="safe" />
+				<Action name="GetDeviceInformation" rt="DeviceInformation" type="safe" />
+				<Action name="HeadDeviceInformation" type="safe" />
+				<Action name="ModifyDeviceInformation" type="idempotent">
+					<ModArg class="DeviceInformation" domain="energy-home.it" name="newDeviceInformation" />
+				</Action>
+				<Action name="GetDeviceStatus" rt="DeviceStatus" type="safe" />
+				<Action name="HeadDeviceStatus" type="safe" />
+				<Action name="ModifyDeviceStatus" type="idempotent">
+					<ModArg class="DeviceStatus" domain="energy-home.it" name="newDeviceStatus" />
+				</Action>
+				<Action name="GetFileStatus" rt="FileStatus" type="safe" />
+				<Action name="HeadFileStatus" type="safe" />
+				<Action name="ModifyFileStatus" type="idempotent">
+					<ModArg class="FileStatus" domain="energy-home.it" name="newFileStatus" />
+				</Action>
+				<Action name="GetIPInterfaceList" rt="IPInterfaceList" type="safe" />
+				<Action name="HeadIPInterfaceList" type="safe" />
+				<Action name="GetLoadShedAvailability" rt="LoadShedAvailability" type="safe" />
+				<Action name="HeadLoadShedAvailability" type="safe" />
+				<Action name="ModifyLoadShedAvailability" type="idempotent">
+					<ModArg class="LoadShedAvailability" domain="energy-home.it" name="newLoadShedAvailability" />
+				</Action>
+				<Action name="GetLogEventList" rt="LogEventList" type="safe" />
+				<Action name="HeadLogEventList" type="safe" />
+				<Action name="CreateLogEvent" type="unsafe">
+					<ModArg class="LogEvent" domain="energy-home.it" name="newLogEvent" />
+				</Action>
+				<Action name="GetPowerStatus" rt="PowerStatus" type="safe" />
+				<Action name="HeadPowerStatus" type="safe" />
+				<Action name="ModifyPowerStatus" type="idempotent">
+					<ModArg class="PowerStatus" domain="energy-home.it" name="newPowerStatus" />
+				</Action>
+			</Actions>
+			<ModuleRef class="DeviceCategoryType" domain="energy-home.it" name="loadShedDeviceCategory" />
+			<ModuleRef class="SFDIType" domain="energy-home.it" name="sFDI" />
+		</ModuleClass>
+		<ModuleClass name="DeviceStatus">
+			<extends class="Resource" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetTime" rt="Time" type="safe" />
+				<Action name="HeadTime" type="safe" />
+			</Actions>
+			<Data>
+				<DataPoint name="onCount" type="integer" />
+				<DataPoint name="opState" type="integer" />
+				<DataPoint name="opTime" type="integer" />
+			</Data>
+			<ModuleRef class="TimeType" domain="energy-home.it" name="changedTime" />
+			<ModuleRef class="Temperature" domain="energy-home.it" name="Temperature" />
+		</ModuleClass>
+		<ModuleClass name="EndDevice">
+			<extends class="AbstractDevice" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetExtendedPowerProfilePrice" rt="ExtendedPowerProfilePrice" type="safe" />
+				<Action name="HeadExtendedPowerProfilePrice" type="safe" />
+				<Action name="GetFlowReservationRequestList" rt="FlowReservationRequestList" type="safe" />
+				<Action name="HeadFlowReservationRequestList" type="safe" />
+				<Action name="CreateFlowReservationRequest" type="unsafe">
+					<ModArg class="FlowReservationRequest" domain="energy-home.it" name="newFlowReservationRequest" />
+				</Action>
+				<Action name="GetFlowReservationResponseList" rt="FlowReservationResponseList" type="safe" />
+				<Action name="HeadFlowReservationResponseList" type="safe" />
+				<Action name="GetFunctionSetAssignmentsList" rt="FunctionSetAssignmentsList" type="safe" />
+				<Action name="HeadFunctionSetAssignmentsList" type="safe" />
+				<Action name="GetPowerProfileSchedule" rt="PowerProfileSchedule" type="safe" />
+				<Action name="HeadPowerProfileSchedule" type="safe" />
+				<Action name="GetRegistration" rt="Registration" type="safe" />
+				<Action name="HeadRegistration" type="safe" />
+				<Action name="GetSubscriptionList" rt="SubscriptionList" type="safe" />
+				<Action name="HeadSubscriptionList" type="safe" />
+				<Action name="CreateSubscription" type="unsafe">
+					<ModArg class="Subscription" domain="energy-home.it" name="newSubscription" />
+				</Action>
+			</Actions>
+			<ModuleRef class="OverallSchedulePricelink" domain="energy-home.it" name="OverallSchedulePricelink" />
+		</ModuleClass>
+		<ModuleClass name="EndDeviceList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="EndDevice" domain="energy-home.it" name="EndDevice" />
+		</ModuleClass>
+		<ModuleClass name="Registration">
+			<extends class="Resource" domain="energy-home.it" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="dateTimeRegistered" />
+			<ModuleRef class="PINType" domain="energy-home.it" name="pIN" />
+		</ModuleClass>
+		<ModuleClass name="SelfDevice">
+			<extends class="AbstractDevice" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetExtendedPowerProfileList" rt="ExtendedPowerProfileList" type="safe" />
+				<Action name="HeadExtendedPowerProfileList" type="safe" />
+			</Actions>
+		</ModuleClass>
+		<ModuleClass name="Temperature">
+			<Data>
+				<DataPoint name="subject" type="integer" />
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="multiplier" />
+		</ModuleClass>
+		<ModuleClass name="FunctionSetAssignmentsBase">
+			<extends class="Resource" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetCustomerAccountList" rt="CustomerAccountList" type="safe" />
+				<Action name="HeadCustomerAccountList" type="safe" />
+				<Action name="GetDemandResponseProgramList" rt="DemandResponseProgramList" type="safe" />
+				<Action name="HeadDemandResponseProgramList" type="safe" />
+				<Action name="GetDERProgramList" rt="DERProgramList" type="safe" />
+				<Action name="HeadDERProgramList" type="safe" />
+				<Action name="GetFileList" rt="FileList" type="safe" />
+				<Action name="HeadFileList" type="safe" />
+				<Action name="GetMessagingProgramList" rt="MessagingProgramList" type="safe" />
+				<Action name="HeadMessagingProgramList" type="safe" />
+				<Action name="GetPrepaymentList" rt="PrepaymentList" type="safe" />
+				<Action name="HeadPrepaymentList" type="safe" />
+				<Action name="GetTariffProfileList" rt="TariffProfileList" type="safe" />
+				<Action name="HeadTariffProfileList" type="safe" />
+				<Action name="GetTime" rt="Time" type="safe" />
+				<Action name="HeadTime" type="safe" />
+				<Action name="GetUsagePointList" rt="UsagePointList" type="safe" />
+				<Action name="HeadUsagePointList" type="safe" />
+			</Actions>
+		</ModuleClass>
+		<ModuleClass name="FunctionSetAssignments">
+			<extends class="FunctionSetAssignmentsBase" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="description" type="string" />
+			</Data>
+			<ModuleRef class="mRIDType" domain="energy-home.it" name="mRID" />
+			<ModuleRef class="VersionType" domain="energy-home.it" name="version" />
+		</ModuleClass>
+		<ModuleClass name="FunctionSetAssignmentsList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="FunctionSetAssignments" domain="energy-home.it" name="FunctionSetAssignments" />
+		</ModuleClass>
+		<ModuleClass name="Condition">
+			<Data>
+				<DataPoint name="attributeIdentifier" type="integer" />
+				<DataPoint name="lowerThreshold" type="integer" />
+				<DataPoint name="upperThreshold" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="SubscriptionBase">
+			<extends class="Resource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="subscribedResource" type="string" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="Subscription">
+			<extends class="SubscriptionBase" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="encoding" type="integer" />
+				<DataPoint name="level" type="string" />
+				<DataPoint name="limit" type="integer" />
+				<DataPoint name="notificationURI" type="string" />
+			</Data>
+			<ModuleRef class="Condition" domain="energy-home.it" name="Condition" />
+		</ModuleClass>
+		<ModuleClass name="SubscriptionList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="Subscription" domain="energy-home.it" name="Subscription" />
+		</ModuleClass>
+		<ModuleClass name="Notification">
+			<extends class="SubscriptionBase" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="newResourceURI" type="string" />
+				<DataPoint name="status" type="integer" />
+				<DataPoint name="subscriptionURI" type="string" />
+			</Data>
+			<ModuleRef class="Resource" domain="energy-home.it" name="Resource" />
+		</ModuleClass>
+		<ModuleClass name="NotificationList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="Notification" domain="energy-home.it" name="Notification" />
+		</ModuleClass>
+		<ModuleClass name="AppliedTargetReduction">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="UnitType" domain="energy-home.it" name="type" />
+		</ModuleClass>
+		<ModuleClass name="DrResponse">
+			<extends class="Response" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="overrideDuration" type="integer" />
+			</Data>
+			<ModuleRef class="ApplianceLoadReduction" domain="energy-home.it" name="ApplianceLoadReduction" />
+			<ModuleRef class="AppliedTargetReduction" domain="energy-home.it" name="AppliedTargetReduction" />
+			<ModuleRef class="DutyCycle" domain="energy-home.it" name="DutyCycle" />
+			<ModuleRef class="Offset" domain="energy-home.it" name="Offset" />
+			<ModuleRef class="SetPoint" domain="energy-home.it" name="SetPoint" />
+		</ModuleClass>
+		<ModuleClass name="PriceResponse">
+			<extends class="Response" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="Response">
+			<extends class="Resource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="endDeviceLFDI" type="array" />
+				<DataPoint name="status" type="integer" />
+			</Data>
+			<ModuleRef class="TimeType" domain="energy-home.it" name="createdDateTime" />
+			<ModuleRef class="mRIDType" domain="energy-home.it" name="subject" />
+		</ModuleClass>
+		<ModuleClass name="ResponseList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="Response" domain="energy-home.it" name="Response" />
+		</ModuleClass>
+		<ModuleClass name="ResponseSet">
+			<extends class="IdentifiedObject" domain="energy-home.it" />
+			<Actions>
+				<Action name="CreateResponse" type="unsafe">
+					<ModArg class="Response" domain="energy-home.it" name="newResponse" />
+				</Action>
+			</Actions>
+		</ModuleClass>
+		<ModuleClass name="ResponseSetList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="ResponseSet" domain="energy-home.it" name="ResponseSet" />
+		</ModuleClass>
+		<ModuleClass name="TextResponse">
+			<extends class="Response" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="Time">
+			<extends class="Resource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="quality" type="integer" />
+			</Data>
+			<ModuleRef class="TimeType" domain="energy-home.it" name="currentTime" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="dstEndTime" />
+			<ModuleRef class="TimeOffsetType" domain="energy-home.it" name="dstOffset" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="dstStartTime" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="lastSetTime" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="localTime" />
+			<ModuleRef class="TimeOffsetType" domain="energy-home.it" name="tzOffset" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="validUntilTime" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceIdentification">
+			<Data>
+				<DataPoint name="BrandId" type="integer" />
+				<DataPoint name="BrandName" type="string" />
+				<DataPoint name="CECEDSpecificationVersion" type="integer" />
+				<DataPoint name="CompanyId" type="integer" />
+				<DataPoint name="CompanyName" type="string" />
+				<DataPoint name="Model" type="string" />
+				<DataPoint name="PartNumber" type="string" />
+				<DataPoint name="ProductRevision" type="string" />
+				<DataPoint name="ProductTypeId" type="integer" />
+				<DataPoint name="ProductTypeName" type="string" />
+				<DataPoint name="SoftwareRevision" type="string" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="CECEDCompliancy">
+			<extends class="UInt16" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ProductType">
+			<extends class="UInt16" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DeviceInformation">
+			<extends class="Resource" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetSupportedLocaleList" rt="SupportedLocaleList" type="safe" />
+				<Action name="HeadSupportedLocaleList" type="safe" />
+				<Action name="CreateSupportedLocale" type="unsafe">
+					<ModArg class="SupportedLocale" domain="energy-home.it" name="newSupportedLocale" />
+				</Action>
+			</Actions>
+			<Data>
+				<DataPoint name="brandID" type="integer" />
+				<DataPoint name="brandName" type="string" />
+				<DataPoint name="companyName" type="string" />
+				<DataPoint name="functionsImplemented" type="array" />
+				<DataPoint name="lFDI" type="array" />
+				<DataPoint name="mfHwVer" type="string" />
+				<DataPoint name="mfInfo" type="string" />
+				<DataPoint name="mfModel" type="string" />
+				<DataPoint name="mfSerNum" type="string" />
+				<DataPoint name="productTypeName" type="string" />
+				<DataPoint name="swVer" type="string" />
+			</Data>
+			<ModuleRef class="CECEDCompliancy" domain="energy-home.it" name="CECEDSpecificationVersion" />
+			<ModuleRef class="DRLCCapabilities" domain="energy-home.it" name="DRLCCapabilities" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="mfDate" />
+			<ModuleRef class="PENType" domain="energy-home.it" name="mfID" />
+			<ModuleRef class="PowerSourceType" domain="energy-home.it" name="primaryPower" />
+			<ModuleRef class="ProductType" domain="energy-home.it" name="productTypeID" />
+			<ModuleRef class="PowerSourceType" domain="energy-home.it" name="secondaryPower" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="swActTime" />
+		</ModuleClass>
+		<ModuleClass name="DRLCCapabilities">
+			<Data>
+				<DataPoint name="optionsImplemented" type="array" />
+			</Data>
+			<ModuleRef class="RealEnergy" domain="energy-home.it" name="averageEnergy" />
+			<ModuleRef class="ActivePower" domain="energy-home.it" name="maxDemand" />
+		</ModuleClass>
+		<ModuleClass name="SupportedLocale">
+			<extends class="Resource" domain="energy-home.it" />
+			<ModuleRef class="LocaleType" domain="energy-home.it" name="locale" />
+		</ModuleClass>
+		<ModuleClass name="SupportedLocaleList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="SupportedLocale" domain="energy-home.it" name="SupportedLocale" />
+		</ModuleClass>
+		<ModuleClass name="PowerStatus">
+			<extends class="Resource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="batteryStatus" type="integer" />
+				<DataPoint name="estimatedTimeRemaining" type="integer" />
+				<DataPoint name="sessionTimeOnBattery" type="integer" />
+				<DataPoint name="totalTimeOnBattery" type="integer" />
+			</Data>
+			<ModuleRef class="TimeType" domain="energy-home.it" name="changedTime" />
+			<ModuleRef class="PowerSourceType" domain="energy-home.it" name="currentPowerSource" />
+			<ModuleRef class="PerCent" domain="energy-home.it" name="estimatedChargeRemaining" />
+			<ModuleRef class="PEVInfo" domain="energy-home.it" name="PEVInfo" />
+		</ModuleClass>
+		<ModuleClass name="PowerSourceType">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="PEVInfo">
+			<Data>
+				<DataPoint name="minimumChargingDuration" type="integer" />
+			</Data>
+			<ModuleRef class="ActivePower" domain="energy-home.it" name="chargingPowerNow" />
+			<ModuleRef class="RealEnergy" domain="energy-home.it" name="energyRequestNow" />
+			<ModuleRef class="ActivePower" domain="energy-home.it" name="maxForwardPower" />
+			<ModuleRef class="PerCent" domain="energy-home.it" name="targetStateOfCharge" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="timeChargeIsNeeded" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="timeChargingStatusPEV" />
+		</ModuleClass>
+		<ModuleClass name="IEEE_802_15_4">
+			<Actions>
+				<Action name="GetNeighborList" rt="NeighborList" type="safe" />
+				<Action name="HeadNeighborList" type="safe" />
+			</Actions>
+			<Data>
+				<DataPoint name="capabilityInfo" type="array" />
+				<DataPoint name="shortAddress" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="IPAddr">
+			<extends class="Resource" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetRPLInstanceList" rt="RPLInstanceList" type="safe" />
+				<Action name="HeadRPLInstanceList" type="safe" />
+			</Actions>
+			<Data>
+				<DataPoint name="address" type="array" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="IPAddrList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="IPAddr" domain="energy-home.it" name="IPAddr" />
+		</ModuleClass>
+		<ModuleClass name="IPInterface">
+			<extends class="Resource" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetIPAddrList" rt="IPAddrList" type="safe" />
+				<Action name="HeadIPAddrList" type="safe" />
+				<Action name="GetLLInterfaceList" rt="LLInterfaceList" type="safe" />
+				<Action name="HeadLLInterfaceList" type="safe" />
+			</Actions>
+			<Data>
+				<DataPoint name="ifDescr" type="string" />
+				<DataPoint name="ifHighSpeed" type="integer" />
+				<DataPoint name="ifInBroadcastPkts" type="integer" />
+				<DataPoint name="ifIndex" type="integer" />
+				<DataPoint name="ifInDiscards" type="integer" />
+				<DataPoint name="ifInErrors" type="integer" />
+				<DataPoint name="ifInMulticastPkts" type="integer" />
+				<DataPoint name="ifInOctets" type="integer" />
+				<DataPoint name="ifInUcastPkts" type="integer" />
+				<DataPoint name="ifInUnknownProtos" type="integer" />
+				<DataPoint name="ifMtu" type="integer" />
+				<DataPoint name="ifName" type="string" />
+				<DataPoint name="ifOperStatus" type="integer" />
+				<DataPoint name="ifOutBroadcastPkts" type="integer" />
+				<DataPoint name="ifOutDiscards" type="integer" />
+				<DataPoint name="ifOutErrors" type="integer" />
+				<DataPoint name="ifOutMulticastPkts" type="integer" />
+				<DataPoint name="ifOutOctets" type="integer" />
+				<DataPoint name="ifOutUcastPkts" type="integer" />
+				<DataPoint name="ifPromiscuousMode" type="boolean" />
+				<DataPoint name="ifSpeed" type="integer" />
+				<DataPoint name="ifType" type="integer" />
+				<DataPoint name="lastResetTime" type="integer" />
+				<DataPoint name="lastUpdatedTime" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="IPInterfaceList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="IPInterface" domain="energy-home.it" name="IPInterface" />
+		</ModuleClass>
+		<ModuleClass name="LLInterface">
+			<extends class="Resource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="CRCerrors" type="integer" />
+				<DataPoint name="EUI64" type="array" />
+				<DataPoint name="linkLayerType" type="integer" />
+				<DataPoint name="LLAckNotRx" type="integer" />
+				<DataPoint name="LLCSMAFail" type="integer" />
+				<DataPoint name="LLFramesDropRx" type="integer" />
+				<DataPoint name="LLFramesDropTx" type="integer" />
+				<DataPoint name="LLFramesRx" type="integer" />
+				<DataPoint name="LLFramesTx" type="integer" />
+				<DataPoint name="LLMediaAccessFail" type="integer" />
+				<DataPoint name="LLOctetsRx" type="integer" />
+				<DataPoint name="LLOctetsTx" type="integer" />
+				<DataPoint name="LLRetryCount" type="integer" />
+				<DataPoint name="LLSecurityErrorRx" type="integer" />
+			</Data>
+			<ModuleRef class="IEEE_802_15_4" domain="energy-home.it" name="IEEE_802_15_4" />
+			<ModuleRef class="loWPAN" domain="energy-home.it" name="loWPAN" />
+		</ModuleClass>
+		<ModuleClass name="LLInterfaceList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="LLInterface" domain="energy-home.it" name="LLInterface" />
+		</ModuleClass>
+		<ModuleClass name="loWPAN">
+			<Data>
+				<DataPoint name="octetsRx" type="integer" />
+				<DataPoint name="octetsTx" type="integer" />
+				<DataPoint name="packetsRx" type="integer" />
+				<DataPoint name="packetsTx" type="integer" />
+				<DataPoint name="rxFragError" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="Neighbor">
+			<extends class="Resource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="isChild" type="boolean" />
+				<DataPoint name="linkQuality" type="integer" />
+				<DataPoint name="shortAddress" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="NeighborList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="Neighbor" domain="energy-home.it" name="Neighbor" />
+		</ModuleClass>
+		<ModuleClass name="RPLInstance">
+			<extends class="Resource" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetRPLSourceRoutesList" rt="RPLSourceRoutesList" type="safe" />
+				<Action name="HeadRPLSourceRoutesList" type="safe" />
+			</Actions>
+			<Data>
+				<DataPoint name="DODAGid" type="integer" />
+				<DataPoint name="DODAGroot" type="boolean" />
+				<DataPoint name="flags" type="integer" />
+				<DataPoint name="groundedFlag" type="boolean" />
+				<DataPoint name="MOP" type="integer" />
+				<DataPoint name="PRF" type="integer" />
+				<DataPoint name="rank" type="integer" />
+				<DataPoint name="RPLInstanceID" type="integer" />
+				<DataPoint name="versionNumber" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="RPLInstanceList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="RPLInstance" domain="energy-home.it" name="RPLInstance" />
+		</ModuleClass>
+		<ModuleClass name="RPLSourceRoutes">
+			<extends class="Resource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="DestAddress" type="array" />
+				<DataPoint name="SourceRoute" type="array" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="RPLSourceRoutesList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="RPLSourceRoutes" domain="energy-home.it" name="RPLSourceRoutes" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceLogEventList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="LogEvent" domain="energy-home.it" name="LogEvent" />
+		</ModuleClass>
+		<ModuleClass name="LogAlert">
+			<extends class="LogEvent" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="category" type="integer" />
+				<DataPoint name="presenceRecovery" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="LogEvent">
+			<extends class="Resource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="extendedData" type="integer" />
+				<DataPoint name="functionSet" type="integer" />
+				<DataPoint name="logEventCode" type="integer" />
+				<DataPoint name="logEventID" type="integer" />
+				<DataPoint name="profileID" type="integer" />
+			</Data>
+			<ModuleRef class="TimeType" domain="energy-home.it" name="createdDateTime" />
+			<ModuleRef class="PENType" domain="energy-home.it" name="logEventPEN" />
+		</ModuleClass>
+		<ModuleClass name="LogEventList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="LogEvent" domain="energy-home.it" name="LogEvent" />
+		</ModuleClass>
+		<ModuleClass name="Configuration">
+			<extends class="SubscribableResource" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetPriceResponseCfgList" rt="PriceResponseCfgList" type="safe" />
+				<Action name="HeadPriceResponseCfgList" type="safe" />
+				<Action name="CreatePriceResponseCfg" type="unsafe">
+					<ModArg class="PriceResponseCfg" domain="energy-home.it" name="newPriceResponseCfg" />
+				</Action>
+			</Actions>
+			<Data>
+				<DataPoint name="userDeviceName" type="string" />
+			</Data>
+			<ModuleRef class="LocaleType" domain="energy-home.it" name="currentLocale" />
+			<ModuleRef class="PowerConfiguration" domain="energy-home.it" name="PowerConfiguration" />
+			<ModuleRef class="TimeConfiguration" domain="energy-home.it" name="TimeConfiguration" />
+		</ModuleClass>
+		<ModuleClass name="PowerConfiguration">
+			<Data>
+				<DataPoint name="lowChargeThreshold" type="integer" />
+			</Data>
+			<ModuleRef class="TimeType" domain="energy-home.it" name="batteryInstallTime" />
+		</ModuleClass>
+		<ModuleClass name="PriceResponseCfg">
+			<extends class="Resource" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetRateComponent" rt="RateComponent" type="safe" />
+				<Action name="HeadRateComponent" type="safe" />
+			</Actions>
+			<Data>
+				<DataPoint name="consumeThreshold" type="integer" />
+				<DataPoint name="maxReductionThreshold" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="PriceResponseCfgList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="PriceResponseCfg" domain="energy-home.it" name="PriceResponseCfg" />
+		</ModuleClass>
+		<ModuleClass name="TimeConfiguration">
+			<ModuleRef class="DstRuleType" domain="energy-home.it" name="dstEndRule" />
+			<ModuleRef class="TimeOffsetType" domain="energy-home.it" name="dstOffset" />
+			<ModuleRef class="DstRuleType" domain="energy-home.it" name="dstStartRule" />
+			<ModuleRef class="TimeOffsetType" domain="energy-home.it" name="tzOffset" />
+		</ModuleClass>
+		<ModuleClass name="File">
+			<extends class="Resource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="fileURI" type="string" />
+				<DataPoint name="lFDI" type="array" />
+				<DataPoint name="mfHwVer" type="string" />
+				<DataPoint name="mfModel" type="string" />
+				<DataPoint name="mfSerNum" type="string" />
+				<DataPoint name="mfVer" type="string" />
+				<DataPoint name="size" type="integer" />
+				<DataPoint name="type" type="array" />
+			</Data>
+			<ModuleRef class="TimeType" domain="energy-home.it" name="activateTime" />
+			<ModuleRef class="PENType" domain="energy-home.it" name="mfID" />
+		</ModuleClass>
+		<ModuleClass name="FileList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="File" domain="energy-home.it" name="File" />
+		</ModuleClass>
+		<ModuleClass name="FileStatus">
+			<extends class="Resource" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetFile" rt="File" type="safe" />
+				<Action name="HeadFile" type="safe" />
+			</Actions>
+			<Data>
+				<DataPoint name="loadPercent" type="integer" />
+				<DataPoint name="request503Count" type="integer" />
+				<DataPoint name="requestFailCount" type="integer" />
+				<DataPoint name="status" type="integer" />
+			</Data>
+			<ModuleRef class="TimeType" domain="energy-home.it" name="activateTime" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="nextRequestAttempt" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="statusTime" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceLoadReduction">
+			<ModuleRef class="ApplianceLoadReductionType" domain="energy-home.it" name="type" />
+		</ModuleClass>
+		<ModuleClass name="DemandResponseProgram">
+			<extends class="IdentifiedObject" domain="energy-home.it" />
+			<Actions />
+			<ModuleRef class="PerCent" domain="energy-home.it" name="availabilityUpdatePercentChangeThreshold" />
+			<ModuleRef class="ActivePower" domain="energy-home.it" name="availabilityUpdatePowerChangeThreshold" />
+			<ModuleRef class="PrimacyType" domain="energy-home.it" name="primacy" />
+		</ModuleClass>
+		<ModuleClass name="DemandResponseProgramList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="DemandResponseProgram" domain="energy-home.it" name="DemandResponseProgram" />
+		</ModuleClass>
+		<ModuleClass name="DutyCycle">
+			<Data>
+				<DataPoint name="normalValue" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="EndDeviceControl">
+			<extends class="RandomizableEvent" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="drProgramMandatory" type="boolean" />
+				<DataPoint name="loadShiftForward" type="boolean" />
+				<DataPoint name="overrideDuration" type="integer" />
+			</Data>
+			<ModuleRef class="ApplianceLoadReduction" domain="energy-home.it" name="ApplianceLoadReduction" />
+			<ModuleRef class="DeviceCategoryType" domain="energy-home.it" name="deviceCategory" />
+			<ModuleRef class="DutyCycle" domain="energy-home.it" name="DutyCycle" />
+			<ModuleRef class="Offset" domain="energy-home.it" name="Offset" />
+			<ModuleRef class="SetPoint" domain="energy-home.it" name="SetPoint" />
+			<ModuleRef class="TargetReduction" domain="energy-home.it" name="TargetReduction" />
+		</ModuleClass>
+		<ModuleClass name="EndDeviceControlList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="EndDeviceControl" domain="energy-home.it" name="EndDeviceControl" />
+		</ModuleClass>
+		<ModuleClass name="LoadShedAvailability">
+			<extends class="Resource" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetDemandResponseProgram" rt="DemandResponseProgram" type="safe" />
+				<Action name="HeadDemandResponseProgram" type="safe" />
+			</Actions>
+			<Data>
+				<DataPoint name="availabilityDuration" type="integer" />
+			</Data>
+			<ModuleRef class="PerCent" domain="energy-home.it" name="sheddablePercent" />
+			<ModuleRef class="ActivePower" domain="energy-home.it" name="sheddablePower" />
+		</ModuleClass>
+		<ModuleClass name="Offset">
+			<Data>
+				<DataPoint name="coolingOffset" type="integer" />
+				<DataPoint name="heatingOffset" type="integer" />
+				<DataPoint name="loadAdjustmentPercentageOffset" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="SetPoint">
+			<Data>
+				<DataPoint name="coolingSetpoint" type="integer" />
+				<DataPoint name="heatingSetpoint" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="TargetReduction">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="UnitType" domain="energy-home.it" name="type" />
+		</ModuleClass>
+		<ModuleClass name="MeterReading">
+			<extends class="MeterReadingBase" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetRateComponentList" rt="RateComponentList" type="safe" />
+				<Action name="HeadRateComponentList" type="safe" />
+				<Action name="GetReading" rt="Reading" type="safe" />
+				<Action name="HeadReading" type="safe" />
+				<Action name="GetReadingSetList" rt="ReadingSetList" type="safe" />
+				<Action name="HeadReadingSetList" type="safe" />
+				<Action name="GetReadingType" rt="ReadingType" type="safe" />
+				<Action name="HeadReadingType" type="safe" />
+			</Actions>
+		</ModuleClass>
+		<ModuleClass name="MeterReadingList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="MeterReading" domain="energy-home.it" name="MeterReading" />
+		</ModuleClass>
+		<ModuleClass name="Reading">
+			<extends class="ReadingBase" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="localID" type="array" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="ReadingList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="Reading" domain="energy-home.it" name="Reading" />
+		</ModuleClass>
+		<ModuleClass name="ReadingSet">
+			<extends class="ReadingSetBase" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetReadingList" rt="ReadingList" type="safe" />
+				<Action name="HeadReadingList" type="safe" />
+			</Actions>
+		</ModuleClass>
+		<ModuleClass name="ReadingSetList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="ReadingSet" domain="energy-home.it" name="ReadingSet" />
+		</ModuleClass>
+		<ModuleClass name="ReadingType">
+			<extends class="Resource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="intervalLength" type="integer" />
+				<DataPoint name="maxNumberOfIntervals" type="integer" />
+				<DataPoint name="numberOfConsumptionBlocks" type="integer" />
+				<DataPoint name="numberOfTouTiers" type="integer" />
+				<DataPoint name="subIntervalLength" type="integer" />
+				<DataPoint name="supplyDisconnectLimit" type="integer" />
+				<DataPoint name="supplyLimit" type="integer" />
+				<DataPoint name="supplyWarningLimit" type="integer" />
+				<DataPoint name="tieredConsumptionBlocks" type="boolean" />
+			</Data>
+			<ModuleRef class="AccumulationBehaviourType" domain="energy-home.it" name="accumulationBehaviour" />
+			<ModuleRef class="UnitValueType" domain="energy-home.it" name="calorificValue" />
+			<ModuleRef class="CommodityType" domain="energy-home.it" name="commodity" />
+			<ModuleRef class="UnitValueType" domain="energy-home.it" name="conversionFactor" />
+			<ModuleRef class="DataQualifierType" domain="energy-home.it" name="dataQualifier" />
+			<ModuleRef class="FlowDirectionType" domain="energy-home.it" name="flowDirection" />
+			<ModuleRef class="KindType" domain="energy-home.it" name="kind" />
+			<ModuleRef class="PhaseCode" domain="energy-home.it" name="phase" />
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="powerOfTenMultiplier" />
+			<ModuleRef class="UomType" domain="energy-home.it" name="uom" />
+		</ModuleClass>
+		<ModuleClass name="UsagePoint">
+			<extends class="UsagePointBase" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetMeterReadingList" rt="MeterReadingList" type="safe" />
+				<Action name="HeadMeterReadingList" type="safe" />
+			</Actions>
+		</ModuleClass>
+		<ModuleClass name="UsagePointList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="UsagePoint" domain="energy-home.it" name="UsagePoint" />
+		</ModuleClass>
+		<ModuleClass name="ConsumptionTariffInterval">
+			<extends class="Resource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="price" type="integer" />
+				<DataPoint name="priceRatio" type="integer" />
+				<DataPoint name="startValue" type="integer" />
+			</Data>
+			<ModuleRef class="ConsumptionBlockType" domain="energy-home.it" name="consumptionBlock" />
+			<ModuleRef class="EnvironmentalCost" domain="energy-home.it" name="EnvironmentalCost" />
+		</ModuleClass>
+		<ModuleClass name="ConsumptionTariffIntervalList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="ConsumptionTariffInterval" domain="energy-home.it" name="ConsumptionTariffInterval" />
+		</ModuleClass>
+		<ModuleClass name="CostKindType">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="EnvironmentalCost">
+			<Data>
+				<DataPoint name="amount" type="integer" />
+				<DataPoint name="costLevel" type="integer" />
+				<DataPoint name="numCostLevels" type="integer" />
+			</Data>
+			<ModuleRef class="CostKindType" domain="energy-home.it" name="costKind" />
+		</ModuleClass>
+		<ModuleClass name="RateComponent">
+			<extends class="IdentifiedObject" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetActiveTimeTariffIntervalList" rt="TimeTariffIntervalList" type="safe" />
+				<Action name="HeadActiveTimeTariffIntervalList" type="safe" />
+				<Action name="GetReadingType" rt="ReadingType" type="safe" />
+				<Action name="HeadReadingType" type="safe" />
+				<Action name="GetTimeTariffIntervalList" rt="TimeTariffIntervalList" type="safe" />
+				<Action name="HeadTimeTariffIntervalList" type="safe" />
+			</Actions>
+			<ModuleRef class="UnitValueType" domain="energy-home.it" name="flowRateEndLimit" />
+			<ModuleRef class="UnitValueType" domain="energy-home.it" name="flowRateStartLimit" />
+			<ModuleRef class="RoleFlagsType" domain="energy-home.it" name="roleFlags" />
+		</ModuleClass>
+		<ModuleClass name="RateComponentList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="RateComponent" domain="energy-home.it" name="RateComponent" />
+		</ModuleClass>
+		<ModuleClass name="TariffProfile">
+			<extends class="IdentifiedObject" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetRateComponentList" rt="RateComponentList" type="safe" />
+				<Action name="HeadRateComponentList" type="safe" />
+			</Actions>
+			<Data>
+				<DataPoint name="rateCode" type="string" />
+			</Data>
+			<ModuleRef class="CurrencyCode" domain="energy-home.it" name="currency" />
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="pricePowerOfTenMultiplier" />
+			<ModuleRef class="PrimacyType" domain="energy-home.it" name="primacy" />
+			<ModuleRef class="ServiceKind" domain="energy-home.it" name="serviceCategoryKind" />
+		</ModuleClass>
+		<ModuleClass name="TariffProfileList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="TariffProfile" domain="energy-home.it" name="TariffProfile" />
+		</ModuleClass>
+		<ModuleClass name="TimeTariffInterval">
+			<extends class="RandomizableEvent" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetConsumptionTariffIntervalList" rt="ConsumptionTariffIntervalList" type="safe" />
+				<Action name="HeadConsumptionTariffIntervalList" type="safe" />
+			</Actions>
+			<ModuleRef class="TOUType" domain="energy-home.it" name="touTier" />
+		</ModuleClass>
+		<ModuleClass name="TimeTariffIntervalList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="TimeTariffInterval" domain="energy-home.it" name="TimeTariffInterval" />
+		</ModuleClass>
+		<ModuleClass name="MessagingProgram">
+			<extends class="SubscribableIdentifiedObject" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetActiveTextMessageList" rt="TextMessageList" type="safe" />
+				<Action name="HeadActiveTextMessageList" type="safe" />
+				<Action name="GetTextMessageList" rt="TextMessageList" type="safe" />
+				<Action name="HeadTextMessageList" type="safe" />
+			</Actions>
+			<ModuleRef class="LocaleType" domain="energy-home.it" name="locale" />
+			<ModuleRef class="PrimacyType" domain="energy-home.it" name="primacy" />
+		</ModuleClass>
+		<ModuleClass name="MessagingProgramList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="MessagingProgram" domain="energy-home.it" name="MessagingProgram" />
+		</ModuleClass>
+		<ModuleClass name="PriorityType">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="TextMessage">
+			<extends class="Event" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="originator" type="string" />
+				<DataPoint name="textMessage" type="string" />
+			</Data>
+			<ModuleRef class="PriorityType" domain="energy-home.it" name="priority" />
+		</ModuleClass>
+		<ModuleClass name="TextMessageList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="TextMessage" domain="energy-home.it" name="TextMessage" />
+		</ModuleClass>
+		<ModuleClass name="BillingPeriod">
+			<extends class="Resource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="billLastPeriod" type="integer" />
+				<DataPoint name="billToDate" type="integer" />
+			</Data>
+			<ModuleRef class="DateTimeInterval" domain="energy-home.it" name="interval" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="statusTimeStamp" />
+		</ModuleClass>
+		<ModuleClass name="BillingPeriodList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="BillingPeriod" domain="energy-home.it" name="BillingPeriod" />
+		</ModuleClass>
+		<ModuleClass name="BillingMeterReadingBase">
+			<extends class="MeterReadingBase" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetBillingReadingSetList" rt="BillingReadingSetList" type="safe" />
+				<Action name="HeadBillingReadingSetList" type="safe" />
+				<Action name="GetReadingType" rt="ReadingType" type="safe" />
+				<Action name="HeadReadingType" type="safe" />
+			</Actions>
+		</ModuleClass>
+		<ModuleClass name="BillingReading">
+			<extends class="ReadingBase" domain="energy-home.it" />
+			<ModuleRef class="Charge" domain="energy-home.it" name="Charge" />
+		</ModuleClass>
+		<ModuleClass name="BillingReadingList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="BillingReading" domain="energy-home.it" name="BillingReading" />
+		</ModuleClass>
+		<ModuleClass name="BillingReadingSet">
+			<extends class="ReadingSetBase" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetBillingReadingList" rt="BillingReadingList" type="safe" />
+				<Action name="HeadBillingReadingList" type="safe" />
+			</Actions>
+		</ModuleClass>
+		<ModuleClass name="BillingReadingSetList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="BillingReadingSet" domain="energy-home.it" name="BillingReadingSet" />
+		</ModuleClass>
+		<ModuleClass name="Charge">
+			<Data>
+				<DataPoint name="description" type="string" />
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="ChargeKind" domain="energy-home.it" name="kind" />
+		</ModuleClass>
+		<ModuleClass name="ChargeKind">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="CustomerAccount">
+			<extends class="IdentifiedObject" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetCustomerAgreementList" rt="CustomerAgreementList" type="safe" />
+				<Action name="HeadCustomerAgreementList" type="safe" />
+				<Action name="GetServiceSupplier" rt="ServiceSupplier" type="safe" />
+				<Action name="HeadServiceSupplier" type="safe" />
+			</Actions>
+			<Data>
+				<DataPoint name="currency" type="integer" />
+				<DataPoint name="customerAccount" type="string" />
+				<DataPoint name="customerName" type="string" />
+			</Data>
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="pricePowerOfTenMultiplier" />
+		</ModuleClass>
+		<ModuleClass name="CustomerAccountList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="CustomerAccount" domain="energy-home.it" name="CustomerAccount" />
+		</ModuleClass>
+		<ModuleClass name="CustomerAgreement">
+			<extends class="IdentifiedObject" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetActiveBillingPeriodList" rt="BillingPeriodList" type="safe" />
+				<Action name="HeadActiveBillingPeriodList" type="safe" />
+				<Action name="GetBillingPeriodList" rt="BillingPeriodList" type="safe" />
+				<Action name="HeadBillingPeriodList" type="safe" />
+				<Action name="GetHistoricalReadingList" rt="HistoricalReadingList" type="safe" />
+				<Action name="HeadHistoricalReadingList" type="safe" />
+				<Action name="GetPrepayment" rt="Prepayment" type="safe" />
+				<Action name="HeadPrepayment" type="safe" />
+				<Action name="GetProjectionReadingList" rt="ProjectionReadingList" type="safe" />
+				<Action name="HeadProjectionReadingList" type="safe" />
+				<Action name="GetTargetReadingList" rt="TargetReadingList" type="safe" />
+				<Action name="HeadTargetReadingList" type="safe" />
+				<Action name="GetTariffProfile" rt="TariffProfile" type="safe" />
+				<Action name="HeadTariffProfile" type="safe" />
+				<Action name="GetUsagePoint" rt="UsagePoint" type="safe" />
+				<Action name="HeadUsagePoint" type="safe" />
+			</Actions>
+			<Data>
+				<DataPoint name="serviceAccount" type="string" />
+				<DataPoint name="serviceLocation" type="string" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="CustomerAgreementList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="CustomerAgreement" domain="energy-home.it" name="CustomerAgreement" />
+		</ModuleClass>
+		<ModuleClass name="HistoricalReading">
+			<extends class="BillingMeterReadingBase" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="HistoricalReadingList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="HistoricalReading" domain="energy-home.it" name="HistoricalReading" />
+		</ModuleClass>
+		<ModuleClass name="ProjectionReading">
+			<extends class="BillingMeterReadingBase" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ProjectionReadingList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="ProjectionReading" domain="energy-home.it" name="ProjectionReading" />
+		</ModuleClass>
+		<ModuleClass name="TargetReading">
+			<extends class="BillingMeterReadingBase" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="TargetReadingList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="TargetReading" domain="energy-home.it" name="TargetReading" />
+		</ModuleClass>
+		<ModuleClass name="ServiceSupplier">
+			<extends class="IdentifiedObject" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="email" type="string" />
+				<DataPoint name="phone" type="string" />
+				<DataPoint name="providerID" type="integer" />
+				<DataPoint name="web" type="string" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="ServiceSupplierList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="ServiceSupplier" domain="energy-home.it" name="ServiceSupplier" />
+		</ModuleClass>
+		<ModuleClass name="AccountBalance">
+			<extends class="Resource" domain="energy-home.it" />
+			<ModuleRef class="AccountingUnit" domain="energy-home.it" name="availableCredit" />
+			<ModuleRef class="CreditStatusType" domain="energy-home.it" name="creditStatus" />
+			<ModuleRef class="AccountingUnit" domain="energy-home.it" name="emergencyCredit" />
+			<ModuleRef class="CreditStatusType" domain="energy-home.it" name="emergencyCreditStatus" />
+		</ModuleClass>
+		<ModuleClass name="AccountingUnit">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="RealEnergy" domain="energy-home.it" name="energyUnit" />
+			<ModuleRef class="CurrencyCode" domain="energy-home.it" name="monetaryUnit" />
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="multiplier" />
+		</ModuleClass>
+		<ModuleClass name="CreditRegister">
+			<extends class="IdentifiedObject" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="token" type="string" />
+			</Data>
+			<ModuleRef class="AccountingUnit" domain="energy-home.it" name="creditAmount" />
+			<ModuleRef class="CreditTypeType" domain="energy-home.it" name="creditType" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="effectiveTime" />
+		</ModuleClass>
+		<ModuleClass name="CreditRegisterList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="CreditRegister" domain="energy-home.it" name="CreditRegister" />
+		</ModuleClass>
+		<ModuleClass name="Prepayment">
+			<extends class="IdentifiedObject" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetAccountBalance" rt="AccountBalance" type="safe" />
+				<Action name="HeadAccountBalance" type="safe" />
+				<Action name="GetActiveSupplyInterruptionOverrideList" rt="SupplyInterruptionOverrideList" type="safe" />
+				<Action name="HeadActiveSupplyInterruptionOverrideList" type="safe" />
+				<Action name="GetCreditRegisterList" rt="CreditRegisterList" type="safe" />
+				<Action name="HeadCreditRegisterList" type="safe" />
+				<Action name="GetPrepayOperationStatus" rt="PrepayOperationStatus" type="safe" />
+				<Action name="HeadPrepayOperationStatus" type="safe" />
+				<Action name="GetSupplyInterruptionOverrideList" rt="SupplyInterruptionOverrideList" type="safe" />
+				<Action name="HeadSupplyInterruptionOverrideList" type="safe" />
+				<Action name="GetUsagePoint" rt="UsagePoint" type="safe" />
+				<Action name="HeadUsagePoint" type="safe" />
+			</Actions>
+			<ModuleRef class="AccountingUnit" domain="energy-home.it" name="creditExpiryLevel" />
+			<ModuleRef class="AccountingUnit" domain="energy-home.it" name="lowCreditWarningLevel" />
+			<ModuleRef class="AccountingUnit" domain="energy-home.it" name="lowEmergencyCreditWarningLevel" />
+			<ModuleRef class="PrepayModeType" domain="energy-home.it" name="prepayMode" />
+			<ModuleRef class="UsagePoint" domain="energy-home.it" name="UsagePoint" />
+		</ModuleClass>
+		<ModuleClass name="PrepaymentList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="Prepayment" domain="energy-home.it" name="Prepayment" />
+		</ModuleClass>
+		<ModuleClass name="PrepayModeType">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="PrepayOperationStatus">
+			<extends class="Resource" domain="energy-home.it" />
+			<ModuleRef class="CreditTypeChange" domain="energy-home.it" name="creditTypeChange" />
+			<ModuleRef class="CreditTypeType" domain="energy-home.it" name="creditTypeInUse" />
+			<ModuleRef class="ServiceChange" domain="energy-home.it" name="serviceChange" />
+			<ModuleRef class="ServiceStatusType" domain="energy-home.it" name="serviceStatus" />
+		</ModuleClass>
+		<ModuleClass name="ServiceChange">
+			<ModuleRef class="ServiceStatusType" domain="energy-home.it" name="newStatus" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="startTime" />
+		</ModuleClass>
+		<ModuleClass name="SupplyInterruptionOverride">
+			<extends class="Resource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="description" type="string" />
+			</Data>
+			<ModuleRef class="DateTimeInterval" domain="energy-home.it" name="interval" />
+		</ModuleClass>
+		<ModuleClass name="SupplyInterruptionOverrideList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="SupplyInterruptionOverride" domain="energy-home.it" name="SupplyInterruptionOverride" />
+		</ModuleClass>
+		<ModuleClass name="CreditStatusType">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="CreditTypeType">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="CreditTypeChange">
+			<ModuleRef class="CreditTypeType" domain="energy-home.it" name="newType" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="startTime" />
+		</ModuleClass>
+		<ModuleClass name="ServiceStatusType">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="RequestStatus">
+			<Data>
+				<DataPoint name="requestStatus" type="integer" />
+			</Data>
+			<ModuleRef class="TimeType" domain="energy-home.it" name="dateTime" />
+		</ModuleClass>
+		<ModuleClass name="AbstractFlowReservation">
+			<extends class="Event" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="FlowReservationRequest">
+			<extends class="IdentifiedObject" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="durationRequested" type="integer" />
+			</Data>
+			<ModuleRef class="TimeType" domain="energy-home.it" name="creationTime" />
+			<ModuleRef class="SignedRealEnergy" domain="energy-home.it" name="energyRequested" />
+			<ModuleRef class="DateTimeInterval" domain="energy-home.it" name="intervalRequested" />
+			<ModuleRef class="ActivePower" domain="energy-home.it" name="powerRequested" />
+			<ModuleRef class="RequestStatus" domain="energy-home.it" name="RequestStatus" />
+		</ModuleClass>
+		<ModuleClass name="FlowReservationRequestList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="FlowReservationRequest" domain="energy-home.it" name="FlowReservationRequest" />
+		</ModuleClass>
+		<ModuleClass name="FlowReservationResponse">
+			<extends class="Event" domain="energy-home.it" />
+			<ModuleRef class="RealEnergy" domain="energy-home.it" name="energyAvailable" />
+			<ModuleRef class="ActivePower" domain="energy-home.it" name="powerAvailable" />
+			<ModuleRef class="mRIDType" domain="energy-home.it" name="subject" />
+		</ModuleClass>
+		<ModuleClass name="FlowReservationResponseList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="FlowReservationResponse" domain="energy-home.it" name="FlowReservationResponse" />
+		</ModuleClass>
+		<ModuleClass name="DefaultDERControl">
+			<extends class="SubscribableIdentifiedObject" domain="energy-home.it" />
+			<ModuleRef class="DERControlBase" domain="energy-home.it" name="DERControlBase" />
+		</ModuleClass>
+		<ModuleClass name="DER">
+			<extends class="SubscribableResource" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetAssociatedDERProgramList" rt="AssociatedDERProgramList" type="safe" />
+				<Action name="HeadAssociatedDERProgramList" type="safe" />
+				<Action name="GetAssociatedUsagePoint" rt="AssociatedUsagePoint" type="safe" />
+				<Action name="HeadAssociatedUsagePoint" type="safe" />
+				<Action name="GetCurrentDERProgram" rt="CurrentDERProgram" type="safe" />
+				<Action name="HeadCurrentDERProgram" type="safe" />
+				<Action name="GetDERAvailability" rt="DERAvailability" type="safe" />
+				<Action name="HeadDERAvailability" type="safe" />
+				<Action name="ModifyDERAvailability" type="idempotent">
+					<ModArg class="DERAvailability" domain="energy-home.it" name="newDERAvailability" />
+				</Action>
+				<Action name="GetDERCapability" rt="DERCapability" type="safe" />
+				<Action name="HeadDERCapability" type="safe" />
+				<Action name="ModifyDERCapability" type="idempotent">
+					<ModArg class="DERCapability" domain="energy-home.it" name="newDERCapability" />
+				</Action>
+				<Action name="GetDERSettings" rt="DERSettings" type="safe" />
+				<Action name="HeadDERSettings" type="safe" />
+				<Action name="ModifyDERSettings" type="idempotent">
+					<ModArg class="DERSettings" domain="energy-home.it" name="newDERSettings" />
+				</Action>
+				<Action name="GetDERStatus" rt="DERStatus" type="safe" />
+				<Action name="HeadDERStatus" type="safe" />
+				<Action name="ModifyDERStatus" type="idempotent">
+					<ModArg class="DERStatus" domain="energy-home.it" name="newDERStatus" />
+				</Action>
+			</Actions>
+		</ModuleClass>
+		<ModuleClass name="DERList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="DER" domain="energy-home.it" name="DER" />
+		</ModuleClass>
+		<ModuleClass name="DERSettings">
+			<extends class="SubscribableResource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="setGenConnect" type="boolean" />
+				<DataPoint name="setGradW" type="integer" />
+				<DataPoint name="setStorConnect" type="boolean" />
+			</Data>
+			<ModuleRef class="ActivePower" domain="energy-home.it" name="setMaxChargeRate" />
+			<ModuleRef class="ActivePower" domain="energy-home.it" name="setMaxDischargeRate" />
+			<ModuleRef class="ApparentPower" domain="energy-home.it" name="setMaxVA" />
+			<ModuleRef class="ReactivePower" domain="energy-home.it" name="setMaxVAr" />
+			<ModuleRef class="ReactivePower" domain="energy-home.it" name="setMaxVArNeg" />
+			<ModuleRef class="ActivePower" domain="energy-home.it" name="setMaxW" />
+			<ModuleRef class="UnsignedFixedPointType" domain="energy-home.it" name="setMinPF" />
+			<ModuleRef class="FixedPointType" domain="energy-home.it" name="setMinPFNeg" />
+			<ModuleRef class="VoltageRMS" domain="energy-home.it" name="setVRef" />
+			<ModuleRef class="VoltageRMS" domain="energy-home.it" name="setVRefOfs" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="updatedTime" />
+		</ModuleClass>
+		<ModuleClass name="DERType">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DERAvailability">
+			<extends class="SubscribableResource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="availabilityDuration" type="integer" />
+				<DataPoint name="maxChargeDuration" type="integer" />
+			</Data>
+			<ModuleRef class="TimeType" domain="energy-home.it" name="readingTime" />
+			<ModuleRef class="PerCent" domain="energy-home.it" name="reserveChargePercent" />
+			<ModuleRef class="PerCent" domain="energy-home.it" name="reservePercent" />
+			<ModuleRef class="ReactivePower" domain="energy-home.it" name="statVArAvail" />
+			<ModuleRef class="ActivePower" domain="energy-home.it" name="statWAvail" />
+		</ModuleClass>
+		<ModuleClass name="DERCapability">
+			<extends class="Resource" domain="energy-home.it" />
+			<ModuleRef class="DERControlType" domain="energy-home.it" name="modesSupported" />
+			<ModuleRef class="CurrentRMS" domain="energy-home.it" name="rtgA" />
+			<ModuleRef class="AmpereHour" domain="energy-home.it" name="rtgAh" />
+			<ModuleRef class="ActivePower" domain="energy-home.it" name="rtgMaxChargeRate" />
+			<ModuleRef class="ActivePower" domain="energy-home.it" name="rtgMaxDischargeRate" />
+			<ModuleRef class="UnsignedFixedPointType" domain="energy-home.it" name="rtgMinPF" />
+			<ModuleRef class="FixedPointType" domain="energy-home.it" name="rtgMinPFNeg" />
+			<ModuleRef class="ApparentPower" domain="energy-home.it" name="rtgVA" />
+			<ModuleRef class="ReactivePower" domain="energy-home.it" name="rtgVAr" />
+			<ModuleRef class="ReactivePower" domain="energy-home.it" name="rtgVArNeg" />
+			<ModuleRef class="ActivePower" domain="energy-home.it" name="rtgW" />
+			<ModuleRef class="WattHour" domain="energy-home.it" name="rtgWh" />
+			<ModuleRef class="DERType" domain="energy-home.it" name="type" />
+		</ModuleClass>
+		<ModuleClass name="DERControlBase">
+			<Data>
+				<DataPoint name="rampTms" type="integer" />
+			</Data>
+			<ModuleRef class="SignedPerCent" domain="energy-home.it" name="opModFixedFlow" />
+			<ModuleRef class="FixedPowerFactor" domain="energy-home.it" name="opModFixedPF" />
+			<ModuleRef class="FixedVAr" domain="energy-home.it" name="opModFixedVAr" />
+			<ModuleRef class="PerCent" domain="energy-home.it" name="opModFixedW" />
+			<ModuleRef class="DERCurveLink" domain="energy-home.it" name="opModFreqWatt" />
+			<ModuleRef class="CurvePairType" domain="energy-home.it" name="opModHVRT" />
+			<ModuleRef class="CurvePairType" domain="energy-home.it" name="opModLVRT" />
+			<ModuleRef class="DERCurveLink" domain="energy-home.it" name="opModVoltVAr" />
+			<ModuleRef class="DERCurveLink" domain="energy-home.it" name="opModVoltWatt" />
+			<ModuleRef class="DERCurveLink" domain="energy-home.it" name="opModWattPF" />
+		</ModuleClass>
+		<ModuleClass name="DERControl">
+			<extends class="RandomizableEvent" domain="energy-home.it" />
+			<ModuleRef class="DERControlBase" domain="energy-home.it" name="DERControlBase" />
+		</ModuleClass>
+		<ModuleClass name="DERControlList">
+			<extends class="SubscribableList" domain="energy-home.it" />
+			<ModuleRef class="DERControl" domain="energy-home.it" name="DERControl" />
+		</ModuleClass>
+		<ModuleClass name="DERControlType">
+			<extends class="HexBinary32" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DERCurve">
+			<extends class="IdentifiedObject" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="rampDecTms" type="integer" />
+				<DataPoint name="rampIncTms" type="integer" />
+				<DataPoint name="rampPT1Tms" type="integer" />
+			</Data>
+			<ModuleRef class="TimeType" domain="energy-home.it" name="creationTime" />
+			<ModuleRef class="CurveData" domain="energy-home.it" name="CurveData" />
+			<ModuleRef class="DERCurveType" domain="energy-home.it" name="curveType" />
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="xMultiplier" />
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="yMultiplier" />
+			<ModuleRef class="DERUnitRefType" domain="energy-home.it" name="yRefType" />
+		</ModuleClass>
+		<ModuleClass name="CurrentDERProgramLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DERCurveList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="DERCurve" domain="energy-home.it" name="DERCurve" />
+		</ModuleClass>
+		<ModuleClass name="CurveData">
+			<Data>
+				<DataPoint name="excitation" type="integer" />
+				<DataPoint name="xvalue" type="integer" />
+				<DataPoint name="yvalue" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="DERCurveType">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="CurvePairType">
+			<ModuleRef class="DERCurveLink" domain="energy-home.it" name="lowerLimit" />
+			<ModuleRef class="DERCurveLink" domain="energy-home.it" name="upperLimit" />
+		</ModuleClass>
+		<ModuleClass name="DERProgram">
+			<extends class="IdentifiedObject" domain="energy-home.it" />
+			<Actions>
+				<Action name="GetActiveDERControlList" rt="DERControlList" type="safe" />
+				<Action name="HeadActiveDERControlList" type="safe" />
+				<Action name="GetDefaultDERControl" rt="DefaultDERControl" type="safe" />
+				<Action name="HeadDefaultDERControl" type="safe" />
+				<Action name="GetDERControlList" rt="DERControlList" type="safe" />
+				<Action name="HeadDERControlList" type="safe" />
+				<Action name="GetDERCurveList" rt="DERCurveList" type="safe" />
+				<Action name="HeadDERCurveList" type="safe" />
+			</Actions>
+			<ModuleRef class="PrimacyType" domain="energy-home.it" name="primacy" />
+		</ModuleClass>
+		<ModuleClass name="DERProgramList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="DERProgram" domain="energy-home.it" name="DERProgram" />
+		</ModuleClass>
+		<ModuleClass name="DERStatus">
+			<extends class="SubscribableResource" domain="energy-home.it" />
+			<ModuleRef class="ConnectStatusType" domain="energy-home.it" name="genConnectStatus" />
+			<ModuleRef class="InverterStatusType" domain="energy-home.it" name="inverterStatus" />
+			<ModuleRef class="LocalControlModeStatusType" domain="energy-home.it" name="localControlModeStatus" />
+			<ModuleRef class="ManufacturerStatusType" domain="energy-home.it" name="manufacturerStatus" />
+			<ModuleRef class="OperationalModeStatusType" domain="energy-home.it" name="operationalModeStatus" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="readingTime" />
+			<ModuleRef class="StateOfChargeStatusType" domain="energy-home.it" name="stateOfChargeStatus" />
+			<ModuleRef class="StorageModeStatusType" domain="energy-home.it" name="storageModeStatus" />
+			<ModuleRef class="ConnectStatusType" domain="energy-home.it" name="storConnectStatus" />
+		</ModuleClass>
+		<ModuleClass name="DERUnitRefType">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="CurrentRMS">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="multiplier" />
+		</ModuleClass>
+		<ModuleClass name="FixedPointType">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="multiplier" />
+		</ModuleClass>
+		<ModuleClass name="UnsignedFixedPointType">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="multiplier" />
+		</ModuleClass>
+		<ModuleClass name="ActivePower">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="multiplier" />
+		</ModuleClass>
+		<ModuleClass name="AmpereHour">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="multiplier" />
+		</ModuleClass>
+		<ModuleClass name="ApparentPower">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="multiplier" />
+		</ModuleClass>
+		<ModuleClass name="ReactivePower">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="multiplier" />
+		</ModuleClass>
+		<ModuleClass name="FixedPowerFactor">
+			<Data>
+				<DataPoint name="displacement" type="integer" />
+			</Data>
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="multiplier" />
+		</ModuleClass>
+		<ModuleClass name="FixedVAr">
+			<ModuleRef class="DERUnitRefType" domain="energy-home.it" name="refType" />
+			<ModuleRef class="SignedPerCent" domain="energy-home.it" name="value" />
+		</ModuleClass>
+		<ModuleClass name="WattHour">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="multiplier" />
+		</ModuleClass>
+		<ModuleClass name="VoltageRMS">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="multiplier" />
+		</ModuleClass>
+		<ModuleClass name="ConnectStatusType">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="TimeType" domain="energy-home.it" name="dateTime" />
+		</ModuleClass>
+		<ModuleClass name="InverterStatusType">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="TimeType" domain="energy-home.it" name="dateTime" />
+		</ModuleClass>
+		<ModuleClass name="LocalControlModeStatusType">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="TimeType" domain="energy-home.it" name="dateTime" />
+		</ModuleClass>
+		<ModuleClass name="ManufacturerStatusType">
+			<Data>
+				<DataPoint name="value" type="string" />
+			</Data>
+			<ModuleRef class="TimeType" domain="energy-home.it" name="dateTime" />
+		</ModuleClass>
+		<ModuleClass name="OperationalModeStatusType">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="TimeType" domain="energy-home.it" name="dateTime" />
+		</ModuleClass>
+		<ModuleClass name="StateOfChargeStatusType">
+			<ModuleRef class="TimeType" domain="energy-home.it" name="dateTime" />
+			<ModuleRef class="PerCent" domain="energy-home.it" name="value" />
+		</ModuleClass>
+		<ModuleClass name="StorageModeStatusType">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="TimeType" domain="energy-home.it" name="dateTime" />
+		</ModuleClass>
+		<ModuleClass name="ActiveApplianceControlListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ActiveApplianceParameterSettingsLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ActiveApplianceWorkingModeLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ActiveEnergyPhaseLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="AffectedParametersListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceControlListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceLogEventListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceMonitorListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceParameterCompatibilityActionListLink" />
+		<ModuleClass name="ApplianceParameterLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceParameterListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceParameterSetListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceStatisticListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceWorkingModeListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="EnergyPhaseLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="EnergyPhaseScheduleStateLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ExtendedPowerProfileListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ExtendedPowerProfilePriceLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ModeLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="NameListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="OverallSchedulePricelink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="PowerProfileScheduleContraintsLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="PowerProfileScheduleLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="PowerProfileScheduleListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="PowerProfileScheduleStateLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="PowerProfileStateLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="AccountBalanceLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ActiveBillingPeriodListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ActiveCreditRegisterListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ActiveDERControlListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ActiveEventListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ActiveFlowReservationListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ActiveProjectionReadingListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ActiveSupplyInterruptionOverrideListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ActiveTargetReadingListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ActiveTextMessageListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ActiveTimeTariffIntervalListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="AssociatedDERProgramListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="AssociatedUsagePointLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="BillingPeriodListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="BillingReadingListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="BillingReadingSetListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ConfigurationLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ConsumptionTariffIntervalListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="CreditRegisterListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="CustomerAccountLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="CustomerAccountListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="CustomerAgreementListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DemandResponseProgramLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DemandResponseProgramListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DERAvailabilityLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DefaultDERControlLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DERCapabilityLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DERControlListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DERCurveLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DERCurveListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DERLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DERListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DERProgramLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DERProgramListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DERSettingsLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DERStatusLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DeviceCapabilityLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DeviceInformationLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DeviceStatusLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="EventListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="EndDeviceLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="EndDeviceListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="FileLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="FileListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="FileStatusLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="FlowReservationRequestListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="FlowReservationResponseListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="FunctionSetAssignmentsListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="HistoricalReadingListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="IPAddrListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="IPInterfaceListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="LLInterfaceListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="LoadShedAvailabilityLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="LogEventListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="MessagingProgramListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="MeterReadingLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="MeterReadingListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="MirrorUsagePointListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="NeighborListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="NotificationListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="PowerStatusLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="PrepaymentLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="PrepaymentListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="PrepayOperationStatusLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="PriceResponseCfgListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ProjectionReadingListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="RateComponentLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="RateComponentListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ReadingLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ReadingListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ReadingSetListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ReadingTypeLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="RegistrationLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ResponseListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ResponseSetListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="RPLInstanceListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="RPLSourceRoutesListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="SelfDeviceLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ServiceSupplierLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="SubscriptionListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="SupplyInterruptionOverrideListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="SupportedLocaleListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="TargetReadingListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="TariffProfileLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="TariffProfileListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="TextMessageListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="TimeLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="TimeTariffIntervalListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="UsagePointLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="UsagePointListLink">
+			<extends class="ListLink" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="IdentifiedObject">
+			<extends class="Resource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="description" type="string" />
+			</Data>
+			<ModuleRef class="mRIDType" domain="energy-home.it" name="mRID" />
+			<ModuleRef class="VersionType" domain="energy-home.it" name="version" />
+		</ModuleClass>
+		<ModuleClass name="Link" />
+		<ModuleClass name="List">
+			<extends class="Resource" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ListLink">
+			<extends class="Link" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="Resource" />
+		<ModuleClass name="RespondableIdentifiedObject">
+			<extends class="RespondableResource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="description" type="string" />
+			</Data>
+			<ModuleRef class="mRIDType" domain="energy-home.it" name="mRID" />
+			<ModuleRef class="VersionType" domain="energy-home.it" name="version" />
+		</ModuleClass>
+		<ModuleClass name="RespondableResource">
+			<extends class="Resource" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="RespondableSubscribableIdentifiedObject">
+			<extends class="RespondableResource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="description" type="string" />
+			</Data>
+			<ModuleRef class="mRIDType" domain="energy-home.it" name="mRID" />
+			<ModuleRef class="VersionType" domain="energy-home.it" name="version" />
+		</ModuleClass>
+		<ModuleClass name="SubscribableIdentifiedObject">
+			<extends class="SubscribableResource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="description" type="string" />
+			</Data>
+			<ModuleRef class="mRIDType" domain="energy-home.it" name="mRID" />
+			<ModuleRef class="VersionType" domain="energy-home.it" name="version" />
+		</ModuleClass>
+		<ModuleClass name="SubscribableList">
+			<extends class="SubscribableResource" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="SubscribableResource">
+			<extends class="Resource" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="Error">
+			<Data>
+				<DataPoint name="maxRetryDuration" type="integer" />
+				<DataPoint name="reasonCode" type="integer" />
+			</Data>
+		</ModuleClass>
+		<ModuleClass name="Event">
+			<extends class="RespondableSubscribableIdentifiedObject" domain="energy-home.it" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="creationTime" />
+			<ModuleRef class="EventStatus" domain="energy-home.it" name="EventStatus" />
+			<ModuleRef class="DateTimeInterval" domain="energy-home.it" name="interval" />
+		</ModuleClass>
+		<ModuleClass name="EventStatus">
+			<Data>
+				<DataPoint name="currentStatus" type="integer" />
+				<DataPoint name="potentiallySuperseded" type="boolean" />
+				<DataPoint name="reason" type="string" />
+			</Data>
+			<ModuleRef class="TimeType" domain="energy-home.it" name="dateTime" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="potentiallySupersededTime" />
+		</ModuleClass>
+		<ModuleClass name="RandomizableEvent">
+			<extends class="Event" domain="energy-home.it" />
+			<ModuleRef class="OneHourRangeType" domain="energy-home.it" name="randomizeDuration" />
+			<ModuleRef class="OneHourRangeType" domain="energy-home.it" name="randomizeStart" />
+		</ModuleClass>
+		<ModuleClass name="AccumulationBehaviourType">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ApplianceLoadReductionType">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="CommodityType">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ConsumptionBlockType">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="CurrencyCode">
+			<extends class="UInt16" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DataQualifierType">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DateTimeInterval">
+			<Data>
+				<DataPoint name="duration" type="integer" />
+			</Data>
+			<ModuleRef class="TimeType" domain="energy-home.it" name="start" />
+		</ModuleClass>
+		<ModuleClass name="DeviceCategoryType">
+			<extends class="HexBinary32" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="DstRuleType">
+			<extends class="HexBinary32" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="FlowDirectionType">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="KindType">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="LocaleType">
+			<extends class="String42" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="mRIDType">
+			<extends class="HexBinary128" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="OneHourRangeType">
+			<extends class="Int16" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="PENType">
+			<extends class="UInt32" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="PerCent">
+			<extends class="UInt16" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="PhaseCode">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="PINType">
+			<extends class="UInt32" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="PowerOfTenMultiplierType">
+			<extends class="Int8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="PrimacyType">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="RealEnergy">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="multiplier" />
+		</ModuleClass>
+		<ModuleClass name="RoleFlagsType">
+			<extends class="HexBinary16" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="ServiceKind">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="SFDIType">
+			<extends class="UInt40" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="SignedPerCent">
+			<extends class="Int16" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="SignedRealEnergy">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="multiplier" />
+		</ModuleClass>
+		<ModuleClass name="TimeOffsetType">
+			<extends class="Int32" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="TimeType">
+			<extends class="Int64" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="TOUType">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="UnitType">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="UnitValueType">
+			<Data>
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="PowerOfTenMultiplierType" domain="energy-home.it" name="multiplier" />
+			<ModuleRef class="UomType" domain="energy-home.it" name="unit" />
+		</ModuleClass>
+		<ModuleClass name="UomType">
+			<extends class="UInt8" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="VersionType">
+			<extends class="UInt16" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="MirrorMeterReading">
+			<extends class="MeterReadingBase" domain="energy-home.it" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="lastUpdateTime" />
+			<ModuleRef class="MirrorReadingSet" domain="energy-home.it" name="MirrorReadingSet" />
+			<ModuleRef class="TimeType" domain="energy-home.it" name="nextUpdateTime" />
+			<ModuleRef class="Reading" domain="energy-home.it" name="Reading" />
+			<ModuleRef class="ReadingType" domain="energy-home.it" name="ReadingType" />
+		</ModuleClass>
+		<ModuleClass name="MirrorMeterReadingList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="MirrorMeterReading" domain="energy-home.it" name="MirrorMeterReading" />
+		</ModuleClass>
+		<ModuleClass name="MeterReadingBase">
+			<extends class="IdentifiedObject" domain="energy-home.it" />
+		</ModuleClass>
+		<ModuleClass name="MirrorReadingSet">
+			<extends class="ReadingSetBase" domain="energy-home.it" />
+			<ModuleRef class="Reading" domain="energy-home.it" name="Reading" />
+		</ModuleClass>
+		<ModuleClass name="MirrorUsagePoint">
+			<extends class="UsagePointBase" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="deviceLFDI" type="array" />
+			</Data>
+			<ModuleRef class="MirrorMeterReading" domain="energy-home.it" name="MirrorMeterReading" />
+		</ModuleClass>
+		<ModuleClass name="MirrorUsagePointList">
+			<extends class="List" domain="energy-home.it" />
+			<ModuleRef class="MirrorUsagePoint" domain="energy-home.it" name="MirrorUsagePoint" />
+		</ModuleClass>
+		<ModuleClass name="ReadingBase">
+			<extends class="Resource" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="qualityFlags" type="array" />
+				<DataPoint name="value" type="integer" />
+			</Data>
+			<ModuleRef class="ConsumptionBlockType" domain="energy-home.it" name="consumptionBlock" />
+			<ModuleRef class="DateTimeInterval" domain="energy-home.it" name="timePeriod" />
+			<ModuleRef class="TOUType" domain="energy-home.it" name="touTier" />
+		</ModuleClass>
+		<ModuleClass name="ReadingSetBase">
+			<extends class="IdentifiedObject" domain="energy-home.it" />
+			<ModuleRef class="DateTimeInterval" domain="energy-home.it" name="timePeriod" />
+		</ModuleClass>
+		<ModuleClass name="UsagePointBase">
+			<extends class="IdentifiedObject" domain="energy-home.it" />
+			<Data>
+				<DataPoint name="status" type="integer" />
+			</Data>
+			<ModuleRef class="RoleFlagsType" domain="energy-home.it" name="roleFlags" />
+			<ModuleRef class="ServiceKind" domain="energy-home.it" name="serviceCategoryKind" />
+		</ModuleClass>
+	</Modules>
+</Domain>

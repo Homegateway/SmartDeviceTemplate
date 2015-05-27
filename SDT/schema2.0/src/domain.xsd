@@ -149,6 +149,7 @@
       <xs:element minOccurs="0" ref="Actions"/>
       <xs:element minOccurs="0" ref="Data"/>
       <xs:element minOccurs="0" ref="Events"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="ModuleRef"/>
     </xs:sequence>
     <xs:attribute name="name" use="required"/>
   </xs:complexType>
@@ -158,6 +159,16 @@
       <xs:attribute name="class" use="required"/>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ModuleRef">
+    <xs:complexType>
+      <xs:attributeGroup ref="ModuleRef"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="ModuleRef">
+    <xs:attribute name="name"/>
+    <xs:attribute name="domain" use="required" type="xs:IDREF"/>
+    <xs:attribute name="class" use="required"/>
+  </xs:attributeGroup>
   <xs:element name="Modules">
     <xs:complexType>
       <xs:sequence>
@@ -177,10 +188,17 @@
     <xs:complexType>
       <xs:sequence>
         <xs:group ref="Doc"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ModArg"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="Arg"/>
       </xs:sequence>
       <xs:attribute name="name" use="required"/>
-      <xs:attribute name="type" type="DataType"/>
+      <xs:attribute name="type" type="xs:string"/>
+      <xs:attribute name="rt" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ModArg">
+    <xs:complexType>
+      <xs:attributeGroup ref="ModuleRef"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="Arg">

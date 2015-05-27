@@ -77,7 +77,12 @@ ModuleDef =
   Doc,
   Actions?,
   Data?,
-  Events?
+  Events?,
+  element ModuleRef { ModuleRef }*
+ModuleRef =
+  attribute name { text }?,
+  attribute domain { xsd:IDREF },
+  attribute class { text }
 Modules =
   element Modules {
     element Module { ModuleDef }*
@@ -86,8 +91,10 @@ Actions =
   element Actions {
     element Action {
       attribute name { text },
-      attribute type { DataType }?,
+      attribute type { xsd:string }?,
+      attribute rt { xsd:string }?,
       Doc,
+      element ModArg { ModuleRef }*,
       element Arg {
         attribute name { text },
         attribute type { DataType },
