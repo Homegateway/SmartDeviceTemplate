@@ -98,6 +98,7 @@
       <xs:enumeration value="time"/>
       <xs:enumeration value="datetime"/>
       <xs:enumeration value="blob"/>
+      <xs:enumeration value="uri"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:group name="DocText">
