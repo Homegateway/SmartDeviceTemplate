@@ -54,6 +54,7 @@ DataType =
   | "time"
   | "datetime"
   | "blob"
+  | "uri"
 DocText =
   (text
    | element em { text }
