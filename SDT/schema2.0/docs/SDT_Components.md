@@ -47,8 +47,8 @@ A *Domain* can define [Domain](#Domain) or [RootDevices](#RootDevice) only, or m
 #### Example
 
 	<Domain xmlns:xi="http://www.w3.org/2001/XInclude"
-    	xmlns="http://hgi.org/xml/dal/2.0" 
-    	id="org.hgi">
+    	xmlns="http://homegatewayinitiative.org/xml/dal/2.0" 
+    	id="org.homegatewayinitiative">
     	<Imports>
       	  <xi:include href="./dal-core.xml" parse="xml" />
     	</Imports>
