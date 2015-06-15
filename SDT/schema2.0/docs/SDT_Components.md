@@ -47,8 +47,8 @@ A *Domain* can define [Modules](#ModuleClass) or [RootDevices](#RootDevice) only
 #### Example
 
 	<Domain xmlns:xi="http://www.w3.org/2001/XInclude"
-    	xmlns="http://hgi.org/xml/dal/2.0" 
-    	id="org.hgi">
+    	xmlns="http://homegatewayinitiative.org/xml/dal/2.0" 
+    	id="org.homegatewayinitiative">
     	<Imports>
       	  <xi:include href="./dal-core.xml" parse="xml" />
     	</Imports>
@@ -65,9 +65,14 @@ A *Domain* can define [Modules](#ModuleClass) or [RootDevices](#RootDevice) only
 
 <a name="RootDevice"/></a>
 ### RootDevice
-A *RootDevice* is the description of a (physical) device that may contain optional embedded sub-devices. It represents the idea an appliance that is addressable on a Home Area Network where one or more sub-[Devices](#Devices) provide certain (possibly independent) functionalities. 
 
-An example is a connected power-strip where each of the sockets can be switched on and off individually. The power-strip itself can provide own functions such as "all sockets off" and "overall power consumption".
+A *RootDevice* is the definition of a physical device that may contain optional embedded sub-devices. It represents the idea an appliance that is addressable on a Home Area Network where one or more sub-[Devices](#Devices) provide certain functionalities.
+
+For each physical device on the network at least one *RootDevice* **must** be defined. If the physical device is a simple device, ie. it does not contain embedded devices, e.g. a light switch, it does not include further *Devices*. On the other hand, if the pyhsical is a compound device, ie. it does contain embedded devices that can be addressed separately, the *RootDevice* **should** contain *Devices* for each of the identifiable embedded devices.
+
+There is also the possibility to have more than one *RootDevice* for one physical device if a physical device offers more than one distinguishable services or when it is for other reasons meaningful to deliberatly separate the device's services.
+
+An example for a compound device  is a connected power-strip where each of the sockets can be switched on and off individually. The power-strip itself can provide functions such as "all sockets off" and "overall power consumption".
 
 If the *RootDevice* includes sub-[Devices](#Device) then each sub-device may be of the same type or of different types. The functionality ([Actions](#Action)) of the *RootDevice* may be different from the functionality of its sub-[Devices](#Device).
 
@@ -78,14 +83,14 @@ If the *RootDevice* does not include sub-devices then the *RootDevice* is the ac
 ![](images/RootDevice.png)
 
 #### Attributes
-- **id** : The identifier for that *RootDevice*. Required.
+- **id** : The identifier for that *RootDevice*. The identifier must be unique at least in the scope of the domain, but the final scope is also influenced by implementing technologies. Required.
 
 #### Elements
 
 - **[Doc](#Documentation)** : Documentation for the *RootDevice*. Optional.
 - **Modules** : A list of [Module](#ModuleClass) components that are local to the *RootDevice*. Optional.
 - **[DeviceInfo](#DeviceInfo)** : Further meta-data about the *RootDevice*. Optional.
-- **Devices** : A list [Device](#Device) components. Optional.
+- **Devices** : A list of [Device](#Device) components. Optional.
 
 #### Example
 
@@ -107,12 +112,12 @@ If the *RootDevice* does not include sub-devices then the *RootDevice* is the ac
 ### Device
 *Devices* are optional components of a [RootDevice](#RootDevice). They represent physical sub-devices inside another device (the RootDevice).
 
-*Devices* may define their own [ModuleClasses](#ModuleClass) or refer to predefined ModulesClasses of its or another [Domain](#Domain).
+*Devices* may define their own [ModuleClasses](#ModuleClass) or extend ModulesClasses of its or another [Domain](#Domain).
 
 ![](images/Device.png)
 
 #### Attributes
-- **id** : The identifier for that *Device*. Required.
+- **id** : The identifier for that *Device*. The identifier must be unique at least in the scope of the domain, but the final scope is also influenced by implementing technologies. Required.
 
 #### Elements
 - **[Doc](#Documentation)** : Documentation for the *Device*. Optional.
@@ -165,16 +170,18 @@ None.
 
 <a name="ModuleClass"/></a>
 ### Module, ModuleClass
-The *Module* (or *ModuleClass*) represents the concept of a reusable module that defines the [Actions](#Action), [Data](#Data) and [Events](#Event) for a single functionality of a device. A connected device may contain or refer to single or multiple *ModuleClasses* to specify its inherent services it exposes for use by applications.
+The *ModuleClass* represents the concept of a reusable module that defines the [Actions](#Action), [Data](#Data) and [Events](#Event) for a single functionality of a device. A connected device may contain or refer to single or multiple *ModuleClasses* to specify its inherent services it exposes for use by applications.
 
-*ModuleClasses* can be defined by a domain (on the level of the [Domain](#Domain) component) or in [RootDevices](#RootDevice)/[Devices](#Device): The former *ModuleClasses* are global to a [Domain](#Domain) and can be used (refered to) by all [RootDevices](#RootDevice)/[Devices](#Device) of a [Domain](#Domain); the later are local to the [RootDevices](#RootDevice)/[Devices](#Device) where they are defined in. All *ModuleClasses* defined on the [Domain](#Domain) level can be imported and used by other domains.
+*Modules* represent instantiations of *ModuleClasses*.
 
-New *ModuleClasses* can be defined by extending existing *ModuleClasses* to add new or overriding defined [Actions](#Action), [Data](#Data) and [Events](#Event).
+*ModuleClasses* can be defined by a domain (on the level of the [Domain](#Domain) component) or in [RootDevices](#RootDevice)/[Devices](#Device): The first are global to a [Domain](#Domain) and can be used (refered to) by all [RootDevices](#RootDevice) resp. [Devices](#Device) of a [Domain](#Domain); the later are local to the [RootDevices](#RootDevice)/[Devices](#Device) where it is defined in. *ModuleClasses* defined on the [Domain](#Domain) level can be imported, extended and used by other domains.
+
+New *ModuleClasses* can be defined by extending existing *ModuleClasses* from the same or other domains to add new or overriding defined [Actions](#Action), [Data](#Data) and [Events](#Event).
 
 ![](images/ModuleClass.png)
 
 #### Attributes
-- **Name** : Name of the *ModuleClass*. Required.
+- **Name** : Name of the *ModuleClass*. The name must be unique in the scope of the [Domain](#Domain). Required.
 
 #### Elements
 - **extends** : Reference to a another *ModuleClass* that is extended with this *ModuleClass*. Optional.  
@@ -212,7 +219,7 @@ It is also possible that an *Action* results in calling multiple functions on th
 ![](images/Action.png)
 
 #### Attributes
-- **name** : The name of the *Action*. Required.
+- **name** : The name of the *Action*. The name must be unique in the scope of the [ModuleClass](#ModuleClass). Required.
 - **type** : The return type of the *Action*. It must comply to one of the defined [DataTypes](#DataType). Optional. If no *type* is specified the *Action* does not return a value.
 
 #### Elements
@@ -241,11 +248,14 @@ The following are two examples for actions implementing a getter and a setter fo
 
 <a name="Data"/></a>
 ### Data
-The *Data* component represents a list of *DataPoints*.
+The *Data* component represents a list of *DataPoints* of a [ModuleClass](#ModuleClass). 
 
 ![](images/Data.png)
 
-Though *DataPoints* only refer to single data points of a physical device it is possible to describe hierarchies by model the path to the data point in the hierarchy by a path-like structure like to the pathname of a UNIX file system. Here, the root node of the hierarchy is a slash (/ 0x2F) and the segments or nodes along the path are also separated by slashes. The actual data point is the last leaf at the path. 
+
+*DataPoints* serve to provide information to application developers about the internal structure, types and attributes of a device's data model. There are no implicite setter or getter actions to manipulate the data points directly. To do this, [Actions](#Action) must be defined and used explicitly.
+
+Though *DataPoints* only refer to single data points of a physical device it is possible to describe hierarchies by model the path to the data point in the hierarchy by a path-like structure like to the pathname of a UNIX file system. Here, the root node of the hierarchy is a slash (/ 0x2F) and the segments or nodes along the path are also separated by slashes. The actual datapoint is the last leaf at the path. 
 
 In EBNF:
 
@@ -262,7 +272,7 @@ None.
 #### Elements
 - **DataPoint** : Zero or more occurances of *DataPoints. Optional.  
 A *DataPoint* has the following attributes and elements:
-	- **name** : The name (and possible path in a hierarchical data model) of the *DataPoint*. Attribute. Required.
+	- **name** : The name (and possible path in a hierarchical data model) of the *DataPoint*. Attribute. The name must be unique in the scope of the [ModuleClass](#ModuleClass).Required.
 	- **type** : The type of the *DataPoint*. It must comply to one of the defined *DataTypes*. Attribute. Required.
 	- **writable** : Boolean value that indicates whether this *DataPoint* is writable by an application. Attribute. Optional. Default: false.
 	- **readable** : Boolean value that indicates whether this *DataPoint* is readable by an application. Attribute. Optional. Default: false.
@@ -305,7 +315,7 @@ An *Event* is a component that defines properties for events that are raised as 
 ![](images/Event.png)
 
 #### Attributes
-- **name** : The name of the *Event*. Required.
+- **name** : The name of the *Event*. The name must be unique in the scope of the [ModuleClass](#ModuleClass). Required.
 
 #### Elements
 - **Data** : A list of [Data](#Data) components for an event's payload. Optional.
@@ -325,7 +335,7 @@ An *Event* is a component that defines properties for events that are raised as 
 
 <a name="Documentation"/></a>
 # Documentation
-The *Doc* documentation element is optionally available in most components of the SDT. Its purpose is to provide a short explanation of the respective element.
+The *Doc* documentation element is optionally available in most components of the SDT. Its purpose is to provide a short documentation for the respective element. The documentation language *should* be English.
 
 The text inside the *Doc* element can be structure using a very limited subset of HTML elements. The possible structuring is defined in EBNF as follows:
 
