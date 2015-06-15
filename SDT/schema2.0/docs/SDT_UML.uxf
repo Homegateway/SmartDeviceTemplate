@@ -298,7 +298,7 @@ fg=blue</panel_attributes>
       <h>153</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
-m1=0..*
+m1=0,1
 </panel_attributes>
     <additional_attributes>110.0;140.0;50.0;140.0;50.0;10.0;10.0;10.0</additional_attributes>
   </element>
@@ -346,8 +346,8 @@ fg=blue
     <panel_attributes>Event
 --
 *@ name : text*
-/- data : Data/
-- Doc : Doc
+- data : Data
+/- Doc : Doc/
 fg=blue</panel_attributes>
     <additional_attributes/>
   </element>
@@ -410,7 +410,7 @@ m1=0..*
       <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
-m1=0..*
+m1=1
 </panel_attributes>
     <additional_attributes>10.0;10.0;10.0;70.0;120.0;70.0;120.0;140.0;100.0;140.0</additional_attributes>
   </element>
