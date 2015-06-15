@@ -32,7 +32,7 @@ The syntax used in the diagram to model an XML Schema Definition (XSD) as an UML
 ### Domain
 The *Domain* is the top-level component that defines all modules and devices of a domain. A *Domain* can import definitions of other domains.
 
-A *Domain* can define [Domain](#Domain) or [RootDevices](#RootDevice) only, or may choose to provide both.
+A *Domain* can define [Modules](#ModuleClass) or [RootDevices](#RootDevice) only, or may choose to provide both.
 
 ![](images/Domain.png)
 
@@ -42,7 +42,7 @@ A *Domain* can define [Domain](#Domain) or [RootDevices](#RootDevice) only, or m
 #### Elements
 - **Imports** : XML import/include of other XML files. Optional.
 - **Modules** : A list of [Module](#ModuleClass) components that are global to the whole domain. Optional.
-- **RootDevices** : a List [RootDevices](#RootDevice) components. Optional.
+- **RootDevices** : a List of [RootDevices](#RootDevice) components. Optional.
 
 #### Example
 
@@ -65,15 +65,15 @@ A *Domain* can define [Domain](#Domain) or [RootDevices](#RootDevice) only, or m
 
 <a name="RootDevice"/></a>
 ### RootDevice
-A *RootDevice* is the description of a (physical) device that may contain optional embedded sub-devices. It represents the idea an appliance that is addressable on a Home Area Network where one or more sub-[Devices](#Devices) provide certain functionalities. 
+A *RootDevice* is the description of a (physical) device that may contain optional embedded sub-devices. It represents the idea an appliance that is addressable on a Home Area Network where one or more sub-[Devices](#Devices) provide certain (possibly independent) functionalities. 
 
-An example is a connected power-strip where each of the sockets can be switched on and off individually. The power-strip itself can provide functions such as "all sockets off" and "overall power consumption".
+An example is a connected power-strip where each of the sockets can be switched on and off individually. The power-strip itself can provide own functions such as "all sockets off" and "overall power consumption".
 
 If the *RootDevice* includes sub-[Devices](#Device) then each sub-device may be of the same type or of different types. The functionality ([Actions](#Action)) of the *RootDevice* may be different from the functionality of its sub-[Devices](#Device).
 
 If the *RootDevice* does not include sub-devices then the *RootDevice* is the actual adressable device that provides all the functionality of the connected appliance.
 
-*RootDevices* may define their own [ModuleClasses](#ModuleClass) or refer to predefined ModulesClasses of its or another *Domain*.
+*RootDevices* may define their own [ModuleClasses](#ModuleClass) or refer to predefined ModulesClasses of the same or another *Domain*.
 
 ![](images/RootDevice.png)
 
@@ -82,7 +82,7 @@ If the *RootDevice* does not include sub-devices then the *RootDevice* is the ac
 
 #### Elements
 
-- **Doc** : Documentation for the *RootDevice*. Optional.
+- **[Doc](#Documentation)** : Documentation for the *RootDevice*. Optional.
 - **Modules** : A list of [Module](#ModuleClass) components that are local to the *RootDevice*. Optional.
 - **[DeviceInfo](#DeviceInfo)** : Further meta-data about the *RootDevice*. Optional.
 - **Devices** : A list [Device](#Device) components. Optional.
@@ -115,7 +115,7 @@ If the *RootDevice* does not include sub-devices then the *RootDevice* is the ac
 - **id** : The identifier for that *Device*. Required.
 
 #### Elements
-- **Doc** : Documentation for the *Device*. Optional.
+- **[Doc](#Documentation)** : Documentation for the *Device*. Optional.
 - **Modules** : A list of [Module](#ModuleClass) components that are local to the *Device*. Optional.
 - **[DeviceInfo](#DeviceInfo)** : Further meta-data about the *Device*. Optional.
 
@@ -148,6 +148,8 @@ None.
 - **FirmwareVersion** : Current version number of the firmware or other version information. Optional.
 - **VendorURL** : A URL that points to further information for that device. This might be the product page on the web or an URL to the device manual. Optional.
 - **SerialNumber** : The serial number or serial string. Optional.
+- **[Doc](#Documentation)** : Documentation for the *DeviceInfo*. Optional.
+
 
 #### Example
 	
@@ -165,7 +167,7 @@ None.
 ### Module, ModuleClass
 The *Module* (or *ModuleClass*) represents the concept of a reusable module that defines the [Actions](#Action), [Data](#Data) and [Events](#Event) for a single functionality of a device. A connected device may contain or refer to single or multiple *ModuleClasses* to specify its inherent services it exposes for use by applications.
 
-*ModuleClasses* can be defined by a domain (on the level of the [Domain](#Domain) component) or in [RootDevices](#RootDevice)/[Devices](#Device): The former are global to a [Domain](#Domain) and can be used (refered to) by all [RootDevices](#RootDevice)/[Devices](#Device) of a [Domain](#Domain); the later are local to the [RootDevices](#RootDevice)/[Devices](#Device) where it is defined in. *ModuleClasses* defined on the [Domain](#Domain) level can be imported and used by other domains.
+*ModuleClasses* can be defined by a domain (on the level of the [Domain](#Domain) component) or in [RootDevices](#RootDevice)/[Devices](#Device): The former *ModuleClasses* are global to a [Domain](#Domain) and can be used (refered to) by all [RootDevices](#RootDevice)/[Devices](#Device) of a [Domain](#Domain); the later are local to the [RootDevices](#RootDevice)/[Devices](#Device) where they are defined in. All *ModuleClasses* defined on the [Domain](#Domain) level can be imported and used by other domains.
 
 New *ModuleClasses* can be defined by extending existing *ModuleClasses* to add new or overriding defined [Actions](#Action), [Data](#Data) and [Events](#Event).
 
@@ -179,7 +181,7 @@ New *ModuleClasses* can be defined by extending existing *ModuleClasses* to add 
 The element has the following attributes:
 	- **domain** : Identifier / Reference of the [Domain](#Domain) of the extended *ModuleClass*. Required when *extends* is specified.
 	- **class** : Name of the *ModuleClass* in the [Domain](#Domain) thet is extended.
-- **Doc** : Documentation for the *ModuleClass*. Optional.
+- **[Doc](#Documentation)** : Documentation for the *ModuleClass*. Optional.
 - **Actions** : A list of [Action](#Action) components, each defining a single action. Optional.
 - **Data** : A list of [Data](#Data) components. Optional.
 - **Events** : A list of [Event](#Event) components. Optional.
@@ -203,7 +205,9 @@ The element has the following attributes:
 
 <a name="Action"/></a>
 ### Action
-An *Action* is defines a single procedure call for a [ModuleClass](#ModuleClass). It is basically for calling a function on a physical device in order to set or request data, or to invoke an action at a [Device](#Device).
+An *Action* defines a single procedure call for a [ModuleClass](#ModuleClass). It is basically used for calling a function on a physical device in order to set or request data, or to invoke an action at a [Device](#Device). #
+
+It is also possible that an *Action* results in calling multiple functions on the device. Examples for this are the assembly of single function calls into one *Action* in order to provide sanity checks on the arguments, or for managing and fullfil transactional function calls on the device.
 
 ![](images/Action.png)
 
@@ -212,11 +216,11 @@ An *Action* is defines a single procedure call for a [ModuleClass](#ModuleClass)
 - **type** : The return type of the *Action*. It must comply to one of the defined [DataTypes](#DataType). Optional. If no *type* is specified the *Action* does not return a value.
 
 #### Elements
-- **Doc** : Documentation for the *Action*. Optional.
+- **[Doc](#Documentation)** : Documentation for the *Action*. Optional.
 - **Arg** : Zero or more occurances of argument definitions for an *Action*. Optional.  
 The *Arg* has the following attributes and elements:
 	- **name** : The name of the *Arg*. Attribute. Required.
-	- **type** : The type of the *Arg*. It must comply to one of the defined *DataTypes*. Attribute. Required.
+	- **type** : The type of the *Arg*. It must comply to one of the defined [DataTypes](#DataType) Attribute. Required.
 	- **Doc** : Documentation for the *Arg* element. Optional.
 
 #### Example
@@ -241,7 +245,7 @@ The *Data* component represents a list of *DataPoints*.
 
 ![](images/Data.png)
 
-Though *DataPoints* only refer to single data points of a physical device it is possible to describe hierarchies by model the path to the data point in the hierarchy by a path-like structure like to the pathname of a UNIX file system. Here, the root node of the hierarchy is a slash (/ 0x2F) and the segments or nodes along the path are also separated by slashes. The actual datapoint is the last leaf at the path. 
+Though *DataPoints* only refer to single data points of a physical device it is possible to describe hierarchies by model the path to the data point in the hierarchy by a path-like structure like to the pathname of a UNIX file system. Here, the root node of the hierarchy is a slash (/ 0x2F) and the segments or nodes along the path are also separated by slashes. The actual data point is the last leaf at the path. 
 
 In EBNF:
 
@@ -263,7 +267,7 @@ A *DataPoint* has the following attributes and elements:
 	- **writable** : Boolean value that indicates whether this *DataPoint* is writable by an application. Attribute. Optional. Default: false.
 	- **readable** : Boolean value that indicates whether this *DataPoint* is readable by an application. Attribute. Optional. Default: false.
 	- **eventable** : Boolean value that indicates whether an internal or external change of this *DataPoint* raises an event. Attribute. Optional. Default: false.
-	- **Doc** : Documentation for the *DataPoint* element. Optional.
+	- **[Doc](#Documentation)** : Documentation for the *DataPoint* element. Optional.
 
 
 #### Example
@@ -280,17 +284,17 @@ A *DataPoint* has the following attributes and elements:
 ### DataType
 The following *DataTypes* can be used in the SDT's [Action](#Action), *Arg* and [DataPoint](#Data) elements and attributes. If not stated otherwise datatypes should comply to the equivalent datatypes defined in [XML Schema Part 2: Datatypes Second Edition](http://www.w3.org/TR/xmlschema-2/#boolean):
 
-- **boolean** : A boolean value as defined by [http://www.w3.org/TR/xmlschema-2/#boolean](http://www.w3.org/TR/xmlschema-2/#boolean) .
-- **byte** : An integer datatype with the range of [0 - 255] as defined by [http://www.w3.org/TR/xmlschema-2/#unsignedByte](http://www.w3.org/TR/xmlschema-2/#unsignedByte) .
-- **integer** : An integer value as defined by [http://www.w3.org/TR/xmlschema-2/#integer](http://www.w3.org/TR/xmlschema-2/#integer) .
-- **float** : An IEEE single-precision 32-bit floating point type as defined by [http://www.w3.org/TR/xmlschema-2/#float](http://www.w3.org/TR/xmlschema-2/#float) .
-- **string** : The string datatype represents character strings as defined by [http://www.w3.org/TR/xmlschema-2/#string](http://www.w3.org/TR/xmlschema-2/#string) .
+- **boolean** : A boolean value as defined in [http://www.w3.org/TR/xmlschema-2/#boolean](http://www.w3.org/TR/xmlschema-2/#boolean) .
+- **byte** : An integer datatype with the range of [0 - 255] as defined in [http://www.w3.org/TR/xmlschema-2/#unsignedByte](http://www.w3.org/TR/xmlschema-2/#unsignedByte) .
+- **integer** : An integer value as defined in [http://www.w3.org/TR/xmlschema-2/#integer](http://www.w3.org/TR/xmlschema-2/#integer) .
+- **float** : An IEEE single-precision 32-bit floating point type as defined in [http://www.w3.org/TR/xmlschema-2/#float](http://www.w3.org/TR/xmlschema-2/#float) .
+- **string** : The string datatype represents character strings as defined in [http://www.w3.org/TR/xmlschema-2/#string](http://www.w3.org/TR/xmlschema-2/#string) .
 - **enum** : A complete and orderd list of items in a collection. Items in an enumeration are separated by commas (, 0x2c) and must be of one of the datatypes defined here. Commas (, 0x2c) and backslashes (\ 0x5c) in enumaration items must be escaped by backslash.
-- **date** : A date value as defined by [http://www.w3.org/TR/xmlschema-2/#date](http://www.w3.org/TR/xmlschema-2/#date) .
-- **time** : A time value as defined by [http://www.w3.org/TR/xmlschema-2/#time](http://www.w3.org/TR/xmlschema-2/#time) .
-- **datetime** : A time value as defined by [http://www.w3.org/TR/xmlschema-2/#dateTime](http://www.w3.org/TR/xmlschema-2/#dateTime) .
+- **date** : A date value as defined in [http://www.w3.org/TR/xmlschema-2/#date](http://www.w3.org/TR/xmlschema-2/#date) .
+- **time** : A time value as defined in [http://www.w3.org/TR/xmlschema-2/#time](http://www.w3.org/TR/xmlschema-2/#time) .
+- **datetime** : A time value as defined in [http://www.w3.org/TR/xmlschema-2/#dateTime](http://www.w3.org/TR/xmlschema-2/#dateTime) .
 - **blob** : A blob value represents a binary object. The internal encoding is transparent and not defined here. The binary object must be encoded conforming to [http://www.w3.org/TR/xmlschema-2/#base64Binary](http://www.w3.org/TR/xmlschema-2/#base64Binary) .
-- **uri** : A URI that represents a Uniform Resource Identifier Reference (URI) as defined by as defined by [RFC 2396](http://www.ietf.org/rfc/rfc2396.txt) and amended by [RFC 2732](http://www.ietf.org/rfc/rfc2732.txt) .
+- **uri** : A URI that represents a Uniform Resource Identifier Reference (URI) as defined by as defined in [RFC 2396](http://www.ietf.org/rfc/rfc2396.txt) and amended in [RFC 2732](http://www.ietf.org/rfc/rfc2732.txt) .
 
 ---
 
@@ -305,7 +309,7 @@ An *Event* is a component that defines properties for events that are raised as 
 
 #### Elements
 - **Data** : A list of [Data](#Data) components for an event's payload. Optional.
-- **Doc** : Documentation for the *Event* Element. Optional.
+- **[Doc](#Documentation)** : Documentation for the *Event* Element. Optional.
 
 
 #### Example
@@ -321,7 +325,7 @@ An *Event* is a component that defines properties for events that are raised as 
 
 <a name="Documentation"/></a>
 # Documentation
-The *Doc* documentation element is optionally available in most components of the SDT. Its purpose is to provide a short documentation of the respective element.
+The *Doc* documentation element is optionally available in most components of the SDT. Its purpose is to provide a short explanation of the respective element.
 
 The text inside the *Doc* element can be structure using a very limited subset of HTML elements. The possible structuring is defined in EBNF as follows:
 
