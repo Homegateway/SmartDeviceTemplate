@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="13.1">
+<diagram program="umlet" version="13.2">
   <zoom_level>9</zoom_level>
   <element>
     <id>UMLClass</id>
@@ -46,7 +46,7 @@ fg=blue</panel_attributes>
       <w>117</w>
       <h>81</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
+    <panel_attributes>lt=&lt;.
 m1=0,1
 </panel_attributes>
     <additional_attributes>110.0;10.0;40.0;10.0;40.0;70.0;10.0;70.0</additional_attributes>
@@ -75,7 +75,7 @@ fg=blue</panel_attributes>
       <w>99</w>
       <h>36</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
+    <panel_attributes>lt=&lt;.
 m1=0..*</panel_attributes>
     <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
   </element>
@@ -104,7 +104,7 @@ fg=blue</panel_attributes>
       <w>90</w>
       <h>180</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
+    <panel_attributes>lt=&lt;.
 m1= 0..*</panel_attributes>
     <additional_attributes>80.0;10.0;30.0;10.0;30.0;180.0;10.0;180.0</additional_attributes>
   </element>
@@ -133,7 +133,7 @@ fg=blue</panel_attributes>
       <w>45</w>
       <h>180</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
+    <panel_attributes>lt=&lt;.
 m1=0..*
 </panel_attributes>
     <additional_attributes>10.0;180.0;10.0;140.0;30.0;140.0;30.0;10.0;20.0;10.0</additional_attributes>
@@ -165,7 +165,7 @@ fg=blue</panel_attributes>
       <w>90</w>
       <h>81</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
+    <panel_attributes>lt=&lt;.
 m1= 0,1</panel_attributes>
     <additional_attributes>80.0;10.0;40.0;10.0;40.0;70.0;10.0;70.0</additional_attributes>
   </element>
@@ -231,7 +231,7 @@ Extends
       <w>117</w>
       <h>45</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
+    <panel_attributes>lt=&lt;.
 m1=0..*
 </panel_attributes>
     <additional_attributes>110.0;20.0;10.0;20.0</additional_attributes>
@@ -244,7 +244,7 @@ m1=0..*
       <w>99</w>
       <h>198</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
+    <panel_attributes>lt=&lt;&lt;-
 m1=0,1
 </panel_attributes>
     <additional_attributes>90.0;10.0;40.0;10.0;40.0;200.0;10.0;200.0</additional_attributes>
@@ -257,7 +257,7 @@ m1=0,1
       <w>81</w>
       <h>45</h>
     </coordinates>
-    <panel_attributes>lt=&lt;..
+    <panel_attributes>lt=&lt;.
 m1=0..*
 </panel_attributes>
     <additional_attributes>70.0;20.0;10.0;20.0</additional_attributes>
@@ -270,7 +270,7 @@ m1=0..*
       <w>45</w>
       <h>198</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
+    <panel_attributes>lt=&lt;&lt;-
 m1= 1
 </panel_attributes>
     <additional_attributes>10.0;10.0;30.0;10.0;30.0;200.0;10.0;200.0</additional_attributes>
@@ -297,8 +297,8 @@ fg=blue</panel_attributes>
       <w>117</w>
       <h>153</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
-m1=0..*
+    <panel_attributes>lt=&lt;.
+m1=0,1
 </panel_attributes>
     <additional_attributes>110.0;140.0;50.0;140.0;50.0;10.0;10.0;10.0</additional_attributes>
   </element>
@@ -310,7 +310,7 @@ m1=0..*
       <w>72</w>
       <h>45</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
+    <panel_attributes>lt=&lt;.
 m1=0..*
 </panel_attributes>
     <additional_attributes>60.0;20.0;10.0;20.0</additional_attributes>
@@ -346,8 +346,8 @@ fg=blue
     <panel_attributes>Event
 --
 *@ name : text*
-/- data : Data/
-- Doc : Doc
+- data : Data
+/- Doc : Doc/
 fg=blue</panel_attributes>
     <additional_attributes/>
   </element>
@@ -359,7 +359,7 @@ fg=blue</panel_attributes>
       <w>126</w>
       <h>261</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
+    <panel_attributes>lt=&lt;.
 m1=0..*
 </panel_attributes>
     <additional_attributes>120.0;260.0;30.0;260.0;30.0;10.0;10.0;10.0</additional_attributes>
@@ -384,7 +384,7 @@ fg=blue</panel_attributes>
       <w>72</w>
       <h>117</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
+    <panel_attributes>lt=&lt;.
 m1=0..*
 </panel_attributes>
     <additional_attributes>10.0;10.0;60.0;10.0;60.0;110.0;50.0;110.0</additional_attributes>
@@ -394,11 +394,11 @@ m1=0..*
     <coordinates>
       <x>306</x>
       <y>207</y>
-      <w>90</w>
+      <w>27</w>
       <h>252</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;.
-&lt;&lt;extends&gt;&gt;</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;-
+</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;260.0</additional_attributes>
   </element>
   <element>
@@ -409,8 +409,8 @@ m1=0..*
       <w>126</w>
       <h>144</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
-m1=0..*
+    <panel_attributes>lt=&lt;.
+m1=1
 </panel_attributes>
     <additional_attributes>10.0;10.0;10.0;70.0;120.0;70.0;120.0;140.0;100.0;140.0</additional_attributes>
   </element>
@@ -422,7 +422,7 @@ m1=0..*
       <w>63</w>
       <h>351</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
+    <panel_attributes>lt=&lt;&lt;-
 m1=1
 </panel_attributes>
     <additional_attributes>10.0;10.0;50.0;10.0;50.0;370.0;10.0;370.0</additional_attributes>
@@ -453,7 +453,7 @@ fg=blue</panel_attributes>
       <w>90</w>
       <h>45</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
+    <panel_attributes>lt=&lt;.
 m1=0..*
 </panel_attributes>
     <additional_attributes>80.0;20.0;10.0;20.0</additional_attributes>
@@ -475,7 +475,7 @@ fontsize=10
 /- optionalElement (0/1)/
 /* optionalElement (0/n)/
 
-"Contains" Relation
+"Depends" Relation
 
 Subclassing</panel_attributes>
     <additional_attributes/>
@@ -488,7 +488,7 @@ Subclassing</panel_attributes>
       <w>90</w>
       <h>36</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
+    <panel_attributes>lt=&lt;.
 fontsize=10
 m1=0..*
 </panel_attributes>
@@ -498,14 +498,13 @@ m1=0..*
     <id>Relation</id>
     <coordinates>
       <x>108</x>
-      <y>108</y>
+      <y>117</y>
       <w>99</w>
-      <h>36</h>
+      <h>27</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;.
-&lt;&lt;extends&gt;&gt;
+    <panel_attributes>lt=&lt;&lt;-
 fontsize=10</panel_attributes>
-    <additional_attributes>90.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -515,7 +514,7 @@ fontsize=10</panel_attributes>
       <w>90</w>
       <h>54</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
+    <panel_attributes>lt=&lt;.
 m1=0..*
 </panel_attributes>
     <additional_attributes>80.0;10.0;30.0;10.0;30.0;40.0;10.0;40.0</additional_attributes>
@@ -528,7 +527,7 @@ m1=0..*
       <w>324</w>
       <h>117</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
+    <panel_attributes>lt=&lt;.
 </panel_attributes>
     <additional_attributes>340.0;10.0;300.0;10.0;300.0;110.0;30.0;110.0;30.0;20.0;10.0;20.0</additional_attributes>
   </element>

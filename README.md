@@ -23,6 +23,8 @@ You can find further Information here:
 - [Backlog & Issues](SDT/schema2.0/docs/Backlog.md)
 - [LICENSE](LICENSE)
 
+## Changes in 2.0.1
+- Added missing "uri" data type.
 
 ## Changes in 2.0
 - Introduced RootDevice to support hierarchical embedded devices.

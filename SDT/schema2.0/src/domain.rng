@@ -130,6 +130,7 @@
 			<value>time</value>
 			<value>datetime</value>
 			<value>blob</value>
+			<value>uri</value>
 		</choice>
 	</define>
 
