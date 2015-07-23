@@ -12,7 +12,8 @@ The files referenced in this document point to version **2.0** of the SDT.
 	- [xml.xsd](src/xml.xsd) : General schema definitions for the SDT
 - [SDT/schema2.0/test/](test/) : This directory contains all XML files with SDT definitions that should be validated whether they conform to the SDT schema. This could be example definitions or contributions.
 - [SDT/schema2.0/build.xml](build.xml) : This is the definition file for the ant build system.
-- [SDT/schema2.0/etc/](etc/), [SDT/schema2.0/lib/](lib/), [SDT/schema2.0/style/](style/) : internal directories for the build system. Please, don't make unnecessary changes to these files.
+- [SDT/schema2.0/etc/](etc/), [SDT/schema2.0/style/](style/) : internal directories for the build system. Please, don't make unnecessary changes to these files.
+- [SDT/schema2.0/lib/](lib/) : Tasks for the ant-based build system. See also [SDT Build System Components and Licenses](SDT%20Build%20System%20Components%20and%20Licenses.md).
 
 ## Installation
 - Install Java on your computer
