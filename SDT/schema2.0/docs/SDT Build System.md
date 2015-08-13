@@ -13,6 +13,12 @@ The files referenced in this document point to version **2.0** of the SDT.
 - [SDT/schema2.0/test/](../test/) : This directory contains all XML files with SDT definitions that should be validated whether they conform to the SDT schema. This could be example definitions or contributions.
 - [SDT/schema2.0/build.xml](../build.xml) : This is the definition file for the ant build system.
 - [SDT/schema2.0/etc/](../etc/), [SDT/schema2.0/style/](../style/) : internal directories for the build system. Please, don't make unnecessary changes to these files.
+ 	- [SDT/schema2.0/etc/dal.rnc](../etc/dal.rnc) : This file contains various configuration parameter to convert the file [domain.rng](../src/domain.rng) to schema file. **The important parameter to change when changing the namespace or the version number is**:
+
+			default namespace xsl = "http://homegatewayinitiative.org/xml/dal/2.0"
+
+	- [SDT/schema2.0/etc/schemas.xml](../etc/schemas.xml) : This file contains the header for the schema file. **This must be changed when changing the namespace or the version number.**
+
 - [SDT/schema2.0/lib/](lib/) : Tasks for the ant-based build system. See also [SDT Build System Components and Licenses](SDT%20Build%20System%20Components%20and%20Licenses.md).
 
 ## Installation
