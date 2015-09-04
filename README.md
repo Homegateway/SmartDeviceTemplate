@@ -1,6 +1,6 @@
-# RWD050
+# Smart Device Template
 
-Repository for the Smart Home Device Template (SDT).
+Repository for the Smart Device Template (SDT).
 
 Note that this project runs under Apache 2.0 license. Read the [LICENSE](LICENSE) in this repository, or refer to [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
