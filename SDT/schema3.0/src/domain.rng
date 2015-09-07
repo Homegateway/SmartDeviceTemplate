@@ -6,16 +6,6 @@
 		<ref name="Domain"/>
 	</start>
 
-	<define name="Imports">
-		<optional>
-			<element name="Imports">
-				<zeroOrMore>
-					<ref name="Domain"/>
-				</zeroOrMore>
-			</element>
-		</optional>
-	</define>
-
 	<define name="Domain">
 		<element name="Domain">
 			<optional>
@@ -38,7 +28,14 @@
 			<attribute name="id">
 				<data type="ID"/>
 			</attribute>
-			<ref name="Imports"/>
+			<ref name="Doc"/>
+			<optional>
+				<element name="Imports">
+					<zeroOrMore>
+						<ref name="Domain"/>
+					</zeroOrMore>
+				</element>
+			</optional>
 			<optional>
 				<element name="Modules">
 					<zeroOrMore>
@@ -55,36 +52,32 @@
 							<attribute name="id">
 								<data type="Name"/>
 							</attribute>
-							<ref name="DeviceInfo"/>
 							<ref name="Doc"/>
+							<ref name="DeviceInfo"/>
 							<optional>
 								<ref name="Modules"/>
 							</optional>
-						<optional>
-							<element name="SubDevices">
-								<zeroOrMore>
-									<element name="SubDevice">
-										<ref name="DeviceDef"/>
-									</element>
-								</zeroOrMore>
-							</element>
-						</optional>
+							<optional>
+								<element name="SubDevices">
+									<zeroOrMore>
+										<element name="SubDevice">
+											<attribute name="id">
+												<data type="Name"/>
+											</attribute>
+											<ref name="Doc"/>
+											<ref name="DeviceInfo"/>
+											<optional>
+												<ref name="Modules"/>
+											</optional>
+										</element>
+									</zeroOrMore>
+								</element>
+							</optional>
 						</element>
 					</zeroOrMore>
 				</element>
 			</optional>
 		</element>
-	</define>
-
-	<define name="DeviceDef">
-		<attribute name="id">
-			<data type="Name"/>
-		</attribute>
-		<ref name="DeviceInfo"/>
-		<ref name="Doc"/>
-		<optional>
-			<ref name="Modules"/>
-		</optional>
 	</define>
 
 
@@ -117,7 +110,70 @@
 	</define>
 
 
-	<define name="DataType">
+	<define name="DataTypeElement">
+		<element name="DataType">
+			<ref name="DataTypeDef" />
+		</element>
+	</define>
+
+
+	<define name="DataTypeDef">
+		<!-- Discuss: Doc on DataType? -->
+		<optional>
+			<attribute name="unitOfMeasure">
+				<text/>
+			</attribute>
+		</optional>
+		<choice>
+			<ref name="StructType" />
+			<ref name="ArrayType" />
+			<ref name="SimpleType" />
+		</choice>
+	</define>
+
+
+	<define name="StructType">
+		<element name="Struct">
+			<optional>
+				<attribute name="name">
+					<text/>
+				</attribute>
+			</optional>
+			<oneOrMore>
+				<ref name="DataTypeDef" />
+			</oneOrMore>
+		</element>
+	</define>
+
+
+	<define name="ArrayType">
+		<element name="Array">
+			<optional>
+				<attribute name="name">
+					<text/>
+				</attribute>
+			</optional>
+			<ref name="DataTypeDef" />
+		</element>
+	</define>
+
+
+	<define name="SimpleType">
+		<element name="SimpleType">
+			<optional>
+				<attribute name="name">
+					<text/>
+				</attribute>
+			</optional>
+			<attribute name="type">
+				<ref name="BasicType" />
+			</attribute>
+			<!-- TODO Constraints -->
+		</element>
+	</define>
+
+
+	<define name="BasicType">
 		<choice>
 			<value>integer</value>
 			<value>boolean</value>
@@ -133,6 +189,7 @@
 			<value>uri</value>
 		</choice>
 	</define>
+
 
 	<define name="DocText">
 		<zeroOrMore>
@@ -225,23 +282,19 @@
 						<text/>
 					</attribute>
 					<optional>
-						<attribute name="type">
-							<ref name="DataType"/>
-						</attribute>
-					</optional>
-					<optional>
 						<attribute name="optional">
 							<data type="boolean"/>
 						</attribute>
 					</optional>
 					<ref name="Doc"/>
+					<optional>
+						<ref name="DataTypeDef"/>
+					</optional>
 					<zeroOrMore>
 						<element name="Arg">
 							<attribute name="name"/>
-							<attribute name="type">
-								<ref name="DataType"/>
-							</attribute>
 							<ref name="Doc"/>
+							<ref name="DataTypeDef"/>
 						</element>
 					</zeroOrMore>
 				</element>
@@ -262,9 +315,6 @@
 							<data type="boolean"/>
 						</attribute>
 					</optional>
-					<attribute name="type">
-						<ref name="DataType"/>
-					</attribute>
 					<optional>
 						<attribute name="writable">
 							<data type="boolean"/>
@@ -281,6 +331,7 @@
 						</attribute>
 					</optional>
 					<ref name="Doc"/>
+					<ref name="DataTypeDef"/>
 				</element>
 			</zeroOrMore>
 		</element>
@@ -299,13 +350,12 @@
 							<data type="boolean"/>
 						</attribute>
 					</optional>
-					<ref name="Data" />
 					<ref name="Doc"/>
+					<ref name="Data" />
 				</element>
 			</zeroOrMore>
 		</element>
 	</define>
-
 
 </grammar>
 

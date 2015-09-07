@@ -5,22 +5,11 @@
 	  
  elementFormDefault="qualified">
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/03/xml.xsd"/>
-  <xs:group name="Imports">
-    <xs:sequence>
-      <xs:element minOccurs="0" ref="Imports"/>
-    </xs:sequence>
-  </xs:group>
-  <xs:element name="Imports">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" maxOccurs="unbounded" ref="Domain"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="Domain">
     <xs:complexType>
       <xs:sequence>
-        <xs:group ref="Imports"/>
+        <xs:group ref="Doc"/>
+        <xs:element minOccurs="0" ref="Imports"/>
         <xs:element minOccurs="0" name="Modules">
           <xs:complexType>
             <xs:sequence>
@@ -34,6 +23,13 @@
       <xs:attribute name="id" use="required" type="xs:ID"/>
     </xs:complexType>
   </xs:element>
+  <xs:element name="Imports">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="Domain"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ModuleClass" type="ModuleDef"/>
   <xs:element name="Devices">
     <xs:complexType>
@@ -45,8 +41,8 @@
   <xs:element name="Device">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="DeviceInfo"/>
         <xs:group ref="Doc"/>
+        <xs:element ref="DeviceInfo"/>
         <xs:element minOccurs="0" ref="Modules"/>
         <xs:element minOccurs="0" ref="SubDevices"/>
       </xs:sequence>
@@ -60,15 +56,16 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SubDevice" type="DeviceDef"/>
-  <xs:complexType name="DeviceDef">
-    <xs:sequence>
-      <xs:element ref="DeviceInfo"/>
-      <xs:group ref="Doc"/>
-      <xs:element minOccurs="0" ref="Modules"/>
-    </xs:sequence>
-    <xs:attribute name="id" use="required" type="xs:Name"/>
-  </xs:complexType>
+  <xs:element name="SubDevice">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:group ref="Doc"/>
+        <xs:element ref="DeviceInfo"/>
+        <xs:element minOccurs="0" ref="Modules"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:Name"/>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="DeviceInfo">
     <xs:complexType>
       <xs:all>
@@ -85,7 +82,43 @@
   <xs:element name="FirmwareVersion" type="xs:string"/>
   <xs:element name="SerialNumber" type="xs:string"/>
   <xs:element name="VendorURL" type="xs:anyURI"/>
-  <xs:simpleType name="DataType">
+  <xs:element name="DataType">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="DataTypeDef"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="DataTypeDef"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DataTypeDef" abstract="true"/>
+  <xs:attributeGroup name="DataTypeDef">
+    <xs:attribute name="unitOfMeasure"/>
+  </xs:attributeGroup>
+  <xs:element name="Struct" substitutionGroup="DataTypeDef">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="DataTypeDef"/>
+      </xs:sequence>
+      <xs:attribute name="name"/>
+      <xs:attributeGroup ref="DataTypeDef"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Array" substitutionGroup="DataTypeDef">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="DataTypeDef"/>
+      </xs:sequence>
+      <xs:attribute name="name"/>
+      <xs:attributeGroup ref="DataTypeDef"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SimpleType" substitutionGroup="DataTypeDef">
+    <xs:complexType>
+      <xs:attribute name="name"/>
+      <xs:attribute name="type" use="required" type="BasicType"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="BasicType">
     <xs:restriction base="xs:token">
       <xs:enumeration value="integer"/>
       <xs:enumeration value="boolean"/>
@@ -179,18 +212,22 @@
     <xs:complexType>
       <xs:sequence>
         <xs:group ref="Doc"/>
+        <xs:element minOccurs="0" ref="DataTypeDef"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="Arg"/>
       </xs:sequence>
       <xs:attribute name="name" use="required"/>
-      <xs:attribute name="type" type="DataType"/>
       <xs:attribute name="optional" type="xs:boolean"/>
+      <xs:attributeGroup ref="DataTypeDef"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="Arg">
     <xs:complexType>
-      <xs:group ref="Doc"/>
+      <xs:sequence>
+        <xs:group ref="Doc"/>
+        <xs:element ref="DataTypeDef"/>
+      </xs:sequence>
       <xs:attribute name="name" use="required"/>
-      <xs:attribute name="type" use="required" type="DataType"/>
+      <xs:attributeGroup ref="DataTypeDef"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="Data">
@@ -202,13 +239,16 @@
   </xs:element>
   <xs:element name="DataPoint">
     <xs:complexType>
-      <xs:group ref="Doc"/>
+      <xs:sequence>
+        <xs:group ref="Doc"/>
+        <xs:element ref="DataTypeDef"/>
+      </xs:sequence>
       <xs:attribute name="name" use="required"/>
       <xs:attribute name="optional" type="xs:boolean"/>
-      <xs:attribute name="type" use="required" type="DataType"/>
       <xs:attribute name="writable" type="xs:boolean"/>
       <xs:attribute name="readable" type="xs:boolean"/>
       <xs:attribute name="eventable" type="xs:boolean"/>
+      <xs:attributeGroup ref="DataTypeDef"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="Events">
@@ -221,8 +261,8 @@
   <xs:element name="Event">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="Data"/>
         <xs:group ref="Doc"/>
+        <xs:element ref="Data"/>
       </xs:sequence>
       <xs:attribute name="name" use="required"/>
       <xs:attribute name="optional" type="xs:boolean"/>

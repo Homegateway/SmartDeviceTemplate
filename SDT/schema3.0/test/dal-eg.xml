@@ -14,11 +14,6 @@
   <Devices>
 
     <Device id="switch.power">
-      <DeviceInfo>
-	<Name>PowerSwitch</Name>
-	<!-- The Vendor field should probably be part of the domain -->
-	<Vendor>Telekom Innovation Laboratories</Vendor>
-      </DeviceInfo>
       
       <Doc>
 	This device is intended as a demonstration of how to use the
@@ -27,6 +22,11 @@
 	<tt>on</tt> and <tt>off</tt>. This is clearly a candidate for the 
 	module class <tt>BooleanState</tt>.
       </Doc>
+      <DeviceInfo>
+		<Name>PowerSwitch</Name>
+		<!-- The Vendor field should probably be part of the domain -->
+		<Vendor>Telekom Innovation Laboratories</Vendor>
+      </DeviceInfo>
 
       <Modules>
 	<Module name="proprietaryPower">
@@ -47,22 +47,21 @@
 		Turn the switch off.
 	      </Doc>
 	    </Action>
-	    <Action name="state" type="string">
-	      <Doc>
-		Query the state of the switch. Returns the string "<tt>on</tt>"
-		or "<tt>off</tt>".
-	      </Doc>
+	    <Action name="state">
+		  	<Doc>Query the state of the switch. Returns the string "<tt>on</tt>" or "<tt>off</tt>".</Doc>
+           	<SimpleType type="string" />
 	    </Action>
 	  </Actions>
 
 	  <Events>
 	  	<Event name="switchEvent">
-		  <Data>
-		    <DataPoint name="state" type="boolean" writable="false">
-	 		</DataPoint>
-		  </Data>
 		  <Doc>An event that indicates the new state of the switch.
 		  </Doc>
+		  <Data>
+		    <DataPoint name="state" writable="false">
+	          <SimpleType type="boolean" />
+	 		</DataPoint>
+		  </Data>
 	  	</Event>
 	  </Events>
 	</Module>

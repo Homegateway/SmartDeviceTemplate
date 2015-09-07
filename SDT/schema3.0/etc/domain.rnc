@@ -1,5 +1,4 @@
 start = Domain
-
 Domain =
   element Domain {
     # still having some problems with included documents ... 
@@ -13,27 +12,28 @@ Domain =
     # </attribute>
     attribute xml:base { xsd:anyURI }?,
     attribute id { xsd:ID },
-    Imports,
+    Doc,
+    element Imports { Domain* }?,
     element Modules {
       element ModuleClass { ModuleDef }*
     }?,
     element Devices {
       element Device {
         attribute id { xsd:Name },
-        DeviceInfo,
         Doc,
+        DeviceInfo,
         Modules?,
         element SubDevices {
-          element SubDevice { DeviceDef }*
+          element SubDevice {
+            attribute id { xsd:Name },
+            Doc,
+            DeviceInfo,
+            Modules?
+          }*
         }?
       }*
     }?
   }
-DeviceDef =
-  attribute id { xsd:Name },
-  DeviceInfo,
-  Doc,
-  Modules?
 DeviceInfo =
   element DeviceInfo {
     element Name { text }
@@ -42,7 +42,29 @@ DeviceInfo =
     & element SerialNumber { text }?
     & element VendorURL { xsd:anyURI }?
   }
-DataType =
+DataTypeElement = element DataType { DataTypeDef }
+DataTypeDef =
+  # Discuss: Doc on DataType?
+  attribute unitOfMeasure { text }?,
+  (StructType | ArrayType | SimpleType)
+StructType =
+  element Struct {
+    attribute name { text }?,
+    DataTypeDef+
+  }
+ArrayType =
+  element Array {
+    attribute name { text }?,
+    DataTypeDef
+  }
+SimpleType =
+  element SimpleType {
+    attribute name { text }?,
+    attribute type { BasicType }
+    # TODO Constraints
+    
+  }
+BasicType =
   "integer"
   | "boolean"
   | "string"
@@ -88,13 +110,13 @@ Actions =
   element Actions {
     element Action {
       attribute name { text },
-      attribute type { DataType }?,
       attribute optional { xsd:boolean }?,
       Doc,
+      DataTypeDef?,
       element Arg {
         attribute name { text },
-        attribute type { DataType },
-        Doc
+        Doc,
+        DataTypeDef
       }*
     }*
   }
@@ -103,11 +125,11 @@ Data =
     element DataPoint {
       attribute name { text },
       attribute optional { xsd:boolean }?,
-      attribute type { DataType },
       attribute writable { xsd:boolean }?,
       attribute readable { xsd:boolean }?,
       attribute eventable { xsd:boolean }?,
-      Doc
+      Doc,
+      DataTypeDef
     }*
   }
 Events =
@@ -115,7 +137,7 @@ Events =
     element Event {
       attribute name { text },
       attribute optional { xsd:boolean }?,
-      Data,
-      Doc
+      Doc,
+      Data
     }*
   }
