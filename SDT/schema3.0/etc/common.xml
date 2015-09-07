@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="imported" default="build">
+
+<!-- TODOs
+
+	* genjar integration
+	* if no manifest is available include a defalt one from etc?
+-->
+
+
+<property name="path.libs"					location="${basedir}/lib" />
+
+<!-- Load various tasks -->
+<import file="anttasks.xml" />
+
+<!-- Unset the _mainbuild property -->
+<var name="_mainbuild" unset="true" />
+
+<!-- Load the properties -->
+<import file="properties.xml" />
+
+
+<!-- Load all the actual tasks -->
+<import file="tasks/all.xml" />
+<import file="tasks/allforced.xml" />
+<import file="tasks/build.xml" />
+<import file="tasks/buildjar.xml" />
+<import file="tasks/clean.xml" />
+<import file="tasks/collect.xml" />
+<import file="tasks/compile.xml" />
+<import file="tasks/compilenative.xml" />
+<import file="tasks/doc.xml" />
+<import file="tasks/eclipse.xml" />
+
+<import file="tasks/_addPrivateLibs.xml" />
+<import file="tasks/_buildNative.xml" />
+<import file="tasks/_checkDependentProjects.xml" />
+<import file="tasks/_cleanDependentProjects.xml" />
+<import file="tasks/_getBuildNumber.xml" />
+<import file="tasks/_handleProjectProperties.xml" />
+<import file="tasks/_includeExternalResourcesInJar.xml" />
+<!-- <import file="tasks/_importManifest.xml" /> -->
+<import file="tasks/_prepare.xml" />
+<import file="tasks/_preparebuild.xml" />
+<import file="tasks/_setClassPath.xml" />
+
+
+</project>

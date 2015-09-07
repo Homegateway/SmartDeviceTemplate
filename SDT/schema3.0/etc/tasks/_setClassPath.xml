@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="_setClassPath" default="build">
+
+<!--	INTERNAL: _setClassPath
+		Set the internal classpath for building the project by reading from the classpathfile, or empty.
+-->
+<target name="_setClassPath">
+	<!-- set the classpath from the file, only when the _classpathfile exists. Otherwise define an empty path element -->
+	<available property="available.classpathfile" file="${path.gen.classpathfile}" />
+	<if><isset property="available.classpathfile" />
+		<then>
+			<path id="id.libraries">
+				<!--fileset dir="${path.base}" includesfile="${path.gen.classpathfile}" excludes="**/*"/ -->
+				<fileset dir="${path.base}" includesfile="${path.gen.classpathfile}" />
+			</path>
+		</then>
+		<else>
+			<path id="id.libraries">
+			</path>
+		</else>
+	</if>
+</target>
+
+</project>

@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.2">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>261</x>
+      <y>99</y>
+      <w>135</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>ModuleClass
+--
+*@ name : text*
+/- extends: Extends/
+/- Doc : Doc/
+/- Actions : Actions/
+/- Data : Data/
+/- Events : Events/
+fg=blue
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>486</x>
+      <y>162</y>
+      <w>126</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Action
+--
+*@ name : text*
+/@ type : DataType/
+/- Doc : Doc/
+/* Arg : Arg/
+fg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>387</x>
+      <y>81</y>
+      <w>117</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1=0,1
+</panel_attributes>
+    <additional_attributes>110.0;10.0;40.0;10.0;40.0;70.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>684</x>
+      <y>225</y>
+      <w>144</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Arg
+--
+*@ name ; text*
+*@ type : DataType*
+/- Doc : Doc/
+fg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>603</x>
+      <y>225</y>
+      <w>99</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1=0..*</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>18</x>
+      <y>198</y>
+      <w>180</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Domain
+--
+*@ id : ID*
+/- imports/
+/- Modules : ModuleClass/
+/- RootDevices : RootDevice/
+fg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>189</x>
+      <y>99</y>
+      <w>90</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1= 0..*</panel_attributes>
+    <additional_attributes>80.0;10.0;30.0;10.0;30.0;180.0;10.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>261</x>
+      <y>486</y>
+      <w>171</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Device
+--
+*@ id : Name*
+/- Doc : Doc/
+/- Modules : Module/
+/- DeviceInfo : DeviceInfo/
+fg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>261</y>
+      <w>45</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1=0..*
+</panel_attributes>
+    <additional_attributes>10.0;180.0;10.0;140.0;30.0;140.0;30.0;10.0;20.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>495</x>
+      <y>495</y>
+      <w>162</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>DeviceInfo
+--
+*- name : text*
+*- vendor : text*
+/- serialNumber : text/
+/- vendorURL : URL/
+/- firmwareVersion : text/
+/- Doc : Doc/
+fg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>423</x>
+      <y>495</y>
+      <w>90</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1= 0,1</panel_attributes>
+    <additional_attributes>80.0;10.0;40.0;10.0;40.0;70.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>684</x>
+      <y>18</y>
+      <w>144</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+DataType
+--
+boolean
+byte
+integer
+float
+string
+enum
+date
+time
+datetime
+blob
+uri</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>729</x>
+      <y>531</y>
+      <w>99</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>Doc
+--
+- ...
+fg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>486</x>
+      <y>72</y>
+      <w>117</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Attributes&gt;&gt;
+Extends
+--
+@domain : IDRF
+@class : text
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>387</x>
+      <y>153</y>
+      <w>117</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1=0..*
+</panel_attributes>
+    <additional_attributes>110.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>603</x>
+      <y>27</y>
+      <w>99</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+m1=0,1
+</panel_attributes>
+    <additional_attributes>90.0;10.0;40.0;10.0;40.0;200.0;10.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>666</x>
+      <y>522</y>
+      <w>81</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1=0..*
+</panel_attributes>
+    <additional_attributes>70.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>819</x>
+      <y>90</y>
+      <w>45</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+m1= 1
+</panel_attributes>
+    <additional_attributes>10.0;10.0;30.0;10.0;30.0;200.0;10.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>486</x>
+      <y>297</y>
+      <w>153</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>Data
+--
+/- dataPoint : DataPoint/
+fg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>387</x>
+      <y>180</y>
+      <w>117</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1=0,1
+</panel_attributes>
+    <additional_attributes>110.0;140.0;50.0;140.0;50.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>630</x>
+      <y>306</y>
+      <w>72</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1=0..*
+</panel_attributes>
+    <additional_attributes>60.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>684</x>
+      <y>315</y>
+      <w>144</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>DataPoint
+--
+*@ name : text*
+@ type : DataType
+/@ writable : boolean/
+/@ readable : boolean/
+/@ eventable : boolean/
+/- Doc : Doc/
+fg=blue
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>495</x>
+      <y>414</y>
+      <w>144</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Event
+--
+*@ name : text*
+- data : Data
+/- Doc : Doc/
+fg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>387</x>
+      <y>189</y>
+      <w>126</w>
+      <h>261</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1=0..*
+</panel_attributes>
+    <additional_attributes>120.0;260.0;30.0;260.0;30.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>261</x>
+      <y>441</y>
+      <w>135</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Module
+fg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>387</x>
+      <y>441</y>
+      <w>72</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1=0..*
+</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0;60.0;110.0;50.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>306</x>
+      <y>207</y>
+      <w>27</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;260.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>549</x>
+      <y>333</y>
+      <w>126</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1=1
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0;120.0;70.0;120.0;140.0;100.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>819</x>
+      <y>27</y>
+      <w>63</w>
+      <h>351</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+m1=1
+</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;370.0;10.0;370.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>27</x>
+      <y>423</y>
+      <w>171</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>RootDevice
+--
+*@ id : Name*
+/- Doc : Doc/
+/- Modules : Module/
+/- Devices : Device/
+/- DeviceInfo : DeviceInfo/
+fg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>189</x>
+      <y>477</y>
+      <w>90</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1=0..*
+</panel_attributes>
+    <additional_attributes>80.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>18</x>
+      <y>18</y>
+      <w>180</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>bg=#FAF8C8
+fontsize=10
+@elementAttribute
+*@mandatoryElementAttribute*
+- element
+- element : Subclass
+/- optionalElement (0/1)/
+/* optionalElement (0/n)/
+
+"Depends" Relation
+
+Subclassing</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>108</x>
+      <y>81</y>
+      <w>90</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+fontsize=10
+m1=0..*
+</panel_attributes>
+    <additional_attributes>80.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>108</x>
+      <y>117</y>
+      <w>99</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+fontsize=10</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>189</x>
+      <y>441</y>
+      <w>90</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1=0..*
+</panel_attributes>
+    <additional_attributes>80.0;10.0;30.0;10.0;30.0;40.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>189</x>
+      <y>495</y>
+      <w>324</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>340.0;10.0;300.0;10.0;300.0;110.0;30.0;110.0;30.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+</diagram>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="all" default="build">
+
+<!--	TASK: all
+		Clean up, build and collect
+-->
+<target name="all">
+	<runtarget target="clean" />
+	<runtarget target="build" />
+	<runtarget target="collect" />
+</target>
+
+</project>

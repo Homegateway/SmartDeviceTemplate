@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="doc" default="build">
+
+<!--	TASK: doc
+		Generate documentation for a project
+-->
+
+<target name="doc" depends="_prepare,_setClassPath">
+	<javadoc 	destdir="${path.gen.documentation}"
+				classpathref="id.libraries"
+				sourcepath="${path.src}"
+				>
+	</javadoc>
+</target>
+
+</project>
+

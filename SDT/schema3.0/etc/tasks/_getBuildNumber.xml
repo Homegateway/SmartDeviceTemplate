@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="_getBuildNumber" default="build">
+
+
+<!--	INTERNAL:	_getBuildNumber
+		Add the build number to the jar file name, if necessary.
+-->
+<target name="_getBuildNumber">
+	<if><and>
+			<isset property="buildnumber" />
+			<not>
+				<equals arg1="${buildnumber}" arg2="none" />
+			</not>
+		</and>
+		<then>
+			<buildnumber />
+			<propertyregex	property="tmp"
+							override="true"
+							input="${file.jar}"
+							regexp="(.*).jar"
+							select="\1" />
+
+			<var name="file.jar" value="${tmp}-${build.number}.jar" />
+		</then>
+	</if>
+
+</target>
+	
+</project>

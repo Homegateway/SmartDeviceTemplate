@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="_checkDependentProjects" default="build">
+
+<!--	INTERNAL:	_checkDependentProjects
+		Check whether there are dependencies to other projects and build them if necessary.
+-->
+<target name="_checkDependentProjects">
+	<if><and>
+			<isset property="dependency.projects" />
+			<length string="${dependency.projects}" trim="true" when="greater" length="0" />	
+		</and>
+		<then>
+			<!-- go through all dependent projects -->
+			<for list="${dependency.projects}" param="pname">
+			<sequential>
+				<available property="available.dir.@{pname}" file="../@{pname}" />
+				<available property="available.gen.@{pname}" file="../../gen/projects/@{pname}" />
+
+				<!-- does the project exist at all? -->
+				<if><isset property="available.dir.@{pname}" />
+					<then>
+						<!-- look for jar files in the according project's gen directory -->
+						<path id="x">
+							<fileset dir="../../gen/projects/@{pname}">
+								<include name="*.jar" />
+							</fileset>
+						</path>
+
+						<trycatch>
+							<try>
+								<echo>Checking dependent project "@{pname}"</echo>
+								<var name="tmp" value="${toString:x}" />
+								<if><isset property="dependency.projects.forcebuild" />
+									<then>
+										<echo>Building dependent project "@{pname}" (forced)</echo>
+										<if><isset property="global.build" />	<!-- inheriting global.build property, if set -->
+											<then>
+												<ant dir="../@{pname}" inheritall="false" antfile="../@{pname}/build.xml" target="all">
+													<property name="global.build" value="true" />
+												</ant>
+											</then>
+											<else>
+												<ant dir="../@{pname}" inheritall="false" antfile="../@{pname}/build.xml" target="all" />
+											</else>
+										</if>
+									</then>
+								</if>
+							</try>
+							<catch>
+								<!-- if no jar file available, build the project -->
+								<echo>Building dependent project "@{pname}"</echo>
+								<if><isset property="global.build" />	<!-- inheriting global.build property, if set -->
+									<then>
+										<ant dir="../@{pname}" inheritall="false" antfile="../@{pname}/build.xml" >
+											<property name="global.build" value="true" />
+										</ant>
+									</then>
+									<else>
+										<ant dir="../@{pname}" inheritall="false" antfile="../@{pname}/build.xml" />
+									</else>
+								</if>
+							</catch>
+						</trycatch>
+
+						<!-- and try again -->
+						<trycatch>
+							<try>
+								<var name="tmp" value="${toString:x}" />
+								<echo>Dependent project "@{pname}": ok</echo>
+								<for list="${tmp}" delimiter=":" param="jfile">
+								<sequential>
+									<!--echo file="${path.gen.classpathfile}" append="true">@{jfile}${line.separator}</echo-->
+									<propertyregex	override="yes" 
+													property="tmp"
+													input="@{jfile}"
+													regexp=".*[/\\]([^/\\]*)"
+													select="\1" />
+									<echo file="${path.gen.classpathfile}" append="true">gen/projects/@{pname}/${tmp}${line.separator}</echo>
+								</sequential>
+								</for>
+							</try>
+							<catch>
+								<fail>.${line.separator}${line.separator}Can't resolve dependency to project "@{pname}". Aborting.${line.separator}Perhaps that project was not build (check the property 'gobal.build.ignore').</fail>
+							</catch>
+						</trycatch>
+					</then>
+				</if>
+			</sequential>
+			</for>
+		</then>
+	</if>
+</target>
+
+
+</project>

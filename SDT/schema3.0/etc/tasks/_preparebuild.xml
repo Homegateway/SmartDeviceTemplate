@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="_preparebuild" default="build">
+
+<!--	INTERNAL: _preparebuild
+		Does preparations that are only necessary in case of a build
+-->
+<target name="_preparebuild">
+	<runtarget target="_checkDependentProjects" />
+	<runtarget target="_addPrivateLibs" />
+</target>
+
+</project>

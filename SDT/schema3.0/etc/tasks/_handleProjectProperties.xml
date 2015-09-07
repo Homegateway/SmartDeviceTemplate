@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="_handleProjectProperties" default="build">
+
+<!--	INTERNAL: _handleProjectProperties
+		Calculate and the project properties
+-->
+<target name="_handleProjectProperties">
+
+	<!-- go through all properties that start with "dependency.lib." -->
+	<propertyselector property="libs.list" 
+						override="yes"
+						delimiter="," 
+						match="^dependency\.lib\.(.*)" 
+						select="\1"
+						casesensitive="false" />
+	<if><isset property="libs.list" />
+		<then>
+			<for list="${libs.list}" param="lib.id">
+				<sequential>
+					<propertycopy override="yes" name="lib.name" from="dependency.lib.@{lib.id}" />
+					<!-- echo message="@{lib.id}" / -->
+					
+					<!-- check whether the value is empty. In this case the globally configured value is assigned to the property so that it is not blank anymore -->
+					<if><length string="${lib.name}" trim="true" when="equal" length="0" />	
+						<then>
+							<var name="dependency.lib.@{lib.id}" value="${default.lib.@{lib.id}}" />
+						</then>
+					</if>
+					<echo file="${path.gen.classpathfile}" append="true">libs/${dependency.lib.@{lib.id}}${line.separator}</echo>
+				</sequential>
+			</for>
+		</then>
+<!--
+		<else>
+			<echo file="${path.gen.classpathfile}" append="true"></echo>
+		</else>
+-->
+	</if>
+
+
+	<!-- build the name for the jar file -->
+	<var name="tmp" value="${projectname}" />
+	<if><isset property="jarbase" />
+		<then>
+			<var name="tmp" value="${jarbase}" />
+		</then>
+	</if> 
+
+	<!-- append verson number if it is not empty -->
+	<if><isset property="version" />
+		<then>
+			<if><and>
+					<length string="${version}" trim="true" when="greater" length="0" />	
+					<not>
+						<equals arg1="${version}" arg2="none" trim="true" />
+					</not>
+				</and>
+				<then>
+					<var name="tmp" value="${tmp}-${version}" />
+				</then>
+			</if>
+		</then>
+	</if>
+	<var name="file.jar" value="${path.gen}/${tmp}.jar" />
+</target>
+
+</project>
