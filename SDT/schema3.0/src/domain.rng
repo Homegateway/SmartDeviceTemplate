@@ -28,7 +28,7 @@
 			<attribute name="id">
 				<data type="ID"/>
 			</attribute>
-			<ref name="Doc"/>
+			<ref name="DocDef"/>
 			<optional>
 				<element name="Imports">
 					<zeroOrMore>
@@ -52,8 +52,10 @@
 							<attribute name="id">
 								<data type="Name"/>
 							</attribute>
-							<ref name="Doc"/>
-							<ref name="DeviceInfo"/>
+							<ref name="DocDef"/>
+							<optional>
+								<ref name="DeviceInfos"/>
+							</optional>
 							<optional>
 								<ref name="Modules"/>
 							</optional>
@@ -64,8 +66,10 @@
 											<attribute name="id">
 												<data type="Name"/>
 											</attribute>
-											<ref name="Doc"/>
-											<ref name="DeviceInfo"/>
+											<ref name="DocDef"/>
+											<optional>
+												<ref name="DeviceInfos"/>
+											</optional>
 											<optional>
 												<ref name="Modules"/>
 											</optional>
@@ -81,38 +85,22 @@
 	</define>
 
 
-	<define name="DeviceInfo">
-		<element name="DeviceInfo">
-			<interleave>
-				<element name="Name">
-					<text/>
-				</element>
-				<element name="Vendor">
-					<text/>
-				</element>
-				<optional>
-					<element name="FirmwareVersion">
+	<define name="DeviceInfos">
+		<element name="DeviceInfos">
+			<zeroOrMore>
+				<element name="DeviceInfo">
+					<attribute name="name">
 						<text/>
-					</element>
-				</optional>
-				<optional>
-					<element name="SerialNumber">
-						<text/>
-					</element>
-				</optional>
-				<optional>
-					<element name="VendorURL">
-						<data type="anyURI"/> 
-					</element>
-				</optional>
-			</interleave>
-		</element>
-	</define>
-
-
-	<define name="DataTypeElement">
-		<element name="DataType">
-			<ref name="DataTypeDef" />
+					</attribute>
+					<optional>
+						<attribute name="optional">
+							<data type="boolean"/>
+						</attribute>
+					</optional>
+					<ref name="DocDef"/>
+					<ref name="DataTypeDef" />
+				</element>
+			</zeroOrMore>
 		</element>
 	</define>
 
@@ -209,7 +197,8 @@
 	</define>
 
 
-	<define name="Doc">
+	<!-- <Doc> element is always optional -->
+	<define name="DocDef">
 		<optional>
 			<element name="Doc">
 				<choice>
@@ -250,7 +239,7 @@
 				<attribute name="class"/>
 			</element>
 		</optional>
-		<ref name="Doc"/>
+		<ref name="DocDef"/>
 		<optional>
 			<ref name="Actions"/>
 		</optional>
@@ -286,22 +275,29 @@
 							<data type="boolean"/>
 						</attribute>
 					</optional>
-					<ref name="Doc"/>
+					<ref name="DocDef"/>
 					<optional>
 						<ref name="DataTypeDef"/>
 					</optional>
-					<zeroOrMore>
-						<element name="Arg">
-							<attribute name="name"/>
-							<ref name="Doc"/>
-							<ref name="DataTypeDef"/>
-						</element>
-					</zeroOrMore>
+					<optional>
+						<ref name="ArgDef" />
+					</optional>
 				</element>
 			</zeroOrMore>
 		</element>
 	</define>
 
+	<define name="ArgDef">
+		<element name="Args">
+			<zeroOrMore>
+				<element name="Arg">
+					<attribute name="name"/>
+					<ref name="DocDef"/>
+					<ref name="DataTypeDef"/>
+				</element>
+			</zeroOrMore>
+		</element>
+	</define>
 
 	<define name="Data">
 		<element name="Data">
@@ -330,7 +326,7 @@
 							<data type="boolean"/>
 						</attribute>
 					</optional>
-					<ref name="Doc"/>
+					<ref name="DocDef"/>
 					<ref name="DataTypeDef"/>
 				</element>
 			</zeroOrMore>
@@ -350,7 +346,7 @@
 							<data type="boolean"/>
 						</attribute>
 					</optional>
-					<ref name="Doc"/>
+					<ref name="DocDef"/>
 					<ref name="Data" />
 				</element>
 			</zeroOrMore>

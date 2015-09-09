@@ -12,7 +12,7 @@ Domain =
     # </attribute>
     attribute xml:base { xsd:anyURI }?,
     attribute id { xsd:ID },
-    Doc,
+    DocDef,
     element Imports { Domain* }?,
     element Modules {
       element ModuleClass { ModuleDef }*
@@ -20,29 +20,29 @@ Domain =
     element Devices {
       element Device {
         attribute id { xsd:Name },
-        Doc,
-        DeviceInfo,
+        DocDef,
+        DeviceInfos?,
         Modules?,
         element SubDevices {
           element SubDevice {
             attribute id { xsd:Name },
-            Doc,
-            DeviceInfo,
+            DocDef,
+            DeviceInfos?,
             Modules?
           }*
         }?
       }*
     }?
   }
-DeviceInfo =
-  element DeviceInfo {
-    element Name { text }
-    & element Vendor { text }
-    & element FirmwareVersion { text }?
-    & element SerialNumber { text }?
-    & element VendorURL { xsd:anyURI }?
+DeviceInfos =
+  element DeviceInfos {
+    element DeviceInfo {
+      attribute name { text },
+      attribute optional { xsd:boolean }?,
+      DocDef,
+      DataTypeDef
+    }*
   }
-DataTypeElement = element DataType { DataTypeDef }
 DataTypeDef =
   # Discuss: Doc on DataType?
   attribute unitOfMeasure { text }?,
@@ -82,7 +82,8 @@ DocText =
    | element em { text }
    | element b { text }
    | element tt { text })*
-Doc =
+# <Doc> element is always optional
+DocDef =
   element Doc {
     DocText
     | (element p { DocText }
@@ -98,7 +99,7 @@ ModuleDef =
     attribute domain { xsd:IDREF },
     attribute class { text }
   }?,
-  Doc,
+  DocDef,
   Actions?,
   Data?,
   Events?
@@ -111,13 +112,17 @@ Actions =
     element Action {
       attribute name { text },
       attribute optional { xsd:boolean }?,
-      Doc,
+      DocDef,
       DataTypeDef?,
-      element Arg {
-        attribute name { text },
-        Doc,
-        DataTypeDef
-      }*
+      ArgDef?
+    }*
+  }
+ArgDef =
+  element Args {
+    element Arg {
+      attribute name { text },
+      DocDef,
+      DataTypeDef
     }*
   }
 Data =
@@ -128,7 +133,7 @@ Data =
       attribute writable { xsd:boolean }?,
       attribute readable { xsd:boolean }?,
       attribute eventable { xsd:boolean }?,
-      Doc,
+      DocDef,
       DataTypeDef
     }*
   }
@@ -137,7 +142,7 @@ Events =
     element Event {
       attribute name { text },
       attribute optional { xsd:boolean }?,
-      Doc,
+      DocDef,
       Data
     }*
   }
