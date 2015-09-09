@@ -19,10 +19,12 @@
 				</Action>
 				<Action name="setTarget">
 					<Doc>Set the associated state to the specified value.</Doc>
-					<Arg name="value">
-						<Doc>The desired value of the associated state.</Doc>
-						<SimpleType type="boolean" />
-					</Arg>
+					<Args>
+						<Arg name="value">
+							<Doc>The desired value of the associated state.</Doc>
+							<SimpleType type="boolean" />
+						</Arg>
+					</Args>
 				</Action>
 			</Actions>
 		</ModuleClass>

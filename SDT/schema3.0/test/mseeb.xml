@@ -87,12 +87,14 @@
                     <Doc>
                         Set the associated state to the specified value.
                     </Doc>
-                    <Arg name="value">
-                        <Doc>
-                        The desired value of the associated state.
-                        </Doc>
-                        <SimpleType type="boolean" />
-                    </Arg>
+                    <Args>
+                        <Arg name="value">
+                            <Doc>
+                            The desired value of the associated state.
+                            </Doc>
+                            <SimpleType type="boolean" />
+                        </Arg>
+                    </Args>
                 </Action>
           </Actions>
           <Events>
@@ -117,13 +119,28 @@
             <Doc>
                 This device is intended as a demonstration of how to define a Root Device with multiple sub-devices.
             </Doc>
-            <DeviceInfo>
-                <Name>Multi Socket Electrical-Extension-Block</Name>
-                <Vendor>HGI</Vendor>
-                <FirmwareVersion>1.0</FirmwareVersion>
-                <VendorURL>http://www.homegatewayinitative.org</VendorURL>
-                <SerialNumber>1234.5</SerialNumber>
-            </DeviceInfo>
+            <DeviceInfos>
+                <DeviceInfo name="Name">
+                    <Doc>Original value: Multi Socket Electrical-Extension-Block</Doc>
+                    <SimpleType type="string" />
+                </DeviceInfo>
+                <DeviceInfo name="Vendor">
+                    <Doc>Original value: HGI</Doc>
+                    <SimpleType type="string" />
+                </DeviceInfo>
+                <DeviceInfo name="FirmwareVersion">
+                  <Doc>Original value: 1.0</Doc>
+                  <SimpleType type="string" />
+                </DeviceInfo>
+                <DeviceInfo name="VendorURL">
+                  <Doc>Original value: http://www.homegatewayinitative.org</Doc>
+                  <SimpleType type="uri" />
+                </DeviceInfo>
+                <DeviceInfo name="SerialNumber">
+                  <Doc>Original value: 1234.5</Doc>
+                  <SimpleType type="string" />
+                </DeviceInfo>
+            </DeviceInfos>
 
 <!-- These are the modules for the device:
     - Switch on/off all contained switches. It inherits from hgi.dal.core.BooleanState.
@@ -188,10 +205,16 @@
                     <Doc>
                         This sub device is intended as a demonstration of how to use the abstract modules defined in the <em>HGI Core</em> domain.
                     </Doc>
-                    <DeviceInfo>
-                        <Name>PowerSwitch 1</Name>
-                        <Vendor>HGI</Vendor>
-                    </DeviceInfo>
+                    <DeviceInfos>
+                        <DeviceInfo name="Name">
+                            <Doc>Original value: PowerSwitch 1</Doc>
+                            <SimpleType type="string" />
+                        </DeviceInfo>
+                        <DeviceInfo name="Vendor">
+                            <Doc>Original value: HGI</Doc>
+                            <SimpleType type="string" />
+                        </DeviceInfo>
+                    </DeviceInfos>
                     <Modules>
                         <Module name="power">
                             <extends domain="hgi.dal.core" class="BooleanState"/>
@@ -205,10 +228,16 @@
                     <Doc>
                         This sub device is intended as a demonstration of how to use the abstract modules defined in the <em>HGI Core</em> domain.
                     </Doc>
-                    <DeviceInfo>
-                        <Name>PowerSwitch 2</Name>
-                        <Vendor>HGI</Vendor>
-                    </DeviceInfo>
+                    <DeviceInfos>
+                        <DeviceInfo name="Name">
+                            <Doc>Original value: PowerSwitch 2</Doc>
+                            <SimpleType type="string" />
+                        </DeviceInfo>
+                        <DeviceInfo name="Vendor">
+                            <Doc>Original value: HGI</Doc>
+                            <SimpleType type="string" />
+                        </DeviceInfo>
+                    </DeviceInfos>
                     <Modules>
                         <Module name="power">
                             <extends domain="hgi.dal.core" class="BooleanState"/>
