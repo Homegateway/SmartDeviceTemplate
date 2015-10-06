@@ -86,26 +86,6 @@
 	</define>
 
 
-	<define name="DeviceInfos">
-		<element name="DeviceInfos">
-			<zeroOrMore>
-				<element name="DeviceInfo">
-					<attribute name="name">
-						<text/>
-					</attribute>
-					<optional>
-						<attribute name="optional">
-							<data type="boolean"/>
-						</attribute>
-					</optional>
-					<ref name="DocDef"/>
-					<ref name="DataTypeDef" />
-				</element>
-			</zeroOrMore>
-		</element>
-	</define>
-
-
 	<define name="Characteristics">
 		<element name="Characteristics">
 			<oneOrMore>
