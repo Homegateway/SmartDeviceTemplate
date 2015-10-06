@@ -8,7 +8,8 @@ Domain =
     #      This almost generates the correct schema ... but it
     #      doesn't have the correct schemaLocation
     # 
-    # <attribute ns="http://www.w3.org/XML/1998/namespace" name="base">		  <data type="anyURI"/>
+    # <attribute ns="http://www.w3.org/XML/1998/namespace" name="base">
+    #	<data type="anyURI"/>
     # </attribute>
     attribute xml:base { xsd:anyURI }?,
     attribute id { xsd:ID },
@@ -21,13 +22,13 @@ Domain =
       element Device {
         attribute id { xsd:Name },
         DocDef,
-        DeviceInfos?,
+        Characteristics?,
         Modules?,
         element SubDevices {
           element SubDevice {
             attribute id { xsd:Name },
             DocDef,
-            DeviceInfos?,
+            Characteristics?,
             Modules?
           }*
         }?
@@ -42,6 +43,16 @@ DeviceInfos =
       DocDef,
       DataTypeDef
     }*
+  }
+Characteristics =
+  element Characteristics {
+    element Characteristic {
+      attribute name { text },
+      attribute optional { xsd:boolean }?,
+      attribute value { text }?,
+      DocDef,
+      SimpleType
+    }+
   }
 DataTypeDef =
   # Discuss: Doc on DataType?
@@ -61,7 +72,7 @@ SimpleType =
   element SimpleType {
     attribute name { text }?,
     attribute type { BasicType }
-    # TODO Constraints
+    #  TODO Constraints Perhaps directly in DataTypeDef
     
   }
 BasicType =
@@ -100,6 +111,7 @@ ModuleDef =
     attribute class { text }
   }?,
   DocDef,
+  Characteristics?,
   Actions?,
   Data?,
   Events?

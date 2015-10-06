@@ -22,18 +22,18 @@
 	<tt>on</tt> and <tt>off</tt>. This is clearly a candidate for the 
 	module class <tt>BooleanState</tt>.
       </Doc>
-      <DeviceInfos>
-      	<DeviceInfo name="Name">
+      <Characteristics>
+      	<Characteristic name="Name">
 		  <Doc>Original value: PowerSwitch</Doc>
 		  <SimpleType type="string" />
-		</DeviceInfo>
+		</Characteristic>
 
 		<!-- The Vendor field should probably be part of the domain -->
-      	<DeviceInfo name="Vendor">
+      	<Characteristic name="Vendor">
       	  <Doc>Original value: Telekom Innovation Laboratories</Doc>
 		  <SimpleType type="string" />
-		</DeviceInfo>
-      </DeviceInfos>
+		</Characteristic>
+      </Characteristics>
 
       <Modules>
 	<Module name="proprietaryPower">

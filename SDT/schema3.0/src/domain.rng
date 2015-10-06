@@ -17,7 +17,8 @@
 	     This almost generates the correct schema ... but it
 	     doesn't have the correct schemaLocation
 
-	<attribute ns="http://www.w3.org/XML/1998/namespace" name="base">		  <data type="anyURI"/>
+	<attribute ns="http://www.w3.org/XML/1998/namespace" name="base">
+		<data type="anyURI"/>
 	</attribute>
 	-->
 
@@ -54,7 +55,7 @@
 							</attribute>
 							<ref name="DocDef"/>
 							<optional>
-								<ref name="DeviceInfos"/>
+								<ref name="Characteristics"/>
 							</optional>
 							<optional>
 								<ref name="Modules"/>
@@ -68,7 +69,7 @@
 											</attribute>
 											<ref name="DocDef"/>
 											<optional>
-												<ref name="DeviceInfos"/>
+												<ref name="Characteristics"/>
 											</optional>
 											<optional>
 												<ref name="Modules"/>
@@ -101,6 +102,32 @@
 					<ref name="DataTypeDef" />
 				</element>
 			</zeroOrMore>
+		</element>
+	</define>
+
+
+	<define name="Characteristics">
+		<element name="Characteristics">
+			<oneOrMore>
+				<element name="Characteristic">
+					<attribute name="name">
+						<text/>
+					</attribute>
+					<optional>
+						<attribute name="optional">
+							<data type="boolean"/>
+						</attribute>
+					</optional>
+					<optional>
+						<attribute name="value">
+							<text/>
+						</attribute>
+					</optional>
+
+					<ref name="DocDef"/>
+					<ref name="SimpleType" />
+				</element>
+			</oneOrMore>
 		</element>
 	</define>
 
@@ -156,7 +183,7 @@
 			<attribute name="type">
 				<ref name="BasicType" />
 			</attribute>
-			<!-- TODO Constraints -->
+			<!-- TODO Constraints Perhaps directly in DataTypeDef-->
 		</element>
 	</define>
 
@@ -240,6 +267,9 @@
 			</element>
 		</optional>
 		<ref name="DocDef"/>
+		<optional>
+			<ref name="Characteristics"/>
+		</optional>
 		<optional>
 			<ref name="Actions"/>
 		</optional>
