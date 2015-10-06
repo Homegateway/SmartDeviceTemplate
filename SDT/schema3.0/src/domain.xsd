@@ -66,24 +66,6 @@
       <xs:attribute name="id" use="required" type="xs:Name"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="DeviceInfos">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceInfo"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="DeviceInfo">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:group ref="DocDef"/>
-        <xs:element ref="DataTypeDef"/>
-      </xs:sequence>
-      <xs:attribute name="name" use="required"/>
-      <xs:attribute name="optional" type="xs:boolean"/>
-      <xs:attributeGroup ref="DataTypeDef"/>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="Characteristics">
     <xs:complexType>
       <xs:sequence>
@@ -283,7 +265,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:group ref="DocDef"/>
-        <xs:element ref="Data"/>
+        <xs:element minOccurs="0" ref="Data"/>
       </xs:sequence>
       <xs:attribute name="name" use="required"/>
       <xs:attribute name="optional" type="xs:boolean"/>

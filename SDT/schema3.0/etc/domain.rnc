@@ -35,15 +35,6 @@ Domain =
       }*
     }?
   }
-DeviceInfos =
-  element DeviceInfos {
-    element DeviceInfo {
-      attribute name { text },
-      attribute optional { xsd:boolean }?,
-      DocDef,
-      DataTypeDef
-    }*
-  }
 Characteristics =
   element Characteristics {
     element Characteristic {
@@ -155,6 +146,6 @@ Events =
       attribute name { text },
       attribute optional { xsd:boolean }?,
       DocDef,
-      Data
+      Data?
     }*
   }

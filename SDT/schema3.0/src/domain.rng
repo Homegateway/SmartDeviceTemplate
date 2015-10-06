@@ -357,7 +357,9 @@
 						</attribute>
 					</optional>
 					<ref name="DocDef"/>
-					<ref name="Data" />
+					<optional>
+						<ref name="Data" />
+					</optional>
 				</element>
 			</zeroOrMore>
 		</element>
