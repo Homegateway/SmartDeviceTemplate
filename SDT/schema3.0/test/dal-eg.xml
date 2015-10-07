@@ -8,9 +8,6 @@
     <xi:include href="./dal-core.xml" parse="xml" />
   </Imports>
 
-  <Modules>
-  </Modules>
-
   <Devices>
 
     <Device id="switch.power">
@@ -31,7 +28,7 @@
 		<!-- The Vendor field should probably be part of the domain -->
       	<Characteristic name="Vendor">
       	  <Doc>Original value: Telekom Innovation Laboratories</Doc>
-		  <SimpleType type="string" />
+	  	  <SimpleType type="string" />
 		</Characteristic>
       </Characteristics>
 
@@ -56,7 +53,9 @@
 	    </Action>
 	    <Action name="state">
 		  	<Doc>Query the state of the switch. Returns the string "<tt>on</tt>" or "<tt>off</tt>".</Doc>
-           	<SimpleType type="string" />
+		  	<DataType>
+	           	<SimpleType type="string" />
+	        </DataType>
 	    </Action>
 	  </Actions>
 
@@ -66,7 +65,9 @@
 		  </Doc>
 		  <Data>
 		    <DataPoint name="state" writable="false">
-	          <SimpleType type="boolean" />
+		      <DataType>
+		          <SimpleType type="boolean" />
+		      </DataType>
 	 		</DataPoint>
 		  </Data>
 	  	</Event>

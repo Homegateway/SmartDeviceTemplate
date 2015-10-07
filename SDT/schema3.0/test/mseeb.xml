@@ -81,7 +81,9 @@
                     <Doc>
                         Obtain the current associated state.
                     </Doc>
-                    <SimpleType type="boolean" />
+                    <DataType>
+                        <SimpleType type="boolean" />
+                    </DataType>
                 </Action>
                 <Action name="setTarget">
                     <Doc>
@@ -92,7 +94,9 @@
                             <Doc>
                             The desired value of the associated state.
                             </Doc>
-                            <SimpleType type="boolean" />
+                            <DataType>
+                                <SimpleType type="boolean" />
+                            </DataType>
                         </Arg>
                     </Args>
                 </Action>
@@ -101,7 +105,9 @@
                 <Event name="stateChanged" optional="true">
                     <Data>
                         <DataPoint name="state" readable="true">
-                    		<SimpleType type="boolean" />
+                            <DataType>
+                        		<SimpleType type="boolean" />
+                            </DataType>
                         </DataPoint>
                     </Data>
                 </Event>      
@@ -165,14 +171,30 @@
                     <Actions>
                     	<Action name="getPowerConsumption">
                             <Doc>Get the power consumption.</Doc>
-                			<Struct name="values">
-                				<Array name="consumption">
-                					<SimpleType type="float" />
-                				</Array>
-                				<Array name="timeFrame">
-                					<SimpleType type="datetime" />
-                				</Array>
-                			</Struct>
+                            <DataType name="consumption">
+                    			<Struct>
+                                    <DataType name="values">
+                        				<Array>
+                                           <DataType>
+                                                <Doc>This is an example simple data type with a minimum-value constraint.</Doc>
+                            					<SimpleType type="float" />
+                                                <Constraints>
+                                                    <Constraint name="minValue" type="float" value="0.0">
+                                                        <Doc>The value must be equal or greater 0.0</Doc>
+                                                    </Constraint>
+                                                </Constraints>
+                                            </DataType>
+                				        </Array>
+                                    </DataType>
+                                    <DataType name="timeFrame">
+                        				<Array>
+                                            <DataType>
+                            					<SimpleType type="datetime" />
+                                            </DataType>
+                				        </Array>
+                                    </DataType>
+                                </Struct>
+                            </DataType>
                     	</Action>
                     </Actions>
                 </Module>
@@ -180,9 +202,13 @@
                 <Module name="extensionBlockDataPoints">
                     <Actions>
                         <Action name="getNames">
-                            <Array name="names">
-                                <SimpleType type="string" />
-                            </Array>
+                            <DataType name="names">
+                                <Array>
+                                    <DataType>
+                                        <SimpleType type="string" />
+                                    </DataType>
+                                </Array>
+                            </DataType>
                         </Action>
                     </Actions>
                     <Data>
@@ -192,7 +218,9 @@
                             <Doc>
                                 This datapoint represents the firmware version of the extension block.
                             </Doc>
-                            <SimpleType type="string" />
+                            <DataType>
+                                <SimpleType type="string" />
+                            </DataType>
                         </DataPoint>
                         
                         <DataPoint  name="powerSwitchNames"
@@ -201,9 +229,13 @@
                             <Doc>
                                 This datapoint is an array of strings with the names of the contained devices.
                             </Doc>
-                            <Array>
-                                <SimpleType type="string" />
-                            </Array>
+                            <DataType>
+                                <Array>
+                                    <DataType>
+                                        <SimpleType type="string" />
+                                    </DataType>
+                                </Array>
+                            </DataType>
                         </DataPoint>
                     </Data>
                 </Module>
@@ -221,12 +253,10 @@
                         This sub device is intended as a demonstration of how to use the abstract modules defined in the <em>HGI Core</em> domain.
                     </Doc>
                     <Characteristics>
-                        <Characteristic name="Name">
-                            <Doc>Original value: PowerSwitch 1</Doc>
+                        <Characteristic name="Name" value="PowerSwitch 1">
                             <SimpleType type="string" />
                         </Characteristic>
-                        <Characteristic name="Vendor">
-                            <Doc>Original value: HGI</Doc>
+                        <Characteristic name="Vendor" value="HGI">
                             <SimpleType type="string" />
                         </Characteristic>
                     </Characteristics>
@@ -244,16 +274,13 @@
                         This sub device is intended as a demonstration of how to use the abstract modules defined in the <em>HGI Core</em> domain.
                     </Doc>
                     <Characteristics>
-                        <Characteristic name="Name">
-                            <Doc>Original value: PowerSwitch 2</Doc>
+                        <Characteristic name="Name" value="PowerSwitch 2">
                             <SimpleType type="string" />
                         </Characteristic>
-                        <Characteristic name="Vendor">
-                            <Doc>Original value: HGI</Doc>
+                        <Characteristic name="Vendor" value="HGI">
                             <SimpleType type="string" />
                         </Characteristic>
                         <Characteristic name="VendorURL" value="http://homegatwaysinitiative.org">
-                            <Doc>Original value: http://homegatwaysinitiative.org</Doc>
                             <SimpleType type="uri" />
                         </Characteristic>
                         <Characteristic name="maximumAltitude" value="2800">

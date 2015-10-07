@@ -15,14 +15,18 @@
 			<Actions>
 				<Action name="get">
 					<Doc>Obtain the current associated state.</Doc>
-					<SimpleType type="boolean" />
+					<DataType>
+						<SimpleType type="boolean" />
+					</DataType>
 				</Action>
 				<Action name="setTarget">
 					<Doc>Set the associated state to the specified value.</Doc>
 					<Args>
 						<Arg name="value">
 							<Doc>The desired value of the associated state.</Doc>
-							<SimpleType type="boolean" />
+							<DataType>
+								<SimpleType type="boolean" />
+							</DataType>
 						</Arg>
 					</Args>
 				</Action>
