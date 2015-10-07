@@ -1,41 +1,31 @@
 start = Domain
 Domain =
   element Domain {
-    # still having some problems with included documents ... 
-    #      the included document is given the attribute xml:base ...
-    #      but my schema does not permit this ... 
-    # 
-    #      This almost generates the correct schema ... but it
-    #      doesn't have the correct schemaLocation
-    # 
-    # <attribute ns="http://www.w3.org/XML/1998/namespace" name="base">
-    #	<data type="anyURI"/>
-    # </attribute>
     attribute xml:base { xsd:anyURI }?,
     attribute id { xsd:ID },
     DocDef,
-    element Imports { Domain* }?,
+    element Imports { Domain+ }?,
     element Modules {
-      element ModuleClass { ModuleDef }*
+      element ModuleClass { ModuleDef }+
     }?,
     element Devices {
       element Device {
         attribute id { xsd:Name },
         DocDef,
-        Characteristics?,
+        CharacteristicsDef?,
         Modules?,
         element SubDevices {
           element SubDevice {
             attribute id { xsd:Name },
             DocDef,
-            Characteristics?,
+            CharacteristicsDef?,
             Modules?
-          }*
+          }+
         }?
-      }*
+      }+
     }?
   }
-Characteristics =
+CharacteristicsDef =
   element Characteristics {
     element Characteristic {
       attribute name { text },
@@ -46,25 +36,18 @@ Characteristics =
     }+
   }
 DataTypeDef =
-  # Discuss: Doc on DataType?
-  attribute unitOfMeasure { text }?,
-  (StructType | ArrayType | SimpleType)
-StructType =
-  element Struct {
+  element DataType {
     attribute name { text }?,
-    DataTypeDef+
+    attribute unitOfMeasure { text }?,
+    DocDef,
+    (StructType | ArrayType | SimpleType),
+    ConstraintsDef?
   }
-ArrayType =
-  element Array {
-    attribute name { text }?,
-    DataTypeDef
-  }
+StructType = element Struct { DataTypeDef+ }
+ArrayType = element Array { DataTypeDef }
 SimpleType =
   element SimpleType {
-    attribute name { text }?,
     attribute type { BasicType }
-    #  TODO Constraints Perhaps directly in DataTypeDef
-    
   }
 BasicType =
   "integer"
@@ -79,6 +62,15 @@ BasicType =
   | "datetime"
   | "blob"
   | "uri"
+ConstraintsDef =
+  element Constraints {
+    element Constraint {
+      attribute name { text },
+      attribute type { BasicType }?,
+      attribute value { text }?,
+      DocDef
+    }+
+  }
 DocText =
   (text
    | element em { text }
@@ -102,13 +94,13 @@ ModuleDef =
     attribute class { text }
   }?,
   DocDef,
-  Characteristics?,
+  CharacteristicsDef?,
   Actions?,
   Data?,
   Events?
 Modules =
   element Modules {
-    element Module { ModuleDef }*
+    element Module { ModuleDef }+
   }
 Actions =
   element Actions {
@@ -118,7 +110,7 @@ Actions =
       DocDef,
       DataTypeDef?,
       ArgDef?
-    }*
+    }+
   }
 ArgDef =
   element Args {
@@ -126,7 +118,7 @@ ArgDef =
       attribute name { text },
       DocDef,
       DataTypeDef
-    }*
+    }+
   }
 Data =
   element Data {
@@ -138,7 +130,7 @@ Data =
       attribute eventable { xsd:boolean }?,
       DocDef,
       DataTypeDef
-    }*
+    }+
   }
 Events =
   element Events {
@@ -147,5 +139,5 @@ Events =
       attribute optional { xsd:boolean }?,
       DocDef,
       Data?
-    }*
+    }+
   }
