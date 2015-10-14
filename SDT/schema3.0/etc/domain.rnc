@@ -12,22 +12,22 @@ Domain =
       element Device {
         attribute id { xsd:Name },
         DocDef,
-        CharacteristicsDef?,
+        PropertiesDef?,
         Modules?,
         element SubDevices {
           element SubDevice {
             attribute id { xsd:Name },
             DocDef,
-            CharacteristicsDef?,
+            PropertiesDef?,
             Modules?
           }+
         }?
       }+
     }?
   }
-CharacteristicsDef =
-  element Characteristics {
-    element Characteristic {
+PropertiesDef =
+  element Properties {
+    element Property {
       attribute name { text },
       attribute optional { xsd:boolean }?,
       attribute value { text }?,
@@ -94,7 +94,7 @@ ModuleDef =
     attribute class { text }
   }?,
   DocDef,
-  CharacteristicsDef?,
+  PropertiesDef?,
   Actions?,
   Data?,
   Events?
