@@ -125,28 +125,28 @@
             <Doc>
                 This device is intended as a demonstration of how to define a Root Device with multiple sub-devices.
             </Doc>
-            <Characteristics>
-                <Characteristic name="Name">
+            <Properties>
+                <Property name="Name">
                     <Doc>Original value: Multi Socket Electrical-Extension-Block</Doc>
                     <SimpleType type="string" />
-                </Characteristic>
-                <Characteristic name="Vendor">
+                </Property>
+                <Property name="Vendor">
                     <Doc>Original value: HGI</Doc>
                     <SimpleType type="string" />
-                </Characteristic>
-                <Characteristic name="FirmwareVersion">
+                </Property>
+                <Property name="FirmwareVersion">
                   <Doc>Original value: 1.0</Doc>
                   <SimpleType type="string" />
-                </Characteristic>
-                <Characteristic name="VendorURL">
+                </Property>
+                <Property name="VendorURL">
                   <Doc>Original value: http://www.homegatewayinitative.org</Doc>
                   <SimpleType type="uri" />
-                </Characteristic>
-                <Characteristic name="SerialNumber">
+                </Property>
+                <Property name="SerialNumber">
                   <Doc>Original value: 1234.5</Doc>
                   <SimpleType type="string" />
-                </Characteristic>
-            </Characteristics>
+                </Property>
+            </Properties>
 
 <!-- These are the modules for the device:
     - Switch on/off all contained switches. It inherits from hgi.dal.core.BooleanState.
@@ -160,12 +160,12 @@
                         The proprietry interface for turning all switches of the extension block on and off. 
                         The action "BooleanState:get" returns "true" when any of the sub-devices is in the state "on", otherwise it returns "false".
                     </Doc>
-                    <Characteristics>
-                        <Characteristic name="version" value="1.0.0">
+                    <Properties>
+                        <Property name="version" value="1.0.0">
                             <Doc>Version for this ModuleClass</Doc>
                             <SimpleType type="string" />
-                        </Characteristic>
-                    </Characteristics>
+                        </Property>
+                    </Properties>
                 </Module>
                 <Module name="power">
                     <Actions>
@@ -181,6 +181,9 @@
                                                 <Constraints>
                                                     <Constraint name="minValue" type="float" value="0.0">
                                                         <Doc>The value must be equal or greater 0.0</Doc>
+                                                    </Constraint>
+                                                      <Constraint name="step" type="float" value="0.1">
+                                                        <Doc>Steps are 0.1</Doc>
                                                     </Constraint>
                                                 </Constraints>
                                             </DataType>
@@ -252,14 +255,14 @@
                     <Doc>
                         This sub device is intended as a demonstration of how to use the abstract modules defined in the <em>HGI Core</em> domain.
                     </Doc>
-                    <Characteristics>
-                        <Characteristic name="Name" value="PowerSwitch 1">
+                    <Properties>
+                        <Property name="Name" value="PowerSwitch 1">
                             <SimpleType type="string" />
-                        </Characteristic>
-                        <Characteristic name="Vendor" value="HGI">
+                        </Property>
+                        <Property name="Vendor" value="HGI">
                             <SimpleType type="string" />
-                        </Characteristic>
-                    </Characteristics>
+                        </Property>
+                    </Properties>
                     <Modules>
                         <Module name="power">
                             <extends domain="hgi.dal.core" class="BooleanState"/>
@@ -273,20 +276,20 @@
                     <Doc>
                         This sub device is intended as a demonstration of how to use the abstract modules defined in the <em>HGI Core</em> domain.
                     </Doc>
-                    <Characteristics>
-                        <Characteristic name="Name" value="PowerSwitch 2">
+                    <Properties>
+                        <Property name="Name" value="PowerSwitch 2">
                             <SimpleType type="string" />
-                        </Characteristic>
-                        <Characteristic name="Vendor" value="HGI">
+                        </Property>
+                        <Property name="Vendor" value="HGI">
                             <SimpleType type="string" />
-                        </Characteristic>
-                        <Characteristic name="VendorURL" value="http://homegatwaysinitiative.org">
+                        </Property>
+                        <Property name="VendorURL" value="http://homegatwaysinitiative.org">
                             <SimpleType type="uri" />
-                        </Characteristic>
-                        <Characteristic name="maximumAltitude" value="2800">
+                        </Property>
+                        <Property name="maximumAltitude" value="2800">
                             <SimpleType type="integer" />
-                        </Characteristic>
-                    </Characteristics>
+                        </Property>
+                    </Properties>
                     <Modules>
                         <Module name="power">
                             <extends domain="hgi.dal.core" class="BooleanState"/>

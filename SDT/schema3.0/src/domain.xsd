@@ -42,7 +42,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:group ref="DocDef"/>
-        <xs:element minOccurs="0" ref="Characteristics"/>
+        <xs:element minOccurs="0" ref="Properties"/>
         <xs:element minOccurs="0" ref="Modules"/>
         <xs:element minOccurs="0" ref="SubDevices"/>
       </xs:sequence>
@@ -60,20 +60,20 @@
     <xs:complexType>
       <xs:sequence>
         <xs:group ref="DocDef"/>
-        <xs:element minOccurs="0" ref="Characteristics"/>
+        <xs:element minOccurs="0" ref="Properties"/>
         <xs:element minOccurs="0" ref="Modules"/>
       </xs:sequence>
       <xs:attribute name="id" use="required" type="xs:Name"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="Characteristics">
+  <xs:element name="Properties">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="Characteristic"/>
+        <xs:element maxOccurs="unbounded" ref="Property"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="Characteristic">
+  <xs:element name="Property">
     <xs:complexType>
       <xs:sequence>
         <xs:group ref="DocDef"/>
@@ -196,7 +196,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" ref="extends"/>
       <xs:group ref="DocDef"/>
-      <xs:element minOccurs="0" ref="Characteristics"/>
+      <xs:element minOccurs="0" ref="Properties"/>
       <xs:element minOccurs="0" ref="Actions"/>
       <xs:element minOccurs="0" ref="Data"/>
       <xs:element minOccurs="0" ref="Events"/>

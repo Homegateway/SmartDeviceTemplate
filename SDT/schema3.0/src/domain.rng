@@ -43,7 +43,7 @@
 							</attribute>
 							<ref name="DocDef"/>
 							<optional>
-								<ref name="CharacteristicsDef"/>
+								<ref name="PropertiesDef"/>
 							</optional>
 							<optional>
 								<ref name="Modules"/>
@@ -57,7 +57,7 @@
 											</attribute>
 											<ref name="DocDef"/>
 											<optional>
-												<ref name="CharacteristicsDef"/>
+												<ref name="PropertiesDef"/>
 											</optional>
 											<optional>
 												<ref name="Modules"/>
@@ -74,10 +74,10 @@
 	</define>
 
 
-	<define name="CharacteristicsDef">
-		<element name="Characteristics">
+	<define name="PropertiesDef">
+		<element name="Properties">
 			<oneOrMore>
-				<element name="Characteristic">
+				<element name="Property">
 					<attribute name="name">
 						<text/>
 					</attribute>
@@ -252,7 +252,7 @@
 		</optional>
 		<ref name="DocDef"/>
 		<optional>
-			<ref name="CharacteristicsDef"/>
+			<ref name="PropertiesDef"/>
 		</optional>
 		<optional>
 			<ref name="Actions"/>
