@@ -8,7 +8,7 @@ The files referenced in this document point to version **3.0** of the SDT.
 - [SDT/schema3.0/src/](../src/) : Source files of the SDT.
 	- [domain.rng](../src/domain.rng) : RELAX NG file with the SDT schema definition. This is the source file that is converted to the actual schema definition *domain.xsd* during the build. See also [http://en.wikipedia.org/wiki/RELAX_NG](http://en.wikipedia.org/wiki/RELAX_NG).  
 	**Only edit this file when one wants to make changes to the SDT!**
-	- [domain.xsd](../src/domain.xsd) : The SDT schema defintion that is generated from *domain.rng*.
+	- [domain.xsd](../src/domain.xsd) : The SDT schema definition that is generated from *domain.rng*.
 	- [xml.xsd](../src/xml.xsd) : General schema definitions for the SDT
 - [SDT/schema3.0/test/](../test/) : This directory contains all XML files with SDT definitions that should be validated whether they conform to the SDT schema. This could be example definitions or contributions.
 - [SDT/schema3.0/build.xml](../build.xml) : This is the definition file for the ant build system.
@@ -26,10 +26,10 @@ The files referenced in this document point to version **3.0** of the SDT.
 - Download and install Apache ant from [http://ant.apache.org](http://ant.apache.org)
 - Clone the SDT repository from GitHub:
 
-		$ git clone https://github.com/Homegateway/RWD050.git
+		$ git clone https://github.com/Homegateway/SmartDeviceTemplate.git
 	
 ## How to Use the Build System
-After cloning the repository go to the directoy *SDT/schema* and run commands depending on what you want to achieve.
+After cloning the repository go to the directory *SDT/schema* and run commands depending on what you want to achieve.
 
 ### Build the Schema
 Running *ant* without any parameter builds the schema definition from the rng-definition [SDT/schema3.0/src/domain.rng](../src/domain.rng) and writes it to [SDT/schema3.0/src/domain.xsd](../src/domain.xsd)
@@ -49,9 +49,9 @@ The output after a successful validation should look like this:
 >BUILD SUCCESSFUL  
 >Total time: 1 second
 
-Otherwise you most likely receive a stacktrace or some other error messages. Search the output for the line *BUILD FAILED*. Above this line you will find some helpful hints for the filename and line number on which the error occured (here: file *mseeb.xml* on line 66) and a reason:	
+Otherwise you most likely receive a stack trace or some other error messages. Search the output for the line *BUILD FAILED*. Above this line you will find some helpful hints for the filename and line number on which the error occurred (here: file *mseeb.xml* on line 66) and a reason:	
 
->[schemavalidate] /Users/someone/Sources/git/RWD050/SDT/schema/test/mseeb.xml:66:18: cvc-elt.1: Cannot find the declaration of element 'Domain'.    
+>[schemavalidate] /Users/someone/Sources/git/SmartDeviceTemplate/SDT/schema/test/mseeb.xml:66:18: cvc-elt.1: Cannot find the declaration of element 'Domain'.    
 >BUILD FAILED
 
 ---

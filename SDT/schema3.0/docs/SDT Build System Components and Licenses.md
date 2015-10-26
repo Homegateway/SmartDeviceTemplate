@@ -5,7 +5,7 @@ The following libraries are used in the build system for the SDT.
 
 [http://www.thaiopensource.com/relaxng/trang-manual.html](http://www.thaiopensource.com/relaxng/trang-manual.html)
 
-Trang takes as input a schema written in any of the following formats:
+*Trang* takes as input a schema written in any of the following formats:
 
 - RELAX NG (XML syntax)
 - RELAX NG (compact syntax)
@@ -18,7 +18,7 @@ and produces as output a schema written in any of the following formats:
 - XML 1.0 DTD
 - W3C XML Schema
 
-Trang can also infer a schema from one or more example XML documents.
+*Trang* can also infer a schema from one or more example XML documents.
 
 
 ### License
@@ -49,7 +49,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 [http://ant-contrib.sourceforge.net](http://ant-contrib.sourceforge.net)
 
-The Ant-Contrib project is a collection of tasks (and at one point maybe types and other tools) for Apache Ant.
+The *Ant-Contrib* project is a collection of tasks (and at one point maybe types and other tools) for Apache Ant.
 
 ### License 
 
