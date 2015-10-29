@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Example SDT definition taken from EchonetLite https://github.com/ECHONET-Consortium -->
+
+<Domain id="jp.echonet" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns="http://homegatewayinitiative.org/xml/dal/2.0">
+
+  <!-- Various examples for module classes -->
+  
+  <Modules>
+
+    <!-- actuator -->
+
+  	<ModuleClass name="operationStatus">
+  		<Data>
+  			<DataPoint name="operationStatus" type="boolean" writable="true">
+  				<Doc>This property indicates the ON/OFF status.</Doc>
+      	    </DataPoint>
+  		</Data>
+      <Events>
+        <Event name="operationStatus">
+          <Data>
+          </Data>
+        </Event>
+      </Events>
+  	</ModuleClass>
+
+  	<!-- runtime property -->
+
+  	<ModuleClass name="installationLocation">
+  		<Data>
+  			<DataPoint name="installationLocation" type="string" writable="true">
+  				<Doc>This property indicates the installation location</Doc>
+  			</DataPoint>
+  		</Data>
+  		<Events>
+  			<Event name="installationLocation">
+          <Data>
+          </Data>
+        </Event>
+  		</Events>
+  	</ModuleClass>
+
+  	<!-- sensor readout -->
+
+  	<ModuleClass name="measuredInstantaneousPowerConsumption">
+  		<Data>
+  			<DataPoint name="measuredInstantaneousPowerConsumption" type="integer" writable="false">
+  				<Doc>This property indicates the instantaneous power consumption of the device in watts.</Doc>
+  			</DataPoint>
+  		</Data>
+  	</ModuleClass>
+
+  	<ModuleClass name="temperatureSensorDataPoints">
+  		<Data>
+  			<DataPoint name="measuredTemperatureValue" type="integer" writable="false">
+  				<Doc>This property indicates the measured temperature value in units of 0.1C.</Doc>
+  			</DataPoint>
+  		</Data>
+  	</ModuleClass>
+
+    <!-- example appliance types -->
+
+    <ModuleClass name="washingMachineDataPoints">
+      <Data>
+        <DataPoint name="door/CoverOpen/CloseStatus" type="enum" writable="false">
+          <Doc>This property indicates whether the door/cover is open or closed.</Doc>
+        </DataPoint>
+        <DataPoint name="washingMachineSetting" type="enum" writable="true">
+          <Doc>Washing machine setting</Doc>
+        </DataPoint>
+        <DataPoint name="currentStageOfWashingCycle" type="enum" writable="false">
+          <Doc>This property indicates the current stage of the washing cycle.</Doc>
+        </DataPoint>
+        <DataPoint name="timeRemainingToCompleteWashingCycle" type="time" writable="false">
+          <Doc>This property indicates the time remaining to complete the current washing cycle in the HH:MM:SS format.</Doc>
+        </DataPoint>
+        <DataPoint name="onTimerReservationSetting" type="enum" writable="true">
+          <Doc>Reservation ON/OFF</Doc>
+        </DataPoint>
+        <DataPoint name="onTimerSetting" type="time" writable="true">
+          <Doc>Timer value (HH:MM)</Doc>
+        </DataPoint>
+        <DataPoint name="relativeTimeBasedOnTimerSetting" type="time" writable="true">
+          <Doc>Timer value (HH:MM)</Doc>
+        </DataPoint>
+      </Data>
+    </ModuleClass>
+  </Modules>
+
+
+  <!-- Very simple example for a washing machine definition -->
+
+  <RootDevices>
+    <RootDevice id="SimpleWaschingMachine">
+      <DeviceInfo>
+        <Name>washing machine</Name>
+        <Vendor>Echonet</Vendor>
+      </DeviceInfo>
+
+      <Modules>
+        <Module name="washingMachineDataPoints">
+          <extends domain="jp.echonet" class="operationStatus"/>
+        </Module>
+      </Modules>
+    </RootDevice>
+  </RootDevices>
+
+</Domain>
+ 
