@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - domain.rng
+  -
+  - Version 3.0
+  -
+  - This work is released by the Smarthome Task Force of the HGI (Home
+  - Gateway Initative), October 2015.
+  - The work is created and released under the Apache License Version 2.0 .
+  - See the license text at http://www.apache.org/licenses/LICENSE-2.0 for
+  - full details.
+-->
 <xs:schema targetNamespace="http://homegatewayinitiative.org/xml/dal/3.0" 
-	   xmlns="http://homegatewayinitiative.org/xml/dal/3.0" 
-	   targetNamespace="http://homegatewayinitiative.org/xml/dal/3.0" 
-	   xmlns="http://homegatewayinitiative.org/xml/dal/3.0" 
-	   targetNamespace="http://homegatewayinitiative.org/xml/dal/3.0" 
 	   xmlns="http://homegatewayinitiative.org/xml/dal/3.0" 
 	   xmlns:xs="http://www.w3.org/2001/XMLSchema" 
 	  
- 
-	  
- 
-	  
  elementFormDefault="qualified">
-  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/03/http://www.w3.org/2001/03/http://www.w3.org/2001/03/xml.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/03/xml.xsd"/>
   <xs:element name="Domain">
     <xs:complexType>
       <xs:sequence>

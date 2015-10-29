@@ -1,14 +1,14 @@
 <!--
-  -- domain.rng
-  --
-  -- Version 3.0
-  --
-  -- This work is released by the Smarthome Task Force of the HGI (Home
-  -- Gateway Initative), October 2015.
-  -- The work is created and released under the Apache License Version 2.0 .
-  -- See the license text at http://www.apache.org/licenses/LICENSE-2.0 for
-  -- full details.
-  -->
+   - domain.rng
+   -
+   - Version 3.0
+   -
+   - This work is released by the Smarthome Task Force of the HGI (Home
+   - Gateway Initative), October 2015.
+   - The work is created and released under the Apache License Version 2.0 .
+   - See the license text at http://www.apache.org/licenses/LICENSE-2.0 for
+   - full details.
+   -->
 
 <grammar xmlns="http://relaxng.org/ns/structure/1.0"
 	datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
