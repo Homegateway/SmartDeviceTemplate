@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-
-<!-- Example SDT definition taken from EchonetLite https://github.com/ECHONET-Consortium -->
-
 <Domain xmlns="http://homegatewayinitiative.org/xml/dal/3.0"
 	xmlns:xi="http://www.w3.org/2001/XInclude"
 	id="jp.echonet">
 	
-  <!-- Various examples for module classes -->
-  
 	<Modules>
-
-    <!-- actuator -->
-
 		<ModuleClass name="operationStatus">
 			<Data>
 				<DataPoint name="operationStatus" writable="true">
@@ -26,9 +18,6 @@
 				</Event>
 			</Events>
 		</ModuleClass>
-
-  		<!-- runtime property -->
-
 		<ModuleClass name="installationLocation">
 			<Data>
 				<DataPoint name="installationLocation" writable="true">
@@ -43,9 +32,6 @@
 				</Event>
 			</Events>
 		</ModuleClass>
-
-		<!-- sensor readout -->
-		
 		<ModuleClass name="measuredInstantaneousPowerConsumption">
 			<Data>
 				<DataPoint name="measuredInstantaneousPowerConsumption" writable="false">
@@ -56,7 +42,6 @@
 				</DataPoint>
 			</Data>
 		</ModuleClass>
-
 		<ModuleClass name="temperatureSensorDataPoints">
 			<Data>
 				<DataPoint name="measuredTemperatureValue" writable="false">
@@ -67,59 +52,8 @@
 				</DataPoint>
 			</Data>
 		</ModuleClass>
-
-		<!-- example appliance types -->
-
-		<ModuleClass name="washingMachineDataPoints">
-			<Data>
-				<DataPoint name="door/CoverOpen/CloseStatus" writable="false">
-					<Doc>This property indicates whether the door/cover is open or closed.</Doc>
-					<DataType>
-						<SimpleType type="enum" />
-					</DataType>
-				</DataPoint>
-				<DataPoint name="washingMachineSetting" writable="true">
-					<Doc>Washing machine setting</Doc>
-					<DataType>
-						<SimpleType type="enum" />
-					</DataType>
-				</DataPoint>
-				<DataPoint name="currentStageOfWashingCycle" writable="false">
-					<Doc>This property indicates the current stage of the washing cycle.</Doc>
-					<DataType>
-						<SimpleType type="enum" />
-					</DataType>
-				</DataPoint>
-				<DataPoint name="timeRemainingToCompleteWashingCycle" writable="false">
-					<Doc>This property indicates the time remaining to complete the current washing cycle in the HH:MM:SS format.</Doc>
-					<DataType>
-						<SimpleType type="time" />
-					</DataType>
-				</DataPoint>
-				<DataPoint name="onTimerReservationSetting" writable="true">
-					<Doc>Reservation ON/OFF</Doc>
-					<DataType>
-						<SimpleType type="enum" />
-					</DataType>
-				</DataPoint>
-				<DataPoint name="onTimerSetting" writable="true">
-					<Doc>Timer value (HH:MM)</Doc>
-					<DataType>
-						<SimpleType type="time" />
-					</DataType>
-				</DataPoint>
-				<DataPoint name="relativeTimeBasedOnTimerSetting" writable="true">
-					<Doc>Timer value (HH:MM)</Doc>
-					<DataType>
-						<SimpleType type="time" />
-					</DataType>
-				</DataPoint>
-			</Data>
-		</ModuleClass>
 	</Modules>
 	
-	<!-- Very simple example for a washing machine definition -->
-
 	<Devices>
 		<Device id="SimpleWaschingMachine">
 			<Properties>
@@ -131,11 +65,56 @@
 				</Property>
 			</Properties>
 			<Modules>
-				<Module name="washingMachineDataPoints">
+				<Module name="washingMachineOperationStatus">
 					<extends domain="jp.echonet" class="operationStatus"/>
+				</Module>
+				<Module name="washingMachineDataPoints">
+					<Data>
+						<DataPoint name="door/CoverOpen/CloseStatus" writable="false">
+							<Doc>This property indicates whether the door/cover is open or closed.</Doc>
+							<DataType>
+								<SimpleType type="enum" />
+							</DataType>
+						</DataPoint>
+						<DataPoint name="washingMachineSetting" writable="true">
+							<Doc>Washing machine setting</Doc>
+							<DataType>
+								<SimpleType type="enum" />
+							</DataType>
+						</DataPoint>
+						<DataPoint name="currentStageOfWashingCycle" writable="false">
+							<Doc>This property indicates the current stage of the washing cycle.</Doc>
+							<DataType>
+								<SimpleType type="enum" />
+							</DataType>
+						</DataPoint>
+						<DataPoint name="timeRemainingToCompleteWashingCycle" writable="false">
+							<Doc>This property indicates the time remaining to complete the current washing cycle in the HH:MM:SS format.</Doc>
+							<DataType>
+								<SimpleType type="time" />
+							</DataType>
+						</DataPoint>
+						<DataPoint name="onTimerReservationSetting" writable="true">
+							<Doc>Reservation ON/OFF</Doc>
+							<DataType>
+								<SimpleType type="enum" />
+							</DataType>
+						</DataPoint>
+						<DataPoint name="onTimerSetting" writable="true">
+							<Doc>Timer value (HH:MM)</Doc>
+							<DataType>
+								<SimpleType type="time" />
+							</DataType>
+						</DataPoint>
+						<DataPoint name="relativeTimeBasedOnTimerSetting" writable="true">
+							<Doc>Timer value (HH:MM)</Doc>
+							<DataType>
+								<SimpleType type="time" />
+							</DataType>
+						</DataPoint>
+					</Data>
 				</Module>
 			</Modules>
 		</Device>
 	</Devices>
-	
 </Domain>
