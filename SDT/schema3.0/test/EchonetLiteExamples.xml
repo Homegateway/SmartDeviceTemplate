@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- Example SDT definition taken from EchonetLite https://github.com/ECHONET-Consortium -->
+
+
 <Domain xmlns="http://homegatewayinitiative.org/xml/dal/3.0"
 	xmlns:xi="http://www.w3.org/2001/XInclude"
 	id="jp.echonet">
-	
+
+  <!-- Various examples for module classes -->
+
 	<Modules>
 		<ModuleClass name="operationStatus">
 			<Data>
@@ -18,6 +24,9 @@
 				</Event>
 			</Events>
 		</ModuleClass>
+
+  	<!-- runtime property -->
+
 		<ModuleClass name="installationLocation">
 			<Data>
 				<DataPoint name="installationLocation" writable="true">
@@ -32,6 +41,9 @@
 				</Event>
 			</Events>
 		</ModuleClass>
+
+  	<!-- sensor readout -->
+
 		<ModuleClass name="measuredInstantaneousPowerConsumption">
 			<Data>
 				<DataPoint name="measuredInstantaneousPowerConsumption" writable="false">
@@ -54,6 +66,9 @@
 		</ModuleClass>
 	</Modules>
 	
+
+  <!-- Very simple example for a washing machine definition -->
+
 	<Devices>
 		<Device id="SimpleWaschingMachine">
 			<Properties>
@@ -64,10 +79,17 @@
 					<SimpleType type="string" />
 				</Property>
 			</Properties>
+
 			<Modules>
+				
+				<!-- Inheriting from the global operating status -->
+
 				<Module name="washingMachineOperationStatus">
 					<extends domain="jp.echonet" class="operationStatus"/>
 				</Module>
+
+				<!-- Data points local to the wasching machine device -->
+
 				<Module name="washingMachineDataPoints">
 					<Data>
 						<DataPoint name="door/CoverOpen/CloseStatus" writable="false">
