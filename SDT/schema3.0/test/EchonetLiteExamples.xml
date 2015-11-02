@@ -12,7 +12,7 @@
 	<Modules>
 		<ModuleClass name="operationStatus">
 			<Data>
-				<DataPoint name="operationStatus" writable="true">
+				<DataPoint name="operationStatus" readable="true" writable="true">
 					<Doc>This property indicates the ON/OFF status.</Doc>
 					<DataType>
 						<SimpleType type="boolean" />
