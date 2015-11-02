@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- Example SDT definition taken from EchonetLite https://github.com/ECHONET-Consortium -->
+
+
 <Domain xmlns="http://homegatewayinitiative.org/xml/dal/3.0"
 	xmlns:xi="http://www.w3.org/2001/XInclude"
-	id="jp.echonet">
-	
+	id="example.based.on.echonetLite">
+
+  <!-- Various examples for module classes -->
+
 	<Modules>
 		<ModuleClass name="operationStatus">
 			<Data>
@@ -13,14 +19,13 @@
 					</DataType>
 				</DataPoint>
 			</Data>
-			<Events>
-				<Event name="operationStatus">
-				</Event>
-			</Events>
 		</ModuleClass>
+
+  	<!-- runtime property -->
+
 		<ModuleClass name="installationLocation">
 			<Data>
-				<DataPoint name="installationLocation" writable="true">
+				<DataPoint name="installationLocation" readable="true" writable="true">
 					<Doc>This property indicates the installation location</Doc>
 					<DataType>
 						<SimpleType type="string" />
@@ -29,24 +34,29 @@
 			</Data>
 			<Events>
 				<Event name="installationLocation">
+					<!-- Event payload not shown here -->
 				</Event>
 			</Events>
 		</ModuleClass>
+
+  	<!-- sensor readout -->
+
 		<ModuleClass name="measuredInstantaneousPowerConsumption">
 			<Data>
-				<DataPoint name="measuredInstantaneousPowerConsumption" writable="false">
+				<DataPoint name="measuredInstantaneousPowerConsumption" readable="true" writable="false">
 					<Doc>This property indicates the instantaneous power consumption of the device in watts.</Doc>
-					<DataType>
+					<DataType unitOfMeasure="watts">
 						<SimpleType type="integer" />
 					</DataType>
 				</DataPoint>
 			</Data>
 		</ModuleClass>
+
 		<ModuleClass name="temperatureSensorDataPoints">
 			<Data>
-				<DataPoint name="measuredTemperatureValue" writable="false">
+				<DataPoint name="measuredTemperatureValue" readable="true" writable="false">
 					<Doc>This property indicates the measured temperature value in units of 0.1C.</Doc>
-					<DataType>
+					<DataType unitOfMeasure="celsius">
 						<SimpleType type="integer" />
 					</DataType>
 				</DataPoint>
@@ -54,64 +64,107 @@
 		</ModuleClass>
 	</Modules>
 	
+
+  <!-- Very simple example for a washing machine definition -->
+
 	<Devices>
 		<Device id="SimpleWaschingMachine">
 			<Properties>
 				<Property name="Name" value="washing machine">
 					<SimpleType type="string" />
 				</Property>
-				<Property name="Vendor" value="Echonet">
+				<Property name="Vendor" value="ACME">
 					<SimpleType type="string" />
 				</Property>
 			</Properties>
+
 			<Modules>
-				<Module name="washingMachineOperationStatus">
-					<extends domain="jp.echonet" class="operationStatus"/>
+				
+				<!-- Inheriting ModuleClasses from the global generic ModuleClasses -->
+
+				<Module name="installationLocation">
+					<extends domain="example.based.on.echonetLite" class="installationLocation"/>
 				</Module>
+
+				<Module name="measuredInstantaneousPowerConsumption">
+					<extends domain="example.based.on.echonetLite" class="measuredInstantaneousPowerConsumption"/>
+				</Module>
+
+				<Module name="temperatureSensorDataPoints">
+					<extends domain="example.based.on.echonetLite" class="temperatureSensorDataPoints"/>
+				</Module>
+
+
+				<!-- The following Module inherits and extends a global generic 		 ModuleClass with an event. Therefore, it is renamed to express
+					 the change of name. -->
+
+				<Module name="washingMachineOperationStatus">
+					<extends domain="example.based.on.echonetLite" class="operationStatus"/>
+
+					<!-- This Module extends the global one with an event. -->
+
+					<Events>
+						<Event name="washingMachineOperationStatus">
+							<!-- Event payload not shown here -->
+						</Event>
+					</Events>
+
+				</Module>
+
+
+				<!-- Data points local to the wasching machine device -->
+
 				<Module name="washingMachineDataPoints">
 					<Data>
-						<DataPoint name="door/CoverOpen/CloseStatus" writable="false">
+						<DataPoint name="door/CoverOpen/CloseStatus" readable="true" writable="false">
 							<Doc>This property indicates whether the door/cover is open or closed.</Doc>
 							<DataType>
 								<SimpleType type="enum" />
 							</DataType>
 						</DataPoint>
-						<DataPoint name="washingMachineSetting" writable="true">
+						<DataPoint name="washingMachineSetting" readable="true" writable="true">
 							<Doc>Washing machine setting</Doc>
 							<DataType>
 								<SimpleType type="enum" />
 							</DataType>
 						</DataPoint>
-						<DataPoint name="currentStageOfWashingCycle" writable="false">
+						<DataPoint name="currentStageOfWashingCycle" readable="true" writable="false">
 							<Doc>This property indicates the current stage of the washing cycle.</Doc>
 							<DataType>
 								<SimpleType type="enum" />
 							</DataType>
 						</DataPoint>
-						<DataPoint name="timeRemainingToCompleteWashingCycle" writable="false">
+						<DataPoint name="timeRemainingToCompleteWashingCycle" readable="true" writable="false">
 							<Doc>This property indicates the time remaining to complete the current washing cycle in the HH:MM:SS format.</Doc>
 							<DataType>
 								<SimpleType type="time" />
 							</DataType>
 						</DataPoint>
-						<DataPoint name="onTimerReservationSetting" writable="true">
+
+						<!-- These three data points actually would make a good 
+							 example to be moved to a separate ModuleClass for
+							 generalization so that they can be used by any device
+							 that would make use of a timer. -->
+
+						<DataPoint name="onTimerReservationSetting" readable="true" writable="true">
 							<Doc>Reservation ON/OFF</Doc>
 							<DataType>
 								<SimpleType type="enum" />
 							</DataType>
 						</DataPoint>
-						<DataPoint name="onTimerSetting" writable="true">
+						<DataPoint name="onTimerSetting" readable="true" writable="true">
 							<Doc>Timer value (HH:MM)</Doc>
 							<DataType>
 								<SimpleType type="time" />
 							</DataType>
 						</DataPoint>
-						<DataPoint name="relativeTimeBasedOnTimerSetting" writable="true">
+						<DataPoint name="relativeTimeBasedOnTimerSetting" readable="true" writable="true">
 							<Doc>Timer value (HH:MM)</Doc>
 							<DataType>
 								<SimpleType type="time" />
 							</DataType>
 						</DataPoint>
+						
 					</Data>
 				</Module>
 			</Modules>
