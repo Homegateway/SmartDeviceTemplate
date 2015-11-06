@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="compilenative" default="build">
+
+<!--
+	Compile native code
+-->
+<target name="compilenative" depends="_prepare, _buildNative">
+</target>
+
+</project>

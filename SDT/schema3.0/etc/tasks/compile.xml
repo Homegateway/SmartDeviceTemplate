@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="compile" default="build">
+
+<!--	TASK: compile
+		Compile the source code
+-->
+<target name="compile" depends="_prepare,_preparebuild,_setClassPath">
+
+	<echo>Java.source=${java.source}, Java.target=${java.target}</echo>
+
+	<if><equals arg1="${uselint}" arg2="true" trim="true" />
+
+		<!-- Enable -Xlint compiler warnings -->
+		<then>
+			<javac 	destdir="${path.gen.classes}"
+					includes="**/*.java"
+					classpathref="id.libraries"
+					srcdir="${path.src}"
+					debug="on"
+					target="${java.target}"
+					source="${java.source}"
+					includeantruntime="false"
+					listfiles="on">
+				<compilerarg value="-Xlint"/>
+			</javac>
+		</then>
+
+		<!-- No special compiler warnings -->
+		<else>
+			<javac 	destdir="${path.gen.classes}"
+					includes="**/*.java"
+					classpathref="id.libraries"
+					srcdir="${path.src}"
+					debug="on"
+					target="${java.target}"
+					source="${java.source}"
+					includeantruntime="false"
+					listfiles="on">
+			</javac>
+		</else>
+	</if>
+</target>
+
+</project>

@@ -1,0 +1,153 @@
+# - domain.rng
+# -
+# - Version 3.0
+# -
+# - This work is released by the Smarthome Task Force of the HGI (Home
+# - Gateway Initative), October 2015.
+# - The work is created and released under the Apache License Version 2.0 .
+# - See the license text at http://www.apache.org/licenses/LICENSE-2.0 for
+# - full details.
+
+start = Domain
+Domain =
+  element Domain {
+    attribute xml:base { xsd:anyURI }?,
+    attribute id { xsd:ID },
+    DocDef,
+    element Imports { Domain+ }?,
+    element Modules {
+      element ModuleClass { ModuleDef }+
+    }?,
+    element Devices {
+      element Device {
+        attribute id { xsd:Name },
+        DocDef,
+        PropertiesDef?,
+        Modules?,
+        element SubDevices {
+          element SubDevice {
+            attribute id { xsd:Name },
+            DocDef,
+            PropertiesDef?,
+            Modules?
+          }+
+        }?
+      }+
+    }?
+  }
+PropertiesDef =
+  element Properties {
+    element Property {
+      attribute name { text },
+      attribute optional { xsd:boolean }?,
+      attribute value { text }?,
+      DocDef,
+      SimpleType
+    }+
+  }
+DataTypeDef =
+  element DataType {
+    attribute name { text }?,
+    attribute unitOfMeasure { text }?,
+    DocDef,
+    (StructType | ArrayType | SimpleType),
+    ConstraintsDef?
+  }
+StructType = element Struct { DataTypeDef+ }
+ArrayType = element Array { DataTypeDef }
+SimpleType =
+  element SimpleType {
+    attribute type { BasicType }
+  }
+BasicType =
+  "integer"
+  | "boolean"
+  | "string"
+  | "byte"
+  | "float"
+  | "array"
+  | "enum"
+  | "date"
+  | "time"
+  | "datetime"
+  | "blob"
+  | "uri"
+ConstraintsDef =
+  element Constraints {
+    element Constraint {
+      attribute name { text },
+      attribute type { BasicType }?,
+      attribute value { text }?,
+      DocDef
+    }+
+  }
+DocText =
+  (text
+   | element em { text }
+   | element b { text }
+   | element tt { text })*
+# <Doc> element is always optional
+DocDef =
+  element Doc {
+    DocText
+    | (element p { DocText }
+       | element img {
+           attribute src { text },
+           element caption { text }
+         })*
+  }?
+ModuleDef =
+  attribute name { text },
+  attribute optional { xsd:boolean }?,
+  element extends {
+    attribute domain { xsd:IDREF },
+    attribute class { text }
+  }?,
+  DocDef,
+  PropertiesDef?,
+  Actions?,
+  Data?,
+  Events?
+Modules =
+  element Modules {
+    element Module { ModuleDef }+
+  }
+Actions =
+  element Actions {
+    element Action {
+      attribute name { text },
+      attribute optional { xsd:boolean }?,
+      DocDef,
+      DataTypeDef?,
+      ArgDef?
+    }+
+  }
+ArgDef =
+  element Args {
+    element Arg {
+      attribute name { text },
+      DocDef,
+      DataTypeDef
+    }+
+  }
+Data =
+  element Data {
+    element DataPoint {
+      attribute name { text },
+      attribute optional { xsd:boolean }?,
+      attribute writable { xsd:boolean }?,
+      attribute readable { xsd:boolean }?,
+      attribute eventable { xsd:boolean }?,
+      DocDef,
+      DataTypeDef
+    }+
+  }
+Events =
+  element Events {
+    element Event {
+      attribute name { text },
+      attribute optional { xsd:boolean }?,
+      DocDef,
+      Data?
+    }+
+  }

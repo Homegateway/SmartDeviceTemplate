@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="buildjar" default="build">
+
+
+<!--	TASK: buildjar
+		Build the jar file
+-->
+<target name="buildjar" depends="_getBuildNumber">
+
+	<!-- Build the base jar file -->
+	<if><not>
+			<equals arg1="${manifest}" arg2="none" trim="true" />
+		</not>
+		<then>
+			<jar destfile="${file.jar}" manifest="${manifest}" whenmanifestonly="create">
+				<fileset dir="${path.gen.classes}">
+					<include name="**/*.class" />
+				</fileset>
+				<manifest>
+					<!-- Who is building this jar? -->
+					<attribute name="Built-By" value="${user.name}"/>
+					<attribute name="Build-Time" value="${build.time}"/>
+					<attribute name="SVN-Revision" value="${svn.revision}"/>
+				</manifest>
+			</jar>
+		</then>
+		<else>
+			<jar destfile="${file.jar}" whenmanifestonly="create">
+				<fileset dir="${path.gen.classes}">
+					<include name="**/*.class" />
+				</fileset>
+				<manifest>
+					<!-- Who is building this jar? -->
+					<attribute name="Built-By" value="${user.name}"/>
+					<attribute name="Build-Time" value="${build.time}"/>
+					<attribute name="SVN-Revision" value="${svn.revision}"/>
+				</manifest>
+			</jar>
+		</else>
+	</if>
+
+	<!-- Add resources, if necessary -->
+	<available property="available.resources" file="resources" />
+	<if><isset property="available.resources" />
+		<then>
+			<jar destfile="${file.jar}" update="true">
+				<fileset dir="${path.resources}">
+					<include name="**/*" />
+				</fileset>
+			</jar>
+		</then>
+	</if>
+	
+	<!-- Include external resources in the jar file -->
+	<runtarget target="_includeExternalResourcesInJar" />
+
+	<!-- Include external manifest in the jar file -->
+	<!-- <runtarget target="_importManifest" /> -->
+
+</target>
+
+
+</project>

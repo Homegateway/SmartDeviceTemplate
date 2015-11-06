@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="clean" default="build">
+
+<!--	TASK: Clean
+		Removes all generated files from the "gen" directory for a project
+-->
+<target name="clean" depends="_cleanDependentProjects">
+	<echo>Cleaning project "${projectname}"</echo>
+	<delete dir="${path.gen}"/>
+	<delete dir="${path.gen.documentation}"/>
+
+	<!-- remove the directory for the domain -->
+	<if>
+		<isset property="omain" />
+		<then>
+			<delete dir="${path.gen.domain}/${omain}" />
+		</then>
+	</if>
+
+</target>
+
+</project>

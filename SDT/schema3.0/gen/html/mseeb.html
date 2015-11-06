@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+
+
+    
+        
+    
+
+    
+        
+            
+                BooleanState is the preferred module for modelling a functionality corresponding to an underlying binary state.This module should be used to abstract away from the actual datatype and values in question. Note that the module does not define whether the execution mode is blocking or non-blocking.
+            
+            
+                
+                    
+                        Obtain the current associated state.
+                    
+                
+                
+                    
+                        Set the associated state to the specified value.
+                    
+                    
+                        
+                        The desired value of the associated state.
+                        
+                    
+                
+          
+          
+                
+                    
+                        
+                        
+                    
+                      
+          
+        
+    
+
+
+
+    
+
+
+
+        
+            
+                Multi Socket Electrical-Extension-Block
+                HGI
+                1.0
+                http://www.homegatewayinitative.org
+                1234.5
+            
+            
+                This device is intended as a demonstration of how to define a Root Device with multiple sub-devices.
+            
+
+
+
+            
+                
+                    
+                    
+                        The proprietry interface for turning all switches of the extension block on and off. 
+                        The action "BooleanState:get" returns "true" when any of the sub-devices is in the state "on", otherwise it returns "false".
+                    
+                
+
+                
+                    
+                        
+                            
+                                This datapoint represents the firmware version of the extension block.
+                            
+                        
+                        
+                        
+                            
+                                This datapoint is an array of strings with the names of the contained devices.
+                            
+                        
+                    
+                
+            
+
+
+
+            
+
+
+
+                
+                    
+                        PowerSwitch 1
+                        HGI
+                    
+                    
+                        This sub device is intended as a demonstration of how to use the abstract modules defined in the HGI Core domain.
+                    
+                    
+                        
+                            
+                        
+                    
+                
+
+
+
+                
+                    
+                        PowerSwitch 2
+                        HGI
+                    
+                    
+                        This sub device is intended as a demonstration of how to use the abstract modules defined in the HGI Core domain.
+                    
+                    
+                        
+                            
+                        
+                    
+                
+
+            
+
+        
+    

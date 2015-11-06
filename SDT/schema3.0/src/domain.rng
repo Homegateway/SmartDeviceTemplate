@@ -1,0 +1,387 @@
+<!--
+   - domain.rng
+   -
+   - Version 3.0
+   -
+   - This work is released by the Smarthome Task Force of the HGI (Home
+   - Gateway Initative), October 2015.
+   - The work is created and released under the Apache License Version 2.0 .
+   - See the license text at http://www.apache.org/licenses/LICENSE-2.0 for
+   - full details.
+   -->
+
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+	datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+ 
+
+	<start>
+		<ref name="Domain"/>
+	</start>
+
+
+	<define name="Domain">
+		<element name="Domain">
+			<optional>
+				<attribute name="xml:base">
+					<data type="anyURI"/>
+				</attribute>
+			</optional>
+			<attribute name="id">
+				<data type="ID"/>
+			</attribute>
+			<ref name="DocDef"/>
+			<optional>
+				<element name="Imports">
+					<oneOrMore>
+						<ref name="Domain"/>
+					</oneOrMore>
+				</element>
+			</optional>
+			<optional>
+				<element name="Modules">
+					<oneOrMore>
+						<element name="ModuleClass">
+							<ref name="ModuleDef"/>
+						</element>
+					</oneOrMore>
+				</element>
+			</optional>
+			<optional>
+				<element name="Devices">
+					<oneOrMore>
+						<element name="Device">
+							<attribute name="id">
+								<data type="Name"/>
+							</attribute>
+							<ref name="DocDef"/>
+							<optional>
+								<ref name="PropertiesDef"/>
+							</optional>
+							<optional>
+								<ref name="Modules"/>
+							</optional>
+							<optional>
+								<element name="SubDevices">
+									<oneOrMore>
+										<element name="SubDevice">
+											<attribute name="id">
+												<data type="Name"/>
+											</attribute>
+											<ref name="DocDef"/>
+											<optional>
+												<ref name="PropertiesDef"/>
+											</optional>
+											<optional>
+												<ref name="Modules"/>
+											</optional>
+										</element>
+									</oneOrMore>
+								</element>
+							</optional>
+						</element>
+					</oneOrMore>
+				</element>
+			</optional>
+		</element>
+	</define>
+
+
+	<define name="PropertiesDef">
+		<element name="Properties">
+			<oneOrMore>
+				<element name="Property">
+					<attribute name="name">
+						<text/>
+					</attribute>
+					<optional>
+						<attribute name="optional">
+							<data type="boolean"/>
+						</attribute>
+					</optional>
+					<optional>
+						<attribute name="value">
+							<text/>
+						</attribute>
+					</optional>
+					<ref name="DocDef"/>
+					<ref name="SimpleType" />
+				</element>
+			</oneOrMore>
+		</element>
+	</define>
+
+
+	<define name="DataTypeDef">
+		<element name="DataType">
+			<optional>
+				<attribute name="name">
+					<text/>
+				</attribute>
+			</optional>
+			<optional>
+				<attribute name="unitOfMeasure">
+					<text/>
+				</attribute>
+			</optional>
+			<ref name="DocDef"/>
+			<choice>
+				<ref name="StructType" />
+				<ref name="ArrayType" />
+				<ref name="SimpleType" />
+			</choice>
+			<optional>
+				<ref name="ConstraintsDef"/>
+			</optional>
+		</element>
+	</define>
+
+
+	<define name="StructType">
+		<element name="Struct">
+			<oneOrMore>
+				<ref name="DataTypeDef" />
+			</oneOrMore>
+		</element>
+	</define>
+
+
+	<define name="ArrayType">
+		<element name="Array">
+			<ref name="DataTypeDef" />
+		</element>
+	</define>
+
+
+	<define name="SimpleType">
+		<element name="SimpleType">
+			<attribute name="type">
+				<ref name="BasicType" />
+			</attribute>
+		</element>
+	</define>
+
+
+	<define name="BasicType">
+		<choice>
+			<value>integer</value>
+			<value>boolean</value>
+			<value>string</value>
+			<value>byte</value>
+			<value>float</value>
+			<value>array</value>
+			<value>enum</value>
+			<value>date</value>
+			<value>time</value>
+			<value>datetime</value>
+			<value>blob</value>
+			<value>uri</value>
+		</choice>
+	</define>
+
+
+	<define name="ConstraintsDef">
+		<element name="Constraints">
+			<oneOrMore>
+				<element name="Constraint">
+					<attribute name="name">
+						<text/>
+					</attribute>
+					<optional>
+						<attribute name="type">
+							<ref name="BasicType" />
+						</attribute>
+					</optional>
+					<optional>
+						<attribute name="value">
+							<text/>
+						</attribute>
+					</optional>
+					<ref name="DocDef"/>
+				</element>
+			</oneOrMore>
+		</element>
+	</define>
+
+	<define name="DocText">
+		<zeroOrMore>
+			<choice>
+				<text/>
+				<element name="em">
+					<text/>
+				</element>
+				<element name="b">
+					<text/>
+				</element>
+				<element name="tt">
+					<text/>
+				</element>
+			</choice>
+		</zeroOrMore>
+	</define>
+
+
+	<!-- <Doc> element is always optional -->
+	<define name="DocDef">
+		<optional>
+			<element name="Doc">
+				<choice>
+					<ref name="DocText"/>
+					<zeroOrMore>
+						<choice>
+							<element name="p">
+								<ref name="DocText"/>
+							</element>
+							<element name="img">
+								<attribute name="src"/>
+								<element name="caption">
+									<text/>
+								</element>
+							</element>
+						</choice>
+					</zeroOrMore>
+				</choice>
+			</element>
+		</optional>
+	</define>
+
+
+	<define name="ModuleDef">
+		<attribute name="name">
+			<text/>
+		</attribute>
+		<optional>
+			<attribute name="optional">
+				<data type="boolean"/>
+			</attribute>
+		</optional>
+		<optional>
+			<element name="extends">
+				<attribute name="domain">
+					<data type="IDREF"/>
+				</attribute>
+				<attribute name="class"/>
+			</element>
+		</optional>
+		<ref name="DocDef"/>
+		<optional>
+			<ref name="PropertiesDef"/>
+		</optional>
+		<optional>
+			<ref name="Actions"/>
+		</optional>
+		<optional>
+			<ref name="Data"/>
+		</optional>
+		<optional>
+			<ref name="Events"/>
+		</optional>
+	</define>
+
+
+	<define name="Modules">
+		<element name="Modules">
+			<oneOrMore>
+				<element name="Module">
+					<ref name="ModuleDef"/>
+				</element>
+			</oneOrMore>
+		</element>
+	</define>
+
+
+	<define name="Actions">
+		<element name="Actions">
+			<oneOrMore>
+				<element name="Action">
+					<attribute name="name">
+						<text/>
+					</attribute>
+					<optional>
+						<attribute name="optional">
+							<data type="boolean"/>
+						</attribute>
+					</optional>
+					<ref name="DocDef"/>
+					<optional>
+						<ref name="DataTypeDef"/>
+					</optional>
+					<optional>
+						<ref name="ArgDef" />
+					</optional>
+				</element>
+			</oneOrMore>
+		</element>
+	</define>
+
+
+	<define name="ArgDef">
+		<element name="Args">
+			<oneOrMore>
+				<element name="Arg">
+					<attribute name="name"/>
+					<ref name="DocDef"/>
+					<ref name="DataTypeDef"/>
+				</element>
+			</oneOrMore>
+		</element>
+	</define>
+
+
+	<define name="Data">
+		<element name="Data">
+			<oneOrMore>
+				<element name="DataPoint">
+					<attribute name="name">
+						<text/>
+					</attribute>
+					<optional>
+						<attribute name="optional">
+							<data type="boolean"/>
+						</attribute>
+					</optional>
+					<optional>
+						<attribute name="writable">
+							<data type="boolean"/>
+						</attribute>
+					</optional>
+					<optional>
+						<attribute name="readable">
+							<data type="boolean"/>
+						</attribute>
+					</optional>
+					<optional>
+						<attribute name="eventable">
+							<data type="boolean"/>
+						</attribute>
+					</optional>
+					<ref name="DocDef"/>
+					<ref name="DataTypeDef"/>
+				</element>
+			</oneOrMore>
+		</element>
+	</define>
+
+
+	<define name="Events">
+		<element name="Events">
+			<oneOrMore>
+				<element name="Event">
+					<attribute name="name">
+						<text/>
+					</attribute>
+					<optional>
+						<attribute name="optional">
+							<data type="boolean"/>
+						</attribute>
+					</optional>
+					<ref name="DocDef"/>
+					<optional>
+						<ref name="Data" />
+					</optional>
+				</element>
+			</oneOrMore>
+		</element>
+	</define>
+
+</grammar>
+

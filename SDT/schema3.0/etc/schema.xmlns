@@ -1,0 +1,4 @@
+targetNamespace="http://homegatewayinitiative.org/xml/dal/3.0" 
+	   xmlns="http://homegatewayinitiative.org/xml/dal/3.0" 
+	   xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	  
