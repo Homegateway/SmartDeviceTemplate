@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Example1 SDT inspired by some Echonet Lite examples -->
+<Domain xmlns="http://homegatewayinitiative.org/xml/dal/3.0"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	id="example1.SDT">
+
+	<Modules>
+
+		<!-- Various examples for module classes -->
+		<ModuleClass name="operationStatus">
+			<Data>
+				<DataPoint name="operationStatus" writable="true">
+					<Doc>This property sets the ON/OFF status.</Doc>
+						<DataType>
+							<SimpleType type="boolean"/> 
+						</DataType>
+				</DataPoint>
+			</Data>
+			<Events>
+				<Event name="operationStatus">
+				</Event>
+			</Events>
+		</ModuleClass>
+
+
+		<ModuleClass name="installationLocation">
+			<Data>
+				<DataPoint name="installationLocation" writable="true">
+					<Doc>This property indicates the installation location</Doc>
+					<DataType>
+						<SimpleType type="string"/>
+					</DataType>
+				</DataPoint>
+			</Data>
+			<Events>
+				<Event name="installationLocation"> </Event>
+			</Events>
+		</ModuleClass>
+
+		<ModuleClass name="measuredCumulativePowerConsumption">
+			<Data>
+				<DataPoint name="measuredCumulativePowerConsumption" writable="false">
+					<Doc>This indicates cumulative power consumption of the device in increments of 0.001kWh.</Doc>
+					<DataType unitOfMeasure="watt">
+						<SimpleType type="integer"/>
+					</DataType>
+				</DataPoint>
+			</Data>
+		</ModuleClass>
+
+		<ModuleClass name="onTimerSetting">
+			<Data>
+				<DataPoint name="onTimer" writable="true">
+					<Doc>Timer value (HH:MM)</Doc>
+					<DataType>
+						<SimpleType type="time"/>
+					</DataType>
+				</DataPoint>
+			</Data>
+		</ModuleClass>
+
+		<ModuleClass name="statusDoor">
+			<Data>
+				<DataPoint name="stausDoor" writable="false">
+					<Doc>This reads the open=true or closed=false status of a door </Doc>
+					<DataType>
+						<SimpleType type="boolean"/>
+					</DataType>
+				</DataPoint>
+			</Data>
+		</ModuleClass>
+
+	</Modules>
+
+</Domain>

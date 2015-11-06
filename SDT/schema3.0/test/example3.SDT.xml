@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Example1 SDT inspired by some Echonet Lite examples -->
+<Domain xmlns="http://homegatewayinitiative.org/xml/dal/3.0"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	id="example3.SDT">
+
+    <Imports>
+        <xi:include href="./example1.SDT.xml" parse="xml" />
+    </Imports>
+
+	<Devices>
+		<Device id="waschingMachine">
+			<Modules>
+				<Module name="operationStatus">
+					<extends domain="example1.SDT" class="operationStatus"/>
+				</Module>
+				<Module name="installationLocation">
+					<extends domain="example1.SDT" class="installationLocation"/>
+				</Module>
+				<Module name="measuredCumulativePowerConsumption">
+					<extends domain="example1.SDT" class="measuredCumulativePowerConsumption"/>
+				</Module>
+				<Module name="measuredCumulativePowerConsumption">
+					<extends domain="example1.SDT" class="measuredCumulativePowerConsumption"/>
+				</Module>
+				<Module name="onTimerSetting">
+					<extends domain="example1.SDT" class="onTimerSetting"/>
+				</Module>
+				<Module name="statusDoor">
+					<extends domain="example1.SDT" class="statusDoor"/>
+				</Module>
+			</Modules>
+		</Device>
+	</Devices>
+</Domain>
