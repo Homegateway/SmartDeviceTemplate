@@ -12,5 +12,3 @@ The source for the diagrams below is [here](SDT_UML.uxf).
 ## Key
 
 ![](images/SDT_UML_Key.png)
-
-##

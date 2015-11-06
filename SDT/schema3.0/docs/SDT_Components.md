@@ -1,9 +1,5 @@
 # SDT Components
 
-In this document an overview about the SDT 3.0 definitions and component hierarchy is given.
-
-## Contents
-
 [Domain](#Domain)  
 [RootDevice](#RootDevice) | [Device](#Device)  
 &nbsp;&nbsp;&nbsp;[DeviceInfo](#DeviceInfo)  
@@ -14,11 +10,40 @@ In this document an overview about the SDT 3.0 definitions and component hierarc
 &nbsp;&nbsp;&nbsp;[Event](#Event)  
 [Doc](#Documentation)  
 
+---
+
+In this document an overview about the SDT 3.0 definitions and component hierarchy is given.
+
+Various details about recommended structure for SDTs are described in the next sections. The key point to keep in mind is that HGI sought a compromise between, at the one extreme, complete flexibility (which could describe any device, of any complexity) and, at the other extreme, a rigid structure which could be 100% validated and lead to validated software APIs.
+
+A major decision, facilitating validation of code and signalling, was to describe services (functionality) of devices in terms of ModuleClasses made up of combinations of three kinds of elements: 
+
+1. DataPoints which can be read/written, 
+2. Actions which consist of more complex sequences of operations; 
+3. Events which can be signalled ("published") by devices asynchronously.
+
+This structure shown in the following figure.
+
+![](images/MC.Action.DataPoint.png)
+
 
 ## SDT Overview
+
+The following UML diagram presents an overview of the structure (elements) of every SDT which is conformant with these guidelines. As implied in the above descriptions, there can be many different choices of the details of a SDT, each one optimized for a particular market segment and the types of devices used in that market segment. Obviously an unnecessary proliferation is counter-productive, but as long as each SDT conforms to the structure shown below then it will be possible with little or modest effort for software applications to be adapted accordingly. 
+
+The reader must keep in mind that the UML diagram below is in a sense the meta-format for different possible Smart Device Templates (XSDs) for device descriptions (XMLs) of real devices - sorry about that.
+
 The followng UML diagram presents an overview about the SDT components.
 
-![](images/SDT3.0_UML.png)
+![](images/SDT_UML_Basic_Elements.png)
+
+The [DataType](#DataType) strukture is shown in the following UML diagram:
+
+![](images/SDT_UML_DataType.png)
+
+The key to the diagram elements of the UML diagrams above and the snippets in the following sections:
+
+![](images/SDT_UML_Key.png)
 
 The syntax used in the diagram to model an XML Schema Definition (XSD) as an UML diagram follows the following approaches:
 
@@ -27,6 +52,12 @@ The syntax used in the diagram to model an XML Schema Definition (XSD) as an UML
 
 
 ## Components
+
+
+**NOTE** The content here is still SDT2 and needs to be updated
+
+
+
 
 <a name="Domain"></a>
 ### Domain
