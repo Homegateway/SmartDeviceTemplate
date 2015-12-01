@@ -21,8 +21,8 @@ Therefore HGI proposes to recommend a certain structure (template) for the infor
 The  SDT approach is to define re-usable basic functions (or services), labelled "ModuleClass" in the figure below, which can represent the typical functions found in many home automation systems, such as "on/off", "dim a lamp", "receive events from binary sensor", "read data from sensor", etc. Each ModuleClass is composed of a (small) number of actions, datapoint read/write operations, or asynchronous events. For example, an "on/off" ModuleClass would consist perhaps of just one Action, but a "ReadKeypad" Action might have a number of possible events, each with some data value and (usually) a sequence-ID or timestamp start/stop to indicate when and how long each key was pressed.
  
 
-<center>![SmartHome Device Template (XSD) for a generic device (simplification)](images/SDT_simplified.png)</center>
-<center>**SmartHome Device Template (XSD) for a generic device (simplification)</center>**
+![SmartHome Device Template (XSD) for a generic device (simplification)](images/SDT_simplified.png)  
+**SmartHome Device Template (XSD) for a generic device (simplification)**
 
 The  SDT represents the device models introduced in the above figure by using an XSD schema to allow formal checking of compliance for XML device descriptions of specific appliances. The modularity  goal  in the XSD schema is achieved with  re-usable XSD fragments ("ModuleClass" in the figure). 
 
@@ -49,7 +49,7 @@ This section provides an overview about the SDT 3.0 definitions and element hier
 | ModuleClass | Specification of a single service with one or more service methods, the involved abstracted data model and related events. The expectation is that each separate service which may be used in many kinds of Devices (like PowerON/OFF, Open/Close, ...) will be described by a ModuleClass which can be re-used in many Device definitions. |
 | Module | Instantiation of a ModuleClass for a specific Device or SubDevice|
 
-<center>**Definitions of SDT Elements.**</center>
+**Definitions of SDT Elements.**
 
 A major decision, facilitating validation of code and signalling, was to describe services (functionality) of devices in terms of ModuleClasses made up of combinations of three kinds of elements:
 
@@ -59,8 +59,8 @@ A major decision, facilitating validation of code and signalling, was to describ
 
 This ModuleClass structure is shown in the figure below and is a major part of the SDT which is illustrated in detail in the following figure:
  
-<center>![UML description of device functionality in terms of Actions, DataPoints and Events](images/MC.Action.DataPoint.Event.png)</center>
-<center>**UML description of device functionality in terms of Actions, DataPoints and Events**</center>
+![UML description of device functionality in terms of Actions, DataPoints and Events](images/MC.Action.DataPoint.Event.png)  
+**UML description of device functionality in terms of Actions, DataPoints and Events**
 
 ## How should SDT work?
 
