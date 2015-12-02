@@ -29,10 +29,13 @@ The key to the diagram elements of the UML diagrams above and the snippets in th
 
 ![](images/SDT_UML_Key.png)
 
-
-## Components
-
 <a name="Domain"></a>
+
+The syntax used in the diagram to model an XML Schema Definition (XSD) as an UML diagram follows the following approaches:
+
+- [Design XML schemas using UML](http://www.ibm.com/developerworks/library/x-umlschem/)
+- [UML For W3C XML Schema Design](http://www.xml.com/pub/a/2002/08/07/wxs_uml.html)
+
 ### Domain
 
 ![](images/Domain.png)
@@ -48,7 +51,7 @@ It can also be used to collect all specified [ModuleClasses](#ModuleClasses)
 #### Elements
 - **[Doc](#Documentation)** : Documentation for the *Domain*. Optional.
 - **Imports** : XML import/include of other XML files. Optional.
-- **[Module](#ModuleClass)** : A list of *Module* components that are global to the whole domain. Optional.
+- **[Module](#ModuleClass)** : A list of those *Module* components that are global to the whole domain. Optional.
 - **[Devices](#Device)** : a List of *Devices* components. Optional.
 
 #### Example
@@ -78,7 +81,7 @@ It can also be used to collect all specified [ModuleClasses](#ModuleClasses)
 
 The *Device* was initially thought of as the representation of "the basic things we are trying to model" and can still be considered so. However, after discussion with various SDOs, it was decided to add also "[sub-devices](#SubDevice)". That is, there is one level of hierarchy to allow modeling of e.g. a set of independent energy monitoring plugs in a single addressable power-extension-block. (Other SDOs might consider it more appropriate to use a recursive sub-sub-sub ... device definition). Note that all the different devices which one needs to model within a Domain are composed of one or more [Modules](#ModuleClass). 
 
-For each physical device on the network at least one *Device* **must** be defined. If the physical device is a simple device, ie. it does not contain embedded devices, e.g. a light switch, it does not include further [SubDevices](#SubDevices). On the other hand, if the physical is a compound device, ie. it does contain embedded devices that can be addressed separately, the *Device* **should** contain [SubDevices](SubDevices) for each of the identifiable embedded devices.
+For each physical device on the network at least one *Device* **must** be defined. If the physical device is a simple device, i.e. it does not contain embedded devices, e.g. a light switch, it does not include further [SubDevices](#SubDevices). On the other hand, if the physical is a compound device, i.e. it does contain embedded devices that can be addressed separately, the *Device* **should** contain [SubDevices](SubDevices) for each of the identifiable embedded devices.
 
 An example for a compound device  is a connected power-strip where each of the sockets can be switched on and off individually. The power-strip itself can provide functions such as "all sockets off" and "overall power consumption".
 
@@ -115,7 +118,7 @@ An example for a compound device  is a connected power-strip where each of the s
 ### SubDevice
 *SubDevices* are optional components of a [Device](#Device). They represent physical sub-devices and services inside another device (the *Device*).
 
-*SubDevices* may define their own [ModuleClasses](#ModuleClass) or extend ModulesClasses of its or another [Domain](#Domain).
+*SubDevices* may define their own [ModuleClasses](#ModuleClass) or extend *ModuleClasses* of it's or another [Domain](#Domain).
 
 ![](images/SubDevice.png)
 
@@ -148,7 +151,7 @@ An example for a compound device  is a connected power-strip where each of the s
 
 *Property* elements are used to append to [Devices](#Device) and their [ModuleClass](ModuleClass) elements with arbitrary additional information. For [Devices](#Device) it would be very common for a manufacturer to want to add into the XML file which is describing the device such information as "Manufacturing Site", "Date of Manufacture", "Certification Code", "Energy Label Code", "compatible LAN technology", "URL for the device handbook", "physical limits of operation environments", etc.
 
-Some of that information might in some devices be available by reading a specific device [DataPoint](#DataPoint), however even if it cannot be read from the device then at least it can be noted in the device's XML description. Examples for organizations that specifiy these kind of added "Property" information are [eCl@ss](http://www.eclass.eu) and [UNSPSC](http://www.unspsc.org) (United Nations Standard Products and Services Code).
+Some of that information might in some devices be available by reading a specific device [DataPoint](#DataPoint), however even if it cannot be read from the device then at least it can be noted in the device's XML description. Examples for organizations that specify these kind of added "Property" information are [eCl@ss](http://www.eclass.eu) and [UNSPSC](http://www.unspsc.org) (United Nations Standard Products and Services Code).
 
 Since the *Properties* are highly varied, depending on industry segment, no attempt is made in the SDT to constrain the options: however it is highly recommended to provide software-developer-friendly information in the [Doc](#Documentation) field of each Property. 
 
