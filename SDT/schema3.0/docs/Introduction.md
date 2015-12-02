@@ -81,3 +81,9 @@ NOT directly part of this work is a related but separate aspect of every gateway
 Programmers developing a "device abstraction layer" for software in a gateway need to create run-time representations of all the recognized devices, their operations and their actual states. This internal "information model" needs to be updated in real time as the devices and the users interact. Programmers may be tempted to use the SDT structure to organize their real-time information model, adding additional information elements for the current state of each device, for some kind of "history" of commands sent/acknowledged, the user etc. 
 
 The above is an efficient approach BUT it must be clear that the real-time state information and history of events, etc, can NOT be represented in a pre-defined SDT and in the XML giving specific details for a device.
+
+---
+
+Click [here](SDT_Components.md) for detailed documentation about SDT.
+
+

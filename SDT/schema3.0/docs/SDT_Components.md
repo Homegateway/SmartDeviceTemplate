@@ -5,6 +5,7 @@
 [Property](#Property)  
 [Module and ModuleClass](#ModuleClass)  
 &nbsp;&nbsp;&nbsp;[Action](#Action)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Arg](#Arg)  
 &nbsp;&nbsp;&nbsp;[DataPoint](#DataPoint)  
 &nbsp;&nbsp;&nbsp;[Event](#Event)  
 [Data Types](#Data_Types)  
@@ -305,26 +306,6 @@ The following are two examples for actions implementing a getter and a setter fo
 	</Action>
 
 ---
-<a name="Arg"/></a>
-### Arg : Element of *Action*
-
-![](images/Arg.png)
- 
-The *Arg* element represents the parameter information which a device needs to carry out a required *Action*. 
-
-The *Arg* has the following attributes and elements:
-
-#### Attributes
-- **name** : The name of the *Arg* attribute. Required.
-
-#### Elements
-- **[Doc](#Documentation)** : Documentation for the *argument*. Optional.
-- **[DataType](#DataType)** : The return type of the *argument*. It must comply to the *DataType* definition. Required.
-
-#### Example
-See [example above](#ActionExample).
-
----
 
 <a name="Event"/></a>
 ### Event : Element of *ModuleClass*
@@ -356,6 +337,27 @@ See [example above](#ActionExample).
 
 ---
 
+<a name="Arg"/></a>
+### Arg : Element of *Action*
+
+![](images/Arg.png)
+ 
+The *Arg* element represents the parameter information which a device needs to carry out a required *Action*. 
+
+The *Arg* has the following attributes and elements:
+
+#### Attributes
+- **name** : The name of the *Arg* attribute. Required.
+
+#### Elements
+- **[Doc](#Documentation)** : Documentation for the *argument*. Optional.
+- **[DataType](#DataType)** : The return type of the *argument*. It must comply to the *DataType* definition. Required.
+
+#### Example
+See [example above](#ActionExample).
+
+---
+
 <a name="Data_Types"/></a>
 ### DataType
 The data type can be simple integers or string text, or rather complex, as shown below:
@@ -383,7 +385,7 @@ The *DataType* element is a "container" for the various aspects of a type.
 ---
 
 <a name="Constraint"/></a>
-### Constraint
+### Constraint : Element of DataType
 
 ![](images/Constraint.png)
 
