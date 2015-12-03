@@ -3,8 +3,9 @@
 [Domain](#Domain)  
 [Device](#Device) | [SubDevice](#SubDevice)  
 [Property](#Property)  
-[ModuleClass](#ModuleClass)  
+[Module and ModuleClass](#ModuleClass)  
 &nbsp;&nbsp;&nbsp;[Action](#Action)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Arg](#Arg)  
 &nbsp;&nbsp;&nbsp;[DataPoint](#DataPoint)  
 &nbsp;&nbsp;&nbsp;[Event](#Event)  
 [Data Types](#Data_Types)  
@@ -17,28 +18,10 @@
 
 ---
 
-In this document an overview about the SDT 3.0 definitions and component hierarchy is given.
-
-Various details about recommended structure for SDTs are described in the next sections. The key point to keep in mind is that HGI sought a compromise between, at the one extreme, complete flexibility (which could describe any device, of any complexity) and, at the other extreme, a rigid structure which could be 100% validated and lead to validated software APIs.
-
-A major decision, facilitating validation of code and signalling, was to describe services (functionality) of devices in terms of ModuleClasses made up of combinations of three kinds of elements: 
-
-1. DataPoints which can be read/written, 
-2. Actions which consist of more complex sequences of operations; 
-3. Events which can be signalled ("published") by devices asynchronously.
-
-This structure shown in the following figure.
-
-![](images/MC.Action.DataPoint.png)
-
 
 ## SDT Overview
 
-The following UML diagram presents an overview of the structure (elements) of every SDT which is conformant with these guidelines. As implied in the above descriptions, there can be many different choices of the details of a SDT, each one optimized for a particular market segment and the types of devices used in that market segment. Obviously an unnecessary proliferation is counter-productive, but as long as each SDT conforms to the structure shown below then it will be possible with little or modest effort for software applications to be adapted accordingly. 
-
-The reader must keep in mind that the UML diagram below is in a sense the meta-format for different possible Smart Device Templates (XSDs) for device descriptions (XMLs) of real devices - sorry about that.
-
-The followng UML diagram presents an overview about the SDT components.
+The following UML diagram presents an overview of the structure (elements) of every SDT which is conformant with these guidelines. As implied in the above descriptions, there can be many different choices of the details of a SDT, each one optimized for a particular market segment and the types of devices used in that market segment. Obviously an unnecessary proliferation is counter-productive, but as long as each SDT conforms to the structure shown below then it will be possible with little or modest effort for software to be adapted accordingly. 
 
 ![](images/SDT_UML_Basic_Elements.png)
 
@@ -46,15 +29,13 @@ The key to the diagram elements of the UML diagrams above and the snippets in th
 
 ![](images/SDT_UML_Key.png)
 
+<a name="Domain"></a>
+
 The syntax used in the diagram to model an XML Schema Definition (XSD) as an UML diagram follows the following approaches:
 
 - [Design XML schemas using UML](http://www.ibm.com/developerworks/library/x-umlschem/)
 - [UML For W3C XML Schema Design](http://www.xml.com/pub/a/2002/08/07/wxs_uml.html)
 
-
-## Components
-
-<a name="Domain"></a>
 ### Domain
 
 ![](images/Domain.png)
@@ -70,7 +51,7 @@ It can also be used to collect all specified [ModuleClasses](#ModuleClasses)
 #### Elements
 - **[Doc](#Documentation)** : Documentation for the *Domain*. Optional.
 - **Imports** : XML import/include of other XML files. Optional.
-- **[Module](#ModuleClass)** : A list of *Module* components that are global to the whole domain. Optional.
+- **[Module](#ModuleClass)** : A list of those *Module* components that are global to the whole domain. Optional.
 - **[Devices](#Device)** : a List of *Devices* components. Optional.
 
 #### Example
@@ -79,12 +60,10 @@ It can also be used to collect all specified [ModuleClasses](#ModuleClasses)
     	xmlns="http://homegatewayinitiative.org/xml/dal/3.0" 
     	id="org.homegatewayinitiative">
 		<Doc>Some documentation</Doc>
-
     	<Imports>
     		<!-- Import other SDTs via XInclude's include mechanism -->
       		<xi:include href="./dal-core.xml" parse="xml" />
     	</Imports>
-
     	<Modules>
     		<!-- List of Domain global Modules goes here -->
     	</Modules>
@@ -102,7 +81,7 @@ It can also be used to collect all specified [ModuleClasses](#ModuleClasses)
 
 The *Device* was initially thought of as the representation of "the basic things we are trying to model" and can still be considered so. However, after discussion with various SDOs, it was decided to add also "[sub-devices](#SubDevice)". That is, there is one level of hierarchy to allow modeling of e.g. a set of independent energy monitoring plugs in a single addressable power-extension-block. (Other SDOs might consider it more appropriate to use a recursive sub-sub-sub ... device definition). Note that all the different devices which one needs to model within a Domain are composed of one or more [Modules](#ModuleClass). 
 
-For each physical device on the network at least one *Device* **must** be defined. If the physical device is a simple device, ie. it does not contain embedded devices, e.g. a light switch, it does not include further [SubDevices](#SubDevices). On the other hand, if the physical is a compound device, ie. it does contain embedded devices that can be addressed separately, the *Device* **should** contain [SubDevices](SubDevices) for each of the identifiable embedded devices.
+For each physical device on the network at least one *Device* **must** be defined. If the physical device is a simple device, i.e. it does not contain embedded devices, e.g. a light switch, it does not include further [SubDevices](#SubDevices). On the other hand, if the physical is a compound device, i.e. it does contain embedded devices that can be addressed separately, the *Device* **should** contain [SubDevices](SubDevices) for each of the identifiable embedded devices.
 
 An example for a compound device  is a connected power-strip where each of the sockets can be switched on and off individually. The power-strip itself can provide functions such as "all sockets off" and "overall power consumption".
 
@@ -139,7 +118,7 @@ An example for a compound device  is a connected power-strip where each of the s
 ### SubDevice
 *SubDevices* are optional components of a [Device](#Device). They represent physical sub-devices and services inside another device (the *Device*).
 
-*SubDevices* may define their own [ModuleClasses](#ModuleClass) or extend ModulesClasses of its or another [Domain](#Domain).
+*SubDevices* may define their own [ModuleClasses](#ModuleClass) or extend *ModuleClasses* of it's or another [Domain](#Domain).
 
 ![](images/SubDevice.png)
 
@@ -166,13 +145,13 @@ An example for a compound device  is a connected power-strip where each of the s
 ---
 
 <a name="Property"/></a>
-### Property
+### Property : Element of a *Device* or *ModuleClass*
 
 ![](images/Property.png)
 
 *Property* elements are used to append to [Devices](#Device) and their [ModuleClass](ModuleClass) elements with arbitrary additional information. For [Devices](#Device) it would be very common for a manufacturer to want to add into the XML file which is describing the device such information as "Manufacturing Site", "Date of Manufacture", "Certification Code", "Energy Label Code", "compatible LAN technology", "URL for the device handbook", "physical limits of operation environments", etc.
 
-Some of that information might in some devices be available by reading a specific device [DataPoint](#DataPoint), however even if it cannot be read from the device then at least it can be noted in the device's XML description. Examples for organizations that specifiy these kind of added "Property" information are [eCl@ss](http://www.eclass.eu) and [UNSPSC](http://www.unspsc.org) (United Nations Standard Products and Services Code).
+Some of that information might in some devices be available by reading a specific device [DataPoint](#DataPoint), however even if it cannot be read from the device then at least it can be noted in the device's XML description. Examples for organizations that specify these kind of added "Property" information are [eCl@ss](http://www.eclass.eu) and [UNSPSC](http://www.unspsc.org) (United Nations Standard Products and Services Code).
 
 Since the *Properties* are highly varied, depending on industry segment, no attempt is made in the SDT to constrain the options: however it is highly recommended to provide software-developer-friendly information in the [Doc](#Documentation) field of each Property. 
 
@@ -194,7 +173,7 @@ Since the *Properties* are highly varied, depending on industry segment, no atte
 ---
 
 <a name="ModuleClass"/></a>
-### Module, ModuleClass
+### Module and ModuleClass
 
 ![](images/ModuleClass.png)
 
@@ -202,7 +181,7 @@ Since the *Properties* are highly varied, depending on industry segment, no atte
 
 *Module* elements are basically constraints or templates for how to model functionality of real things/appliances/devices within the [Domain](#Domain). There could be an infinite number of possible functionalities, however it is recommended to identify a not-too-large selection of them as generic examples (called *"*ModuleClasses*, see below) and allow for additional proprietary extensions. In a particular [Domain](#Domain) there will be one *Module* for each of the agreed *ModuleClasses* plus additional ones for each extension of a *ModuleClass*.
 
-The advantage of identifying a subset of generic *ModuleClasses* is that any suitable high-level software would then be able to "parse" the generic functionality for all compliant appliances, even if the proprietary parts could not be interpreted by the software.
+The advantage of identifying a subset of generic *ModuleClasses*, described below, is that any suitable high-level software would then be able to "parse" the generic functionality for all compliant appliances, even if the proprietary parts could not be interpreted by the software.
 
 Every [Device](#Device) can then be described by a collection of *Modules* (functionality). In the simplest examples, where there are no extensions needed, each *ModuleClass* has exactly one "child" Module ... in such cases the software developer can consider the two terms to be the same.
 
@@ -225,7 +204,7 @@ Typical *ModuleClasses* might be equivalent to "power ON/OFF", "Open/Close", "Pa
 The element has the following attributes:
 	- **domain** : Identifier / Reference of the [Domain](#Domain) of the extended *ModuleClass*. Required for this element.
 	- **class** : Name of the *ModuleClass* in the [Domain](#Domain) that is extended. Required for this element.
-- **[Properties](#Property)** : Further meta-data (or properties) about the *SubDevice*. Optional.
+- **[Properties](#Property)** : Further meta-data (or properties) about the *Module* or *ModuleClass*. Optional.
 - **[Actions](#Action)** : A list of *Action* components, each defining a single action. Optional.
 - **[Data](#DataPoint)** : A list of *DataPoint* components. Optional.
 - **[Events](#Event)** : A list of *Event* components. Optional.
@@ -247,70 +226,14 @@ The element has the following attributes:
 
 ---
 
-<a name="Action"/></a>
-### Action
-
-![](images/Action.png)
-
-*Action* elements are an efficient way of describing arbitrary sequences of operations/methods; these are very common in automation. Typical example include "FactoryReset", and "AutoCalibrate". *Actions* preserve transaction integrity by putting together all the parameters ("args", see next section) with the method which checks and executes them, in one step.
-
-Note that systems which rely on RESTful operations need to carry out such complex setup-parameters-then-do-action by first using (several) [DataPoint](#DataPoint) operations to "load" the parameters to the device and then do a [DataPoint](#DataPoint) operation to manipulate the "start operation NOW" action.
-
-#### Attributes
-- **name** : The name of the *Action*. The name must be unique in the scope of the [ModuleClass](#ModuleClass). Required.
-- **optional**: Boolean that indicates whether an *Action* is optional or mandatory. Optional, the default is *false*.
-
-#### Elements
-- **[Doc](#Documentation)** : Documentation for the *Action*. Optional.
-- **[DataType](#DataType)** : The return type of the *Action*. It must comply to the *DataType* definition. Optional. If no *DataType* is specified the *Action* does not return a value.
-- **Args** : Zero or more occurances of [argument](#Arg) definitions for an *Action*. Optional.
-
-#### Example
-The following are two examples for actions implementing a getter and a setter for boolean values.
-
-	<Action name="get" type="boolean">
-		<Doc>Obtain the current associated state. Example of a getter.</Doc>
-	</Action>
-
-	<Action name="setTarget">
-		<Doc>Set the associated state to the specified value. Example of a setter.</Doc>
-		<Args>
-			<Arg name="value">
-	    		<Doc>The desired value of the associated state.</Doc>
-	    		<DataType>
-	    			<SimpleType type="boolean" />
-	    		</DataType>
-	    	</Arg>
-	    </Args>
-	</Action>
-
----
-<a name="Arg"/></a>
-### Arg
-
-![](images/Arg.png)
- 
-The *Arg* element represents the parameter information which a device needs to carry out a required *Action*. 
-
-The *Arg* has the following attributes and elements:
-
-#### Attributes
-- **name** : The name of the *Arg* attribute. Required.
-
-#### Elements
-- **[Doc](#Documentation)** : Documentation for the *argument*. Optional.
-- **[DataType](#DataType)** : The return type of the *argument*. It must comply to the *DataType* definition. Required.
-
----
-
-<a name="Data"/></a>
-### DataPoint
+<a name="DataPoint"/></a>
+### DataPoint : Element of *ModuleClass* and *Event*
 
 ![](images/DataPoint.png)
 
-A *DataPoint* element represents an aspect of a device which can be read/written to, and forms part of a device’s data model. Manipulating *DataPoints* is the most common way of controlling devices. Each *DataPoint* has an associated *type* (e.g. simple integer/real numbers, string of text, struct, or arrays thereof) which facillitates data integrity. Note that all RESTful systems (e.g. CoAP) only use *DataPoint* operations, so the mapping of a data models using an SDT into RESTful applications is easy.
+A *DataPoint* element represents an aspect of a device which can be read/written to, and forms part of a device’s data model. Manipulating *DataPoints* is the most common way of controlling devices. Each *DataPoint* has an associated *type* (e.g. simple integer/real numbers, string of text, struct, or arrays thereof) which facillitates data integrity. Note that all RESTful systems (e.g. CoAP) use only *DataPoint* operations, so the mapping of a data models using an SDT into RESTful applications is easy.
 
-However, *DataPoints* are not the only way of controlling devices, so further "Actions" and "Events are described below.
+However, *DataPoints* are not the only way of controlling devices, so further [Actions](#Action) and [Events](#Event) are described below.
 
 Though *DataPoints* only refer to single data points of a physical device it is possible to describe hierarchies by model the path to the data point in the hierarchy by a path-like structure like to the pathname of a UNIX file system. Here, the root node of the hierarchy is a slash (/ 0x2F) and the segments or nodes along the path are also separated by slashes. The actual datapoint is the last leaf at the path. 
 
@@ -347,8 +270,48 @@ In EBNF:
 
 ---
 
+<a name="Action"/></a>
+### Action : Element of *ModuleClass*
+
+![](images/Action.png)
+
+*Action* elements are an efficient way of describing arbitrary sequences of operations/methods; these are very common in automation. Typical example include "FactoryReset", and "AutoCalibrate". *Actions* preserve transaction integrity by putting together all the parameters ("args", see next section) with the method which checks and executes them, in one step.
+
+Note that systems which rely on RESTful operations need to carry out such complex setup-parameters-then-do-action by first using (several) [DataPoint](#DataPoint) operations to "load" the parameters to the device and then do a [DataPoint](#DataPoint) operation to manipulate the "start operation NOW" action.
+
+#### Attributes
+- **name** : The name of the *Action*. The name must be unique in the scope of the [ModuleClass](#ModuleClass). Required.
+- **optional**: Boolean that indicates whether an *Action* is optional or mandatory. Optional, the default is *false*.
+
+#### Elements
+- **[Doc](#Documentation)** : Documentation for the *Action*. Optional.
+- **[DataType](#DataType)** : The return type of the *Action*. It must comply to the *DataType* definition. Optional. If no *DataType* is specified the *Action* does not return a value.
+- **Args** : Zero or more occurances of [argument](#Arg) definitions for an *Action*. Optional.
+
+<a name="ActionExample"/></a>
+#### Example
+The following are two examples for actions implementing a getter and a setter for boolean values.
+
+	<Action name="get" type="boolean">
+		<Doc>Obtain the current associated state. Example of a getter.</Doc>
+	</Action>
+
+	<Action name="setTarget">
+		<Doc>Set the associated state to the specified value. Example of a setter.</Doc>
+		<Args>
+			<Arg name="value">
+	    		<Doc>The desired value of the associated state.</Doc>
+	    		<DataType>
+	    			<SimpleType type="boolean" />
+	    		</DataType>
+	    	</Arg>
+	    </Args>
+	</Action>
+
+---
+
 <a name="Event"/></a>
-### Event
+### Event : Element of *ModuleClass*
 
 ![](images/Event.png)
 
@@ -377,27 +340,42 @@ In EBNF:
 
 ---
 
+<a name="Arg"/></a>
+### Arg : Element of *Action*
+
+![](images/Arg.png)
+ 
+The *Arg* element represents the parameter information which a device needs to carry out a required *Action*. 
+
+The *Arg* has the following attributes and elements:
+
+#### Attributes
+- **name** : The name of the *Arg* attribute. Required.
+
+#### Elements
+- **[Doc](#Documentation)** : Documentation for the *argument*. Optional.
+- **[DataType](#DataType)** : The return type of the *argument*. It must comply to the *DataType* definition. Required.
+
+#### Example
+See [example above](#ActionExample).
+
+---
+
 <a name="Data_Types"/></a>
-### Data Types
+### DataType
 The data type can be simple integers or string text, or rather complex, as shown below:
 
 ![](images/SDT_UML_DataType.png)
 
 The various elements are described in the sections below.
 
----
-
-<a name="DataType"/></a>
-### DataType
-
 ![](images/DataType.png)
-![](images/TypeChoice.png)
 
 The *DataType* element is a "container" for the various aspects of a type. 
 
 #### Attributes
 - **name** : The name of the *DataType*. The name must be set for the [Struct](#Struct) types to distinguish individual fields in that structure. It can be used in other cases. Optional.
-- **unitOfMeasure** : This is the option to label the data with the units of measurement.  A "Temperature" measurement is meaningless until the units Kelvin, Celcius, Fahrenheit etc are known. Because of the extreme variety of units, a string field is the default annotation method, although of course a SDO could decide to reference a standardized list of units. Optional.
+- **unitOfMeasure** : Before considering the type of data in detail, there is the option to label the data with the units of measurement.  A "Temperature" measurement is meaningless until the units Kelvin, Celcius, Fahrenheit etc are known. Because of the extreme variety of units, a string field is the default annotation method, although of course a SDO could decide to reference a standardized list of units. Optional.
 
 #### Elements
 - **[Doc](#Documentation)** : Documentation for the *DataType* Element. Optional.
@@ -410,7 +388,7 @@ The *DataType* element is a "container" for the various aspects of a type.
 ---
 
 <a name="Constraint"/></a>
-### Constraint
+### Constraint : Element of DataType
 
 ![](images/Constraint.png)
 
@@ -426,12 +404,20 @@ The *Constraint* element is an optional element allowing the manufacturer to pro
 
 ---
 
+### TypeChoice : Construct of *DataType*
+ 
+ ![](images/TypeChoice.png)
+
+The *TypeChoice* construct is required for syntactic reasons in the UML diagram and the choice from the enumerated list simply designates the complexity of the following DataType.
+
+---
+
 <a name="SimpleType"/></a>
-### SimpleType
+### SimpleType : Element of *TypeChoice*
 
 ![](images/SimpleType.png)
 
-The "SimpleType" element is required in order for software to understand the format of the associated data, e.g. are the bytes an integer or real value? The selection choosen is based on practical experience to include some specific types which are slightly more complex:
+The *SimpleType* element is required in order for software to understand the format of the associated data, e.g. are the bytes an integer or real value? The selection choosen by HGI is based on practical experience to include some specific types which are slightly more complex:
 
 1. the (technically redundant) options of *date* and *time* - to avoid problems which can arise interpreting a *datetime* value; 
 2. *url* because it is expected to become extremely common to provide links to other data sources; 
@@ -454,7 +440,7 @@ If not stated otherwise datatypes should comply to the equivalent datatypes defi
 ---
 
 <a name="StructType"/></a>
-### StructType
+### StructType : Element of *TypeChoice*
 
 ![](images/Struct.png)
 
@@ -467,7 +453,7 @@ The *StructType* element can be used to represent an ordered list of diverse Dat
 ---
 
 <a name="ArrayType"/></a>
-### ArrayType
+### ArrayType : Element of *TypeChoice*
 
 ![](images/Array.png)
 
@@ -479,8 +465,11 @@ The *ArrayType* element is provided for defining lists of data; the definition i
 ---
 
 <a name="Documentation"/></a>
-# Documentation
-The *Doc* documentation element is optionally available in most components of the SDT. Its purpose is to provide a short documentation for the respective element. The documentation language *should* be English.
+### Doc : Element for all Documentation
+
+![](images/Doc.png)
+
+*Doc* elements (optional for all the above Elements) are very important to help understand the software-readable information for specific devices and services. They contain the human-readable information. Many automation protocols describe every possible operation in a comprehensive specification, however SDT is designed to include the relevant information at the "point of use" for the software developer, inside the SDT (and XML files based on it).
 
 The text inside the *Doc* element can be structure using a very limited subset of HTML elements. The possible structuring is defined in EBNF as follows:
 
