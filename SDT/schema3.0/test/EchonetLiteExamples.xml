@@ -112,7 +112,7 @@
 				</Module>
 
 
-				<!-- Data points local to the wasching machine device -->
+				<!-- Data points local to the washing machine device -->
 
 				<Module name="washingMachineDataPoints">
 					<Data>
