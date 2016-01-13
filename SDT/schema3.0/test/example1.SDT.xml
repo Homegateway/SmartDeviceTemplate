@@ -61,7 +61,7 @@
 
 		<ModuleClass name="statusDoor">
 			<Data>
-				<DataPoint name="stausDoor" writable="false">
+				<DataPoint name="statusDoor" writable="false">
 					<Doc>This reads the open=true or closed=false status of a door </Doc>
 					<DataType>
 						<SimpleType type="boolean"/>
