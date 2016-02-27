@@ -198,6 +198,22 @@
 		<optional>
 			<ref name="Events"/>
 		</optional>
+		<zeroOrMore>
+			<element name="ModuleRef">
+				<ref name="ModuleRef"/>
+			</element>
+		</zeroOrMore>
+	</define>
+	
+	
+	<define name="ModuleRef">
+		<optional>
+			<attribute name="name"/>
+		</optional>
+		<attribute name="domain">
+			<data type="IDREF"/>
+		</attribute>
+		<attribute name="class"/>
 	</define>
 
 
@@ -221,10 +237,20 @@
 					</attribute>
 					<optional>
 						<attribute name="type">
-							<ref name="DataType"/>
+							<data type="string"/>
+						</attribute>
+					</optional>
+					<optional>
+						<attribute name="rt">
+							<data type="string"/>
 						</attribute>
 					</optional>
 					<ref name="Doc"/>
+					<zeroOrMore>
+						<element name="ModArg">
+							<ref name="ModuleRef"/>
+						</element>
+					</zeroOrMore>
 					<zeroOrMore>
 						<element name="Arg">
 							<attribute name="name"/>

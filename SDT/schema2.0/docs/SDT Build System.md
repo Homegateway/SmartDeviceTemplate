@@ -34,13 +34,13 @@ After cloning the repository go to the directoy *SDT/schema* and run commands de
 ### Build the Schema
 Running *ant* without any parameter builds the schema definition from the rng-definition [SDT/schema2.0/src/domain.rng](../src/domain.rng) and writes it to [SDT/schema2.0/src/domain.xsd](../src/domain.xsd)
 
-	$ cd SDT/schema
+	$ cd SDT/schema2.0
 	$ ant
 
 ### Validate SDT Definitions
 You can use the build system to validate new SDT definitions or changes made to existing ones by running the following command:
 
-	$ cd SDT/schema
+	$ cd SDT/schema2.0
 	$ ant validate
 
 The output after a successful validation should look like this:
